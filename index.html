@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
 
 /* ── TOKENS ──────────────────────────────────────── */
@@ -773,6 +774,44 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 .p-color-dot.selected { border-color: #fff; transform: scale(1.15); }
 
 /* ── PRINT ───────────────────────────────────────── */
+/* ── PDF EXPORT COMPACT MODE ─────────────────────── */
+#cv-root.cv--pdf { font-size: 12px !important; box-shadow: none !important; border-radius: 0 !important; }
+#cv-root.cv--pdf .cv__header { padding: 18px 24px 12px !important; gap: 16px !important; }
+#cv-root.cv--pdf .cv__name { font-size: 1.85rem !important; margin-bottom: 2px !important; }
+#cv-root.cv--pdf .cv__tagline { font-size: 0.78rem !important; margin-bottom: 8px !important; line-height: 1.4 !important; }
+#cv-root.cv--pdf .cv__contacts { gap: 2px 12px !important; }
+#cv-root.cv--pdf .contact-item { font-size: 0.72rem !important; }
+#cv-root.cv--pdf .cv__photo { width: 68px !important; height: 68px !important; }
+#cv-root.cv--pdf .cv__body { grid-template-columns: 1fr 220px !important; }
+#cv-root.cv--pdf .cv__main { padding: 14px 20px 16px 22px !important; }
+#cv-root.cv--pdf .cv__aside { padding: 14px 14px 16px 16px !important; }
+#cv-root.cv--pdf .section { margin-bottom: 12px !important; }
+#cv-root.cv--pdf .section__title { padding-bottom: 4px !important; margin-bottom: 8px !important; font-size: 0.58rem !important; }
+#cv-root.cv--pdf .entry { padding: 0 0 8px 0 !important; }
+#cv-root.cv--pdf .entry + .entry { padding-top: 8px !important; }
+#cv-root.cv--pdf .entry__title { font-size: 0.82rem !important; }
+#cv-root.cv--pdf .entry__date { font-size: 0.68rem !important; }
+#cv-root.cv--pdf .entry__org { font-size: 0.72rem !important; margin: 2px 0 4px !important; }
+#cv-root.cv--pdf .entry__desc { font-size: 0.72rem !important; line-height: 1.45 !important; }
+#cv-root.cv--pdf .entry__desc li { margin-bottom: 2px !important; }
+#cv-root.cv--pdf .entry__tag { font-size: 0.55rem !important; padding: 1px 5px !important; }
+#cv-root.cv--pdf .profile-text { font-size: 0.72rem !important; line-height: 1.45 !important; }
+#cv-root.cv--pdf .skill-list { gap: 3px !important; }
+#cv-root.cv--pdf .skill-list li { font-size: 0.72rem !important; }
+#cv-root.cv--pdf .lang-item { margin-bottom: 7px !important; }
+#cv-root.cv--pdf .lang-name { font-size: 0.78rem !important; }
+#cv-root.cv--pdf .pub { margin-bottom: 8px !important; padding-left: 7px !important; }
+#cv-root.cv--pdf .pub__title { font-size: 0.72rem !important; line-height: 1.35 !important; }
+#cv-root.cv--pdf .pub__authors { font-size: 0.64rem !important; }
+#cv-root.cv--pdf .pub__meta { font-size: 0.66rem !important; margin-top: 1px !important; }
+#cv-root.cv--pdf .pub__doi { font-size: 0.6rem !important; }
+#cv-root.cv--pdf .item-delete,
+#cv-root.cv--pdf .item-move,
+#cv-root.cv--pdf .tag-del,
+#cv-root.cv--pdf .tag-add,
+#cv-root.cv--pdf .section__add-btn,
+#cv-root.cv--pdf .cv__photo-placeholder { display: none !important; }
+
 @media print {
   /* ── base ── */
   html { font-size: 11px !important; }
@@ -1944,27 +1983,57 @@ document.addEventListener('DOMContentLoaded',function(){
   updateAside();
   syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
-  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('btn-print').addEventListener('click', function(){
+    var btn = this;
+    var origHTML = btn.innerHTML;
 
-  // A4 in CSS px at 96dpi: 210mm=794px wide, 297mm=1122px tall
-  var A4W = Math.round(210 * 96 / 25.4);
-  var A4H = Math.round(297 * 96 / 25.4);
+    if(editMode){ toggleEdit(); }
 
-  window.addEventListener('beforeprint', function(){
+    btn.innerHTML = '&#8987; Generando PDF…';
+    btn.disabled = true;
+
     var cv = document.getElementById('cv-root');
-    // Simulate print layout width to get accurate print height
-    var prevW = cv.style.width, prevMax = cv.style.maxWidth;
-    cv.style.width = A4W + 'px';
-    cv.style.maxWidth = A4W + 'px';
-    var printH = cv.scrollHeight;
-    cv.style.width = prevW;
-    cv.style.maxWidth = prevMax;
-    var scale = printH > A4H ? A4H / printH : 1;
-    document.documentElement.style.zoom = scale < 1 ? scale : '';
-  });
+    cv.classList.add('cv--pdf');
 
-  window.addEventListener('afterprint', function(){
-    document.documentElement.style.zoom = '';
+    // Let the browser apply the compact styles before capturing
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var opt = {
+          margin: 0,
+          filename: 'CV_Jacopo_Sorani.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            windowWidth: 960
+          },
+          jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+          },
+          pagebreak: {
+            mode: ['css', 'legacy'],
+            avoid: ['.entry', '.pub', '.lang-item', '.section']
+          }
+        };
+
+        html2pdf().set(opt).from(cv).save()
+          .then(function(){
+            cv.classList.remove('cv--pdf');
+            btn.innerHTML = origHTML;
+            btn.disabled = false;
+            toast('PDF scaricato!');
+          })
+          .catch(function(){
+            cv.classList.remove('cv--pdf');
+            btn.innerHTML = origHTML;
+            btn.disabled = false;
+            toast('Errore PDF');
+          });
+      });
+    });
   });
 });
 
