@@ -128,7 +128,7 @@ a:hover { text-decoration: underline; }
   background: var(--clr-accent-lt);
   border: 2px dashed var(--clr-accent);
   cursor: pointer;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -140,12 +140,14 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.12em;
   text-align: center;
   padding: 8px;
-  opacity: 0.55;
-  transition: opacity .2s;
+  opacity: 0.28;
+  transition: opacity .2s, border-color .2s;
 }
-.cv__photo-placeholder:hover { opacity: 1; }
+.cv__photo-placeholder:hover { opacity: 0.55; }
 .cv__photo-placeholder svg { width: 22px; height: 22px; stroke: var(--clr-accent); fill: none; stroke-width: 1.5; margin-bottom: 2px; }
-body.edit-mode .cv__photo-placeholder { display: flex; }
+.cv__photo-placeholder.hidden { display: none !important; }
+body.edit-mode .cv__photo-placeholder { opacity: 0.75; border-style: solid; cursor: pointer; }
+body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
 .cv__photo {
   width: 100%;
   height: 100%;
@@ -664,7 +666,7 @@ body.edit-mode .fab-group { right: 390px; }
     <!-- PHOTO AREA -->
     <div class="cv__photo-area" id="photo-area">
       <div class="cv__photo-wrap">
-        <div class="cv__photo-placeholder" id="photo-placeholder" onclick="document.getElementById('photo-input').click()">
+        <div class="cv__photo-placeholder" id="photo-placeholder" id="photo-placeholder-el" onclick="if(document.body.classList.contains('edit-mode')){document.getElementById('photo-input').click();}else{document.getElementById('btn-edit').click();setTimeout(function(){document.getElementById('photo-input').click();},400);}">
           <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
           Add Photo
         </div>
@@ -1040,7 +1042,7 @@ function setupPhoto(){
     reader.onload=function(ev){
       img.src=ev.target.result;
       img.classList.add('has-photo');
-      ph.style.display='none';
+      ph.classList.add('hidden');
       updatePhoto();
     };
     reader.readAsDataURL(file);
@@ -1062,7 +1064,7 @@ function removePhoto(){
   var img=document.getElementById('cv-photo');
   var ph=document.getElementById('photo-placeholder');
   if(img){ img.src=''; img.classList.remove('has-photo'); }
-  if(ph && editMode) ph.style.display='flex';
+  if(ph){ ph.classList.remove('hidden'); }
   var input=document.getElementById('photo-input');
   if(input) input.value='';
   toast('Photo removed');
@@ -1254,6 +1256,17 @@ function buildPanel(){
     +'<div class="font-grid">'+fontsH+'</div>'
     +'<div class="p-label">Accent Color</div>'
     +'<div class="color-grid">'+colorsH+'</div>'
+    
+    +'<div class="p-label">Background Color</div>'
+    +'<div class="color-grid">'
+    +'<button class="bg-swatch selected" data-bg="#edece8" style="background:#edece8;border:3px solid #fff;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Warm Paper"></button>'
+    +'<button class="bg-swatch" data-bg="#f0f0f0" style="background:#f0f0f0;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Light Grey"></button>'
+    +'<button class="bg-swatch" data-bg="#e8ecf0" style="background:#e8ecf0;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Cool Blue"></button>'
+    +'<button class="bg-swatch" data-bg="#f0eeec" style="background:#f0eeec;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Cream"></button>'
+    +'<button class="bg-swatch" data-bg="#1a1a1a" style="background:#1a1a1a;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Dark"></button>'
+    +'<button class="bg-swatch" data-bg="#ffffff" style="background:#fff;border:3px solid #ddd;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="White"></button>'
+    +'</div>'
+
     +'<div class="p-label">Font Size</div>'
     +'<div class="size-row"><button class="size-btn" id="size-dn">&#8722;</button><span class="size-label">16px</span><button class="size-btn" id="size-up">&#43;</button></div>'
     +'<button class="p-btn p-btn--danger" id="btn-reset">&#8635; Reset All Styles</button>'
@@ -1329,10 +1342,28 @@ function buildPanel(){
     });
   });
 
-  /* Colors */
+  /* Accent Colors */
   document.querySelectorAll('.color-swatch').forEach(function(sw){
     sw.addEventListener('click',function(){
       changeAccent({c:sw.dataset.c, l:sw.dataset.l, n:sw.title});
+    });
+  });
+
+  /* Background Colors */
+  document.querySelectorAll('.bg-swatch').forEach(function(sw){
+    sw.addEventListener('click',function(){
+      document.documentElement.style.setProperty('--clr-bg', sw.dataset.bg);
+      // Dark bg → light card text
+      var dark = sw.dataset.bg === '#1a1a1a';
+      document.documentElement.style.setProperty('--clr-card', dark ? '#1e1e1e' : '#ffffff');
+      document.documentElement.style.setProperty('--clr-aside', dark ? '#161616' : '');
+      document.documentElement.style.setProperty('--clr-text', dark ? '#f0f0f0' : '#111111');
+      document.documentElement.style.setProperty('--clr-sub', dark ? '#cccccc' : '#2d2d2d');
+      document.documentElement.style.setProperty('--clr-border', dark ? '#2a2a2a' : '#e0e0e0');
+      document.querySelectorAll('.bg-swatch').forEach(function(s){
+        s.style.borderColor = s===sw ? '#fff' : 'transparent';
+      });
+      toast('Background: '+sw.title);
     });
   });
 
