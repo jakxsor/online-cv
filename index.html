@@ -140,13 +140,13 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.12em;
   text-align: center;
   padding: 8px;
-  opacity: 0.28;
+  opacity: 0.65;
   transition: opacity .2s, border-color .2s;
 }
-.cv__photo-placeholder:hover { opacity: 0.55; }
+.cv__photo-placeholder:hover { opacity: 0.9; }
 .cv__photo-placeholder svg { width: 22px; height: 22px; stroke: var(--clr-accent); fill: none; stroke-width: 1.5; margin-bottom: 2px; }
 .cv__photo-placeholder.hidden { display: none !important; }
-body.edit-mode .cv__photo-placeholder { opacity: 0.75; border-style: solid; cursor: pointer; }
+body.edit-mode .cv__photo-placeholder { opacity: 0.9; border-style: solid; cursor: pointer; }
 body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
 .cv__photo {
   width: 100%;
@@ -155,6 +155,7 @@ body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
   object-fit: cover;
   border: 3px solid var(--clr-accent);
   display: none;
+  transition: border-color .2s;
 }
 .cv__photo.has-photo { display: block; }
 
@@ -502,7 +503,7 @@ body.edit-mode .fab-group { right: 390px; }
 .font-opt__sample { font-size: 0.625rem; color: #555; display: block; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* Template grid */
-.tmpl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.tmpl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 10px; }
 .tmpl-opt {
   background: #1a1a1a; border: 2px solid #242424;
   border-radius: 7px; padding: 11px 8px 9px; cursor: pointer;
@@ -514,7 +515,7 @@ body.edit-mode .fab-group { right: 390px; }
 .tmpl-name { font-size: 0.5625rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.12em; }
 
 /* Color swatches */
-.color-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 10px; }
+.color-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .color-swatch {
   width: 30px; height: 30px; border-radius: 50%;
   border: 3px solid transparent; cursor: pointer;
@@ -602,6 +603,32 @@ body.edit-mode .fab-group { right: 390px; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* ── PHOTO POSITION ──────────────────────────────── */
+.cv--photo-left .cv__photo-area { order: -1; }
+.cv--photo-hidden #photo-area { display: none !important; }
+
+/* Photo border ring */
+.cv__photo { border: 3px solid var(--clr-accent); }
+
+/* Position + border color controls */
+.pos-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 12px; }
+.pos-btn {
+  background: #1a1a1a; border: 2px solid #242424; color: #666;
+  border-radius: 6px; padding: 9px 4px; cursor: pointer;
+  font-size: 0.5rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; font-family: var(--font);
+  transition: all .15s; text-align: center;
+}
+.pos-btn:hover { border-color: #444; color: #ddd; }
+.pos-btn.selected { border-color: var(--clr-accent, #2a5a2a); color: #fff; background: rgba(42,90,42,.12); }
+.p-color-pick { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.p-color-dot {
+  width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+  border: 3px solid transparent; transition: transform .15s, border-color .15s;
+}
+.p-color-dot:hover { transform: scale(1.2); }
+.p-color-dot.selected { border-color: #fff; transform: scale(1.15); }
+
 /* ── PRINT ───────────────────────────────────────── */
 @media print {
   body { background: white !important; }
@@ -666,7 +693,7 @@ body.edit-mode .fab-group { right: 390px; }
     <!-- PHOTO AREA -->
     <div class="cv__photo-area" id="photo-area">
       <div class="cv__photo-wrap">
-        <div class="cv__photo-placeholder" id="photo-placeholder" id="photo-placeholder-el" onclick="if(document.body.classList.contains('edit-mode')){document.getElementById('photo-input').click();}else{document.getElementById('btn-edit').click();setTimeout(function(){document.getElementById('photo-input').click();},400);}">
+        <div class="cv__photo-placeholder" id="photo-placeholder" onclick="if(document.body.classList.contains('edit-mode')){document.getElementById('photo-input').click();}else{document.getElementById('btn-edit').click();setTimeout(function(){document.getElementById('photo-input').click();},400);}">
           <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
           Add Photo
         </div>
@@ -866,11 +893,13 @@ body.edit-mode .fab-group { right: 390px; }
 
 /* ── State ─── */
 var editMode  = false;
-var fontSize  = 16;
-var accent    = '#2a5a2a';
-var font      = 'Inter';
-var photoSize = 88;
-var photoR    = '50%';
+var fontSize    = 16;
+var accent      = '#2a5a2a';
+var font        = 'Inter';
+var photoSize   = 88;
+var photoR      = '50%';
+var photoPos    = 'right';
+var photoBorder = '#2a5a2a';
 
 var FONTS = [
   { n:'Inter',         s:"'Inter',system-ui,sans-serif",                              x:'Sans' },
@@ -887,14 +916,22 @@ var ACCENTS = [
   { c:'#6a1a2a', l:'#f7dce2', n:'Bordeaux' },
   { c:'#1a1a1a', l:'#ebebeb', n:'Mono' },
   { c:'#1a4a4a', l:'#dcf0ef', n:'Teal' },
-  { c:'#4a3810', l:'#f5edda', n:'Bronze' }
+  { c:'#4a3810', l:'#f5edda', n:'Bronze' },
+  { c:'#2c3e7a', l:'#dde3f8', n:'Indigo' },
+  { c:'#5a2d82', l:'#f0e6f8', n:'Plum' },
+  { c:'#7a3c00', l:'#f8eddf', n:'Rust' },
+  { c:'#004d40', l:'#e0f5f0', n:'Emerald' }
 ];
 
 var TEMPLATES = [
-  { n:'Scholar',    c:'#2a5a2a', l:'#e6f0e6', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#edece8' },
-  { n:'Executive',  c:'#1a3a6a', l:'#dce8f7', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#eaedf2' },
-  { n:'Elegant',    c:'#6a1a2a', l:'#f7dce2', f:'Playfair',     fs:"'Playfair Display',Georgia,serif",   bg:'#f0eeec' },
-  { n:'Mono',       c:'#1a1a1a', l:'#ebebeb', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#f0f0f0' }
+  { n:'Scholar',    c:'#2a5a2a', l:'#e6f0e6', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#edece8', dark:false },
+  { n:'Executive',  c:'#1a3a6a', l:'#dce8f7', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#eaedf2', dark:false },
+  { n:'Elegant',    c:'#6a1a2a', l:'#f7dce2', f:'Playfair',     fs:"'Playfair Display',Georgia,serif",   bg:'#f0eeec', dark:false },
+  { n:'Mono',       c:'#1a1a1a', l:'#ebebeb', f:'Lato',         fs:"'Lato',system-ui,sans-serif",        bg:'#f5f5f5', dark:false },
+  { n:'Night',      c:'#818cf8', l:'#1e1b4b', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#0f1117', dark:true  },
+  { n:'Academic',   c:'#004d40', l:'#e0f5f0', f:'Source Serif', fs:"'Source Serif 4',Georgia,serif",     bg:'#f5f5f5', dark:false },
+  { n:'Classic',    c:'#2c3e7a', l:'#dde3f8', f:'Georgia',      fs:"Georgia,'Times New Roman',serif",    bg:'#ffffff', dark:false },
+  { n:'Plum',       c:'#5a2d82', l:'#f0e6f8', f:'Raleway',      fs:"'Raleway',system-ui,sans-serif",     bg:'#f9f6fc', dark:false }
 ];
 
 var EDITABLE = [
@@ -1055,10 +1092,26 @@ function updatePhoto(){
   r.style.setProperty('--photo-radius', photoR);
   var img=document.getElementById('cv-photo');
   var ph=document.getElementById('photo-placeholder');
-  if(img){ img.style.width=photoSize+'px'; img.style.height=photoSize+'px'; img.style.borderRadius=photoR; }
+  if(img){
+    img.style.width=photoSize+'px'; img.style.height=photoSize+'px';
+    img.style.borderRadius=photoR;
+    img.style.borderColor=photoBorder==='transparent'?'transparent':photoBorder;
+  }
   if(ph){ ph.style.width=photoSize+'px'; ph.style.height=photoSize+'px'; ph.style.borderRadius=photoR; }
+  // Position
+  var cv=document.getElementById('cv-root');
+  if(cv){
+    cv.classList.toggle('cv--photo-left',   photoPos==='left');
+    cv.classList.toggle('cv--photo-hidden', photoPos==='hidden');
+  }
   var readout=document.querySelector('.size-readout');
   if(readout) readout.textContent=photoSize+'px';
+  syncPanelControls();
+}
+function syncPanelControls(){
+  document.querySelectorAll('.pos-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.pos===photoPos); });
+  document.querySelectorAll('.shape-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.r===photoR); });
+  document.querySelectorAll('.p-color-dot').forEach(function(d){ d.classList.toggle('selected', d.dataset.bc===photoBorder); });
 }
 function removePhoto(){
   var img=document.getElementById('cv-photo');
@@ -1080,15 +1133,28 @@ function changeAccent(a){
   accent=a.c;
   document.documentElement.style.setProperty('--clr-accent',a.c);
   document.documentElement.style.setProperty('--clr-accent-lt',a.l);
+  photoBorder=a.c;
+  updatePhoto();
   document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===a.c); });
   document.querySelectorAll('.panel__tab.active').forEach(function(t){ t.style.borderBottomColor=a.c; });
 }
 function applyTemplate(t){
   accent=t.c; font=t.f;
-  document.documentElement.style.setProperty('--clr-accent',t.c);
-  document.documentElement.style.setProperty('--clr-accent-lt',t.l);
-  document.documentElement.style.setProperty('--font',t.fs);
-  document.documentElement.style.setProperty('--clr-bg',t.bg);
+  var d=document.documentElement;
+  d.style.setProperty('--clr-accent',  t.c);
+  d.style.setProperty('--clr-accent-lt',t.l);
+  d.style.setProperty('--font',        t.fs);
+  d.style.setProperty('--clr-bg',      t.bg);
+  d.style.setProperty('--clr-card',    t.dark?'#1e1e1e':'#ffffff');
+  d.style.setProperty('--clr-aside',   t.dark?'#161616':'#f9f9f6');
+  d.style.setProperty('--clr-text',    t.dark?'#f0f0f0':'#111111');
+  d.style.setProperty('--clr-sub',     t.dark?'#d0d0d0':'#2d2d2d');
+  d.style.setProperty('--clr-muted',   t.dark?'#aaaaaa':'#5a5a5a');
+  d.style.setProperty('--clr-faint',   t.dark?'#888888':'#909090');
+  d.style.setProperty('--clr-border',  t.dark?'#2e2e2e':'#e0e0e0');
+  // sync photo border to new accent
+  photoBorder=t.c;
+  updatePhoto();
   document.querySelectorAll('.tmpl-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.tmpl===t.n); });
   document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===t.c); });
   document.querySelectorAll('.font-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.font===t.f); });
@@ -1118,13 +1184,20 @@ function save(){
     });
     localStorage.setItem('cv_v5_html',clone.innerHTML);
     var img=document.getElementById('cv-photo');
+    var ds=document.documentElement.style;
     localStorage.setItem('cv_v5_style',JSON.stringify({
       accent:accent,
-      accentLt:document.documentElement.style.getPropertyValue('--clr-accent-lt'),
+      accentLt:ds.getPropertyValue('--clr-accent-lt'),
       font:font,
-      fontS:document.documentElement.style.getPropertyValue('--font'),
-      bg:document.documentElement.style.getPropertyValue('--clr-bg'),
+      fontS:ds.getPropertyValue('--font'),
+      bg:ds.getPropertyValue('--clr-bg'),
+      bgCard:ds.getPropertyValue('--clr-card'),
+      bgAside:ds.getPropertyValue('--clr-aside'),
+      bgText:ds.getPropertyValue('--clr-text'),
+      bgSub:ds.getPropertyValue('--clr-sub'),
+      bgBorder:ds.getPropertyValue('--clr-border'),
       size:fontSize, photoSize:photoSize, photoR:photoR,
+      photoPos:photoPos, photoBorder:photoBorder,
       photoSrc:(img&&img.classList.contains('has-photo'))?img.src:''
     }));
     toast('Saved \u2713');
@@ -1137,15 +1210,22 @@ function loadSaved(){
     if(st.accent)  { document.documentElement.style.setProperty('--clr-accent',st.accent); accent=st.accent; }
     if(st.accentLt) document.documentElement.style.setProperty('--clr-accent-lt',st.accentLt);
     if(st.fontS)   { document.documentElement.style.setProperty('--font',st.fontS); font=st.font||font; }
-    if(st.bg)      document.documentElement.style.setProperty('--clr-bg',st.bg);
+    if(st.bg)       document.documentElement.style.setProperty('--clr-bg',    st.bg);
+    if(st.bgCard)   document.documentElement.style.setProperty('--clr-card',  st.bgCard);
+    if(st.bgAside)  document.documentElement.style.setProperty('--clr-aside', st.bgAside);
+    if(st.bgText)   document.documentElement.style.setProperty('--clr-text',  st.bgText);
+    if(st.bgSub)    document.documentElement.style.setProperty('--clr-sub',   st.bgSub);
+    if(st.bgBorder) document.documentElement.style.setProperty('--clr-border',st.bgBorder);
     if(st.size)    { fontSize=st.size; document.documentElement.style.fontSize=fontSize+'px'; }
     if(st.photoSize){ photoSize=st.photoSize; }
-    if(st.photoR)  { photoR=st.photoR; }
+    if(st.photoR)   { photoR=st.photoR; }
+    if(st.photoPos) { photoPos=st.photoPos; }
+    if(st.photoBorder){ photoBorder=st.photoBorder; }
     if(st.photoSrc){
       var img=document.getElementById('cv-photo');
       var ph=document.getElementById('photo-placeholder');
       if(img){ img.src=st.photoSrc; img.classList.add('has-photo'); }
-      if(ph) ph.style.display='none';
+      if(ph) ph.classList.add('hidden');
     }
     updatePhoto();
   } catch(e){ console.warn('Load error:',e); }
@@ -1178,7 +1258,11 @@ function resetAll(){
     document.documentElement.style.removeProperty(p);
   });
   document.documentElement.style.fontSize='16px';
+  ['--clr-card','--clr-aside','--clr-text','--clr-sub','--clr-border'].forEach(function(p){
+    document.documentElement.style.removeProperty(p);
+  });
   fontSize=16; accent='#2a5a2a'; font='Inter'; photoSize=88; photoR='50%';
+  photoPos='right'; photoBorder='#2a5a2a';
   updatePhoto();
   toast('Reset to default');
 }
@@ -1238,13 +1322,30 @@ function buildPanel(){
     +'<div class="p-label">Upload</div>'
     +'<button class="p-btn" id="upload-photo-btn"><span class="pi">&#128247;</span> Choose Photo from Device</button>'
     +'<button class="p-btn p-btn--danger" id="remove-photo-btn"><span class="pi">&#10005;</span> Remove Photo</button>'
-    +'<div class="p-label">Size &mdash; <span class="size-readout">88px</span></div>'
-    +'<input type="range" class="p-range" id="photo-size-slider" min="60" max="160" value="88">'
+    +'<div class="p-label">Position</div>'
+    +'<div class="pos-grid">'
+    +'<button class="pos-btn" data-pos="left">&#9612; Left</button>'
+    +'<button class="pos-btn" data-pos="right">&#9616; Right</button>'
+    +'<button class="pos-btn" data-pos="hidden">&#128683; Hide</button>'
+    +'</div>'
+    +'<div class="p-label">Size &mdash; <span class="size-readout">'+photoSize+'px</span></div>'
+    +'<input type="range" class="p-range" id="photo-size-slider" min="60" max="180" value="'+photoSize+'">'
     +'<div class="p-label">Shape</div>'
     +'<div class="shape-grid">'
-    +'<button class="shape-btn selected" data-r="50%">&#9679; Circle</button>'
-    +'<button class="shape-btn" data-r="10px">&#11036; Rounded</button>'
+    +'<button class="shape-btn" data-r="50%">&#9679; Circle</button>'
+    +'<button class="shape-btn" data-r="14px">&#11036; Rounded</button>'
     +'<button class="shape-btn" data-r="0">&#9632; Square</button>'
+    +'</div>'
+    +'<div class="p-label">Border Color</div>'
+    +'<div class="p-color-pick">'
+    +'<button class="p-color-dot" data-bc="#2a5a2a" style="background:#2a5a2a" title="Forest"></button>'
+    +'<button class="p-color-dot" data-bc="#1a3a6a" style="background:#1a3a6a" title="Navy"></button>'
+    +'<button class="p-color-dot" data-bc="#6a1a2a" style="background:#6a1a2a" title="Bordeaux"></button>'
+    +'<button class="p-color-dot" data-bc="#1a4a4a" style="background:#1a4a4a" title="Teal"></button>'
+    +'<button class="p-color-dot" data-bc="#4a3810" style="background:#4a3810" title="Bronze"></button>'
+    +'<button class="p-color-dot" data-bc="#1a1a1a" style="background:#1a1a1a" title="Black"></button>'
+    +'<button class="p-color-dot" data-bc="#ffffff" style="background:#fff;border-color:#555 !important" title="White"></button>'
+    +'<button class="p-color-dot" data-bc="transparent" style="background:repeating-conic-gradient(#555 0% 25%,#333 0% 50%) 0/8px 8px" title="None"></button>'
     +'</div>'
     +'</div>'
 
@@ -1257,14 +1358,16 @@ function buildPanel(){
     +'<div class="p-label">Accent Color</div>'
     +'<div class="color-grid">'+colorsH+'</div>'
     
-    +'<div class="p-label">Background Color</div>'
+    +'<div class="p-label">Background</div>'
     +'<div class="color-grid">'
-    +'<button class="bg-swatch selected" data-bg="#edece8" style="background:#edece8;border:3px solid #fff;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Warm Paper"></button>'
-    +'<button class="bg-swatch" data-bg="#f0f0f0" style="background:#f0f0f0;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Light Grey"></button>'
-    +'<button class="bg-swatch" data-bg="#e8ecf0" style="background:#e8ecf0;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Cool Blue"></button>'
-    +'<button class="bg-swatch" data-bg="#f0eeec" style="background:#f0eeec;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Cream"></button>'
-    +'<button class="bg-swatch" data-bg="#1a1a1a" style="background:#1a1a1a;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="Dark"></button>'
-    +'<button class="bg-swatch" data-bg="#ffffff" style="background:#fff;border:3px solid #ddd;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s;" title="White"></button>'
+    +'<button class="bg-swatch selected" data-bg="#edece8" data-dark="0" style="background:#edece8;border:3px solid #fff;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Warm Paper"></button>'
+    +'<button class="bg-swatch" data-bg="#f5f5f5" data-dark="0" style="background:#f5f5f5;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Light Grey"></button>'
+    +'<button class="bg-swatch" data-bg="#e8ecf0" data-dark="0" style="background:#e8ecf0;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Cool Blue"></button>'
+    +'<button class="bg-swatch" data-bg="#f0eeec" data-dark="0" style="background:#f0eeec;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Cream"></button>'
+    +'<button class="bg-swatch" data-bg="#eaf2ea" data-dark="0" style="background:#eaf2ea;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Mint"></button>'
+    +'<button class="bg-swatch" data-bg="#ffffff" data-dark="0" style="background:#fff;border:3px solid #ccc;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="White"></button>'
+    +'<button class="bg-swatch" data-bg="#0f1117" data-dark="1" style="background:#0f1117;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Dark Navy"></button>'
+    +'<button class="bg-swatch" data-bg="#1a1a1a" data-dark="1" style="background:#1a1a1a;border:3px solid transparent;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Dark"></button>'
     +'</div>'
 
     +'<div class="p-label">Font Size</div>'
@@ -1326,6 +1429,26 @@ function buildPanel(){
     });
   });
 
+  /* Photo position */
+  document.querySelectorAll('.pos-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.pos-btn').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      photoPos=btn.dataset.pos;
+      updatePhoto();
+    });
+  });
+
+  /* Photo border color */
+  document.querySelectorAll('.p-color-dot').forEach(function(dot){
+    dot.addEventListener('click',function(){
+      document.querySelectorAll('.p-color-dot').forEach(function(d){ d.classList.remove('selected'); });
+      dot.classList.add('selected');
+      photoBorder=dot.dataset.bc;
+      updatePhoto();
+    });
+  });
+
   /* Templates */
   document.querySelectorAll('.tmpl-opt').forEach(function(opt){
     opt.addEventListener('click',function(){
@@ -1352,16 +1475,19 @@ function buildPanel(){
   /* Background Colors */
   document.querySelectorAll('.bg-swatch').forEach(function(sw){
     sw.addEventListener('click',function(){
-      document.documentElement.style.setProperty('--clr-bg', sw.dataset.bg);
-      // Dark bg → light card text
-      var dark = sw.dataset.bg === '#1a1a1a';
-      document.documentElement.style.setProperty('--clr-card', dark ? '#1e1e1e' : '#ffffff');
-      document.documentElement.style.setProperty('--clr-aside', dark ? '#161616' : '');
-      document.documentElement.style.setProperty('--clr-text', dark ? '#f0f0f0' : '#111111');
-      document.documentElement.style.setProperty('--clr-sub', dark ? '#cccccc' : '#2d2d2d');
-      document.documentElement.style.setProperty('--clr-border', dark ? '#2a2a2a' : '#e0e0e0');
+      var d=document.documentElement;
+      var dark=(sw.dataset.dark==='1');
+      d.style.setProperty('--clr-bg',    sw.dataset.bg);
+      d.style.setProperty('--clr-card',  dark?'#1e1e1e':'#ffffff');
+      d.style.setProperty('--clr-aside', dark?'#161616':'#f9f9f6');
+      d.style.setProperty('--clr-text',  dark?'#f0f0f0':'#111111');
+      d.style.setProperty('--clr-sub',   dark?'#d0d0d0':'#2d2d2d');
+      d.style.setProperty('--clr-muted', dark?'#aaaaaa':'#5a5a5a');
+      d.style.setProperty('--clr-faint', dark?'#888888':'#909090');
+      d.style.setProperty('--clr-border',dark?'#2e2e2e':'#e0e0e0');
       document.querySelectorAll('.bg-swatch').forEach(function(s){
-        s.style.borderColor = s===sw ? '#fff' : 'transparent';
+        s.style.borderColor = (s===sw)?'#fff':'transparent';
+        if(sw.dataset.bg==='#ffffff') s===sw&&(s.style.borderColor='#999');
       });
       toast('Background: '+sw.title);
     });
@@ -1398,10 +1524,11 @@ function wireSectionBtns(){
 
 /* ── INIT ─── */
 document.addEventListener('DOMContentLoaded',function(){
-  buildPanel();
   wireSectionBtns();
   setupPhoto();
   loadSaved();
+  buildPanel();   // build after loadSaved so controls reflect saved state
+  syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
   document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
 });
