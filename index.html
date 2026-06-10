@@ -392,7 +392,7 @@ body.edit-mode [contenteditable="true"]:focus {
   z-index: 900;
   transition: right .35s cubic-bezier(.4,0,.2,1);
 }
-body.edit-mode .fab-group { right: 390px; }
+body.edit-mode:not(.dock-mode) .fab-group { right: 400px; }
 
 .fab {
   display: flex;
@@ -420,8 +420,8 @@ body.edit-mode .fab-group { right: 390px; }
 /* ── EDITOR PANEL ────────────────────────────────── */
 #editor-panel {
   position: fixed;
-  top: 0; right: -380px;
-  width: 370px;
+  top: 0; right: -390px;
+  width: 380px;
   height: 100vh;
   background: #111;
   color: #e0e0e0;
@@ -433,6 +433,28 @@ body.edit-mode .fab-group { right: 390px; }
   overflow: hidden;
 }
 #editor-panel.open { right: 0; }
+
+/* ── BOTTOM DOCK MODE ────────────────────────────── */
+#editor-panel.docked {
+  top: auto; right: 0; left: 0; bottom: -360px;
+  width: 100%; height: 360px;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -6px 40px rgba(0,0,0,.55);
+  transition: bottom .35s cubic-bezier(.4,0,.2,1);
+}
+#editor-panel.docked.open { bottom: 0; right: 0; }
+body.edit-mode #editor-panel.docked ~ .fab-group { right: 28px; bottom: 378px; }
+body.edit-mode .page { padding-bottom: 0; }
+body.edit-mode.dock-open .page { padding-bottom: 368px; }
+#editor-panel.docked .panel__tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#editor-panel.docked .panel__tab { flex-shrink: 0; }
+#editor-panel.docked .panel__body { padding-bottom: 72px; }
+.panel__dock-btn {
+  background: none; border: 1px solid #2a2a2a; color: #555; cursor: pointer;
+  font-size: 0.875rem; padding: 3px 8px; border-radius: 5px;
+  transition: color .15s, border-color .15s; white-space: nowrap;
+}
+.panel__dock-btn:hover { color: #ccc; border-color: #555; }
 
 .panel__header {
   padding: 16px 20px 14px;
@@ -602,6 +624,79 @@ body.edit-mode .fab-group { right: 390px; }
   white-space: nowrap; letter-spacing: 0.02em;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── ASIDE COLOR MODES ───────────────────────────── */
+.cv__aside { transition: background .25s, color .25s; }
+
+.cv--aside-colored .cv__aside { background: var(--clr-accent); color: #fff; }
+.cv--aside-colored .cv__aside .section__title { color: rgba(255,255,255,.65); border-bottom-color: rgba(255,255,255,.18); }
+.cv--aside-colored .cv__aside .section__title::after { background: rgba(255,255,255,.5); }
+.cv--aside-colored .cv__aside a { color: rgba(255,255,255,.9); }
+.cv--aside-colored .cv__aside .profile-text,
+.cv--aside-colored .cv__aside .sk-text { color: rgba(255,255,255,.88); }
+.cv--aside-colored .cv__aside .lang-name { color: #fff; font-weight: 700; }
+.cv--aside-colored .cv__aside .lang-level,
+.cv--aside-colored .cv__aside .pub__meta,
+.cv--aside-colored .cv__aside .pub__authors { color: rgba(255,255,255,.62); }
+.cv--aside-colored .cv__aside .pub__title { color: rgba(255,255,255,.94); }
+.cv--aside-colored .cv__aside .pub__doi { color: rgba(255,255,255,.72); }
+.cv--aside-colored .cv__aside .lang-bar { background: rgba(255,255,255,.2); }
+.cv--aside-colored .cv__aside .lang-bar__fill { background: rgba(255,255,255,.85); }
+.cv--aside-colored .cv__aside .skill-list li { color: rgba(255,255,255,.88); }
+.cv--aside-colored .cv__aside .skill-list li::before { color: rgba(255,255,255,.55); }
+.cv--aside-colored .cv__aside .skill-bar-fill { background: rgba(255,255,255,.75); }
+.cv--aside-colored .cv__aside .skill-bar-track { background: rgba(255,255,255,.2); }
+.cv--aside-colored .cv__aside .entry__date { color: rgba(255,255,255,.55); }
+.cv--aside-colored .cv__aside .entry__org { color: rgba(255,255,255,.72); }
+.cv--aside-colored .cv__aside .entry__desc { color: rgba(255,255,255,.82); }
+.cv--aside-colored .cv__aside .pub { border-left-color: rgba(255,255,255,.25); }
+.cv--aside-colored .cv__aside .pub:hover { border-left-color: rgba(255,255,255,.6); }
+
+.cv--aside-dark .cv__aside { background: #16202e; }
+.cv--aside-dark .cv__aside .section__title { color: rgba(200,220,240,.6); border-bottom-color: rgba(200,220,240,.14); }
+.cv--aside-dark .cv__aside .section__title::after { background: rgba(200,220,240,.4); }
+.cv--aside-dark .cv__aside a { color: rgba(200,220,240,.85); }
+.cv--aside-dark .cv__aside .profile-text,
+.cv--aside-dark .cv__aside .sk-text,
+.cv--aside-dark .cv__aside .entry__desc { color: rgba(200,220,240,.8); }
+.cv--aside-dark .cv__aside .lang-name { color: #dce9f8; }
+.cv--aside-dark .cv__aside .lang-level,
+.cv--aside-dark .cv__aside .pub__meta,
+.cv--aside-dark .cv__aside .pub__authors,
+.cv--aside-dark .cv__aside .entry__date { color: rgba(200,220,240,.5); }
+.cv--aside-dark .cv__aside .pub__title { color: #dce9f8; }
+.cv--aside-dark .cv__aside .pub__doi,
+.cv--aside-dark .cv__aside .entry__org { color: rgba(200,220,240,.65); }
+.cv--aside-dark .cv__aside .lang-bar { background: rgba(200,220,240,.14); }
+.cv--aside-dark .cv__aside .lang-bar__fill { background: var(--clr-accent); }
+.cv--aside-dark .cv__aside .skill-list li { color: rgba(200,220,240,.8); }
+.cv--aside-dark .cv__aside .skill-list li::before { color: rgba(200,220,240,.45); }
+.cv--aside-dark .cv__aside .skill-bar-fill { background: var(--clr-accent); }
+.cv--aside-dark .cv__aside .skill-bar-track { background: rgba(200,220,240,.14); }
+.cv--aside-dark .cv__aside .pub { border-left-color: rgba(200,220,240,.14); }
+
+/* Aside mode toggle buttons */
+.aside-mode-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 14px; }
+.aside-mode-btn {
+  background: #1a1a1a; border: 2px solid #242424; border-radius: 6px;
+  padding: 10px 4px 8px; cursor: pointer; text-align: center;
+  font-family: var(--font); transition: all .15s;
+}
+.aside-mode-btn:hover { border-color: #444; }
+.aside-mode-btn.selected { border-color: var(--clr-accent,#2a5a2a); background: rgba(42,90,42,.12); }
+.aside-mode-swatch { height: 28px; border-radius: 4px; margin-bottom: 5px; display: flex; gap: 2px; overflow: hidden; }
+.aside-mode-swatch-main { flex: 1.8; background: #f9f9f6; }
+.aside-mode-swatch-side { flex: 1; }
+.aside-mode-label { font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #666; }
+.aside-mode-btn.selected .aside-mode-label { color: #aaa; }
+
+/* ── SKILL BARS (aside) ───────────────────────────── */
+.skill-bar-item { margin-bottom: 10px; }
+.skill-bar-label { display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 0.8125rem; }
+.skill-bar-name { color: var(--clr-sub); font-weight: 500; }
+.skill-bar-pct { color: var(--clr-faint); font-size: 0.6875rem; }
+.skill-bar-track { height: 5px; background: var(--clr-border); border-radius: 3px; overflow: hidden; }
+.skill-bar-fill { height: 100%; background: var(--clr-accent); border-radius: 3px; transition: width .4s ease; }
 
 /* ── PHOTO POSITION ──────────────────────────────── */
 .cv--photo-left .cv__photo-area { order: -1; }
@@ -811,6 +906,32 @@ body.edit-mode .fab-group { right: 390px; }
         <button class="section__add-btn" data-section="sec-education">+ Add Entry</button>
       </section>
 
+      <section class="section" id="sec-certifications" style="display:none">
+        <h2 class="section__title">Certifications</h2>
+        <article class="entry">
+          <div class="entry__head">
+            <span class="entry__title">EBU Label &mdash; Bioeconomy Qualification <span class="entry__tag">Certificate</span></span>
+            <span class="entry__date">2022</span>
+          </div>
+          <div class="entry__org">European Bioeconomy University</div>
+          <div class="entry__desc">Cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, and sustainability transformation knowledge.</div>
+        </article>
+        <button class="section__add-btn" data-section="sec-certifications">+ Add Certification</button>
+      </section>
+
+      <section class="section" id="sec-awards" style="display:none">
+        <h2 class="section__title">Awards &amp; Honors</h2>
+        <article class="entry">
+          <div class="entry__head">
+            <span class="entry__title">Marie Sk&#322;odowska-Curie Fellowship <span class="entry__tag">MSCA</span></span>
+            <span class="entry__date">2023</span>
+          </div>
+          <div class="entry__org">European Commission &mdash; Horizon Europe</div>
+          <div class="entry__desc">Prestigious EU fellowship awarded to outstanding early-stage researchers for doctoral training in a European research network.</div>
+        </article>
+        <button class="section__add-btn" data-section="sec-awards">+ Add Award</button>
+      </section>
+
     </main>
 
     <!-- SIDEBAR -->
@@ -822,18 +943,32 @@ body.edit-mode .fab-group { right: 390px; }
       </section>
 
       <section class="section" id="sec-skills">
-        <h2 class="section__title">Key Skills</h2>
-        <ul class="skill-list">
-          <li><span class="sk-text">Life Cycle Assessment (LCA)</span></li>
-          <li><span class="sk-text">SimaPro &middot; OpenLCA</span></li>
-          <li><span class="sk-text">Safe &amp; Sustainable by Design (SSbD)</span></li>
-          <li><span class="sk-text">Environmental Risk Assessment</span></li>
-          <li><span class="sk-text">Occupational &amp; Social LCA</span></li>
-          <li><span class="sk-text">Foresight &amp; Policy Analysis</span></li>
-          <li><span class="sk-text">Python &middot; Data Analysis</span></li>
-          <li><span class="sk-text">Scientific Writing &amp; Publication</span></li>
-        </ul>
-        <button class="section__add-btn" data-type="skill">+ Add Skill</button>
+        <h2 class="section__title">Skills &amp; Proficiency</h2>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Life Cycle Assessment (LCA)</span><span class="skill-bar-pct">95%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Safe &amp; Sustainable by Design (SSbD)</span><span class="skill-bar-pct">92%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Environmental Risk Assessment</span><span class="skill-bar-pct">88%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Scientific Writing &amp; Publication</span><span class="skill-bar-pct">85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Python &amp; Data Analysis</span><span class="skill-bar-pct">78%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-label"><span class="skill-bar-name">Foresight &amp; Policy Analysis</span><span class="skill-bar-pct">74%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:74%"></div></div>
+        </div>
+        <button class="section__add-btn" data-type="skill-bar">+ Add Skill</button>
       </section>
 
       <section class="section" id="sec-languages">
@@ -900,6 +1035,8 @@ var photoSize   = 88;
 var photoR      = '50%';
 var photoPos    = 'right';
 var photoBorder = '#2a5a2a';
+var asideMode   = 'light';  // light | colored | dark
+var dockMode    = false;
 
 var FONTS = [
   { n:'Inter',         s:"'Inter',system-ui,sans-serif",                              x:'Sans' },
@@ -940,7 +1077,7 @@ var EDITABLE = [
   '.entry__tag','.profile-text','.sk-text',
   '.lang-name','.lang-level',
   '.pub__title','.pub__journal','.pub__authors','.pub__doi',
-  '.section__title'
+  '.section__title','.skill-bar-name','.skill-bar-pct'
 ];
 
 var SYMBOLS = [
@@ -961,11 +1098,13 @@ function toggleEdit(){
     btn.innerHTML = xSvg()+' Stop Editing';
     btn.classList.add('active');
     panel.classList.add('open');
+    if(dockMode) document.body.classList.add('dock-open');
     enableEditing();
   } else {
     btn.innerHTML = editSvg()+' Edit CV';
     btn.classList.remove('active');
     panel.classList.remove('open');
+    document.body.classList.remove('dock-open');
     disableEditing();
   }
 }
@@ -1044,6 +1183,33 @@ function addToSection(sec){
   if(first) first.focus();
 }
 
+function showSection(id){
+  var s=document.getElementById(id);
+  if(s) s.style.display='';
+}
+function toggleSection(id){
+  var s=document.getElementById(id);
+  if(!s) return;
+  var hidden=s.style.display==='none'||getComputedStyle(s).display==='none';
+  s.style.display=hidden?'':'none';
+  toast(hidden?'Section shown':'Section hidden');
+}
+function addSkillBar(sec){
+  var item=document.createElement('div');
+  item.className='skill-bar-item';
+  item.innerHTML='<div class="skill-bar-label"><span class="skill-bar-name" contenteditable="true">Skill Name</span><span class="skill-bar-pct" contenteditable="true">80%</span></div>'
+    +'<div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>';
+  var db=mkDel(function(){ if(confirm('Remove?')) item.remove(); });
+  db.style.cssText='position:static;display:inline-flex;margin-left:6px;';
+  item.querySelector('.skill-bar-label').appendChild(db);
+  // live update bar width when pct changes
+  var pctEl=item.querySelector('.skill-bar-pct');
+  var fillEl=item.querySelector('.skill-bar-fill');
+  pctEl.addEventListener('input',function(){ fillEl.style.width=pctEl.textContent.trim(); });
+  var addBtn=sec.querySelector('.section__add-btn');
+  if(addBtn) sec.insertBefore(item,addBtn); else sec.appendChild(item);
+  item.querySelector('.skill-bar-name').focus();
+}
 function addSection(containerSel){
   var sec=document.createElement('section');
   sec.className='section'; sec.style.position='relative';
@@ -1112,6 +1278,33 @@ function syncPanelControls(){
   document.querySelectorAll('.pos-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.pos===photoPos); });
   document.querySelectorAll('.shape-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.r===photoR); });
   document.querySelectorAll('.p-color-dot').forEach(function(d){ d.classList.toggle('selected', d.dataset.bc===photoBorder); });
+  document.querySelectorAll('.aside-mode-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.aside===asideMode); });
+  var dockBtn=document.getElementById('dock-toggle');
+  if(dockBtn) dockBtn.textContent=dockMode?'&#8613; Side':'&#8615; Bottom';
+}
+function updateAside(){
+  var cv=document.getElementById('cv-root');
+  if(!cv) return;
+  cv.classList.toggle('cv--aside-colored', asideMode==='colored');
+  cv.classList.toggle('cv--aside-dark',    asideMode==='dark');
+  syncPanelControls();
+}
+function setDockMode(on){
+  dockMode=on;
+  var panel=document.getElementById('editor-panel');
+  var body=document.body;
+  if(on){
+    panel.classList.add('docked');
+    body.classList.add('dock-mode');
+  } else {
+    panel.classList.remove('docked');
+    body.classList.remove('dock-mode');
+  }
+  // Re-open if already open
+  if(panel.classList.contains('open')){
+    body.classList.toggle('dock-open', on && panel.classList.contains('open'));
+  }
+  syncPanelControls();
 }
 function removePhoto(){
   var img=document.getElementById('cv-photo');
@@ -1135,6 +1328,8 @@ function changeAccent(a){
   document.documentElement.style.setProperty('--clr-accent-lt',a.l);
   photoBorder=a.c;
   updatePhoto();
+  // Update colored aside swatch color
+  document.querySelectorAll('[data-aside="colored"] .aside-mode-swatch-side').forEach(function(el){ el.style.background=a.c; });
   document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===a.c); });
   document.querySelectorAll('.panel__tab.active').forEach(function(t){ t.style.borderBottomColor=a.c; });
 }
@@ -1152,9 +1347,10 @@ function applyTemplate(t){
   d.style.setProperty('--clr-muted',   t.dark?'#aaaaaa':'#5a5a5a');
   d.style.setProperty('--clr-faint',   t.dark?'#888888':'#909090');
   d.style.setProperty('--clr-border',  t.dark?'#2e2e2e':'#e0e0e0');
-  // sync photo border to new accent
+  // sync photo border and aside swatch to new accent
   photoBorder=t.c;
-  updatePhoto();
+  updatePhoto(); updateAside();
+  document.querySelectorAll('[data-aside="colored"] .aside-mode-swatch-side').forEach(function(el){ el.style.background=t.c; });
   document.querySelectorAll('.tmpl-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.tmpl===t.n); });
   document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===t.c); });
   document.querySelectorAll('.font-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.font===t.f); });
@@ -1198,6 +1394,7 @@ function save(){
       bgBorder:ds.getPropertyValue('--clr-border'),
       size:fontSize, photoSize:photoSize, photoR:photoR,
       photoPos:photoPos, photoBorder:photoBorder,
+      asideMode:asideMode, dockMode:dockMode,
       photoSrc:(img&&img.classList.contains('has-photo'))?img.src:''
     }));
     toast('Saved \u2713');
@@ -1219,8 +1416,10 @@ function loadSaved(){
     if(st.size)    { fontSize=st.size; document.documentElement.style.fontSize=fontSize+'px'; }
     if(st.photoSize){ photoSize=st.photoSize; }
     if(st.photoR)   { photoR=st.photoR; }
-    if(st.photoPos) { photoPos=st.photoPos; }
+    if(st.photoPos)  { photoPos=st.photoPos; }
     if(st.photoBorder){ photoBorder=st.photoBorder; }
+    if(st.asideMode) { asideMode=st.asideMode; updateAside(); }
+    if(st.dockMode)  { setDockMode(true); }
     if(st.photoSrc){
       var img=document.getElementById('cv-photo');
       var ph=document.getElementById('photo-placeholder');
@@ -1262,8 +1461,9 @@ function resetAll(){
     document.documentElement.style.removeProperty(p);
   });
   fontSize=16; accent='#2a5a2a'; font='Inter'; photoSize=88; photoR='50%';
-  photoPos='right'; photoBorder='#2a5a2a';
-  updatePhoto();
+  photoPos='right'; photoBorder='#2a5a2a'; asideMode='light';
+  updatePhoto(); updateAside();
+  setDockMode(false);
   toast('Reset to default');
 }
 
@@ -1294,7 +1494,11 @@ function buildPanel(){
   var symH = SYMBOLS.map(function(s){ return '<button class="sym-btn">'+s+'</button>'; }).join('');
 
   document.getElementById('editor-panel').innerHTML =
-    '<div class="panel__header"><span class="panel__title">&#9998; CV Editor</span><button class="panel__close" id="panel-close">&times;</button></div>'
+    '<div class="panel__header"><span class="panel__title">&#9998; CV Editor</span>'
+    +'<div style="display:flex;align-items:center;gap:8px">'
+    +'<button class="panel__dock-btn" id="dock-toggle" title="Dock to bottom">&#8615; Bottom</button>'
+    +'<button class="panel__close" id="panel-close">&times;</button>'
+    +'</div></div>'
     +'<div class="panel__tabs">'
     +'<button class="panel__tab active" data-tab="t-content">&#128221;&nbsp;Content</button>'
     +'<button class="panel__tab" data-tab="t-photo">&#128247;&nbsp;Photo</button>'
@@ -1305,14 +1509,19 @@ function buildPanel(){
 
     /* Content */
     +'<div class="panel__content active" id="t-content">'
-    +'<div class="p-label">Experience &amp; Education</div>'
+    +'<div class="p-label">Main Column</div>'
     +'<button class="p-btn" id="add-exp"><span class="pi">&#128188;</span> Add Experience Entry</button>'
     +'<button class="p-btn" id="add-edu"><span class="pi">&#127891;</span> Add Education Entry</button>'
-    +'<div class="p-label">Sidebar</div>'
+    +'<button class="p-btn" id="add-cert"><span class="pi">&#127881;</span> Add Certification</button>'
+    +'<button class="p-btn" id="add-award"><span class="pi">&#127942;</span> Add Award / Honor</button>'
+    +'<div class="p-label">Sidebar Column</div>'
     +'<button class="p-btn" id="add-pub"><span class="pi">&#128196;</span> Add Publication</button>'
-    +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill</button>'
+    +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill (bar)</button>'
     +'<button class="p-btn" id="add-lang"><span class="pi">&#127757;</span> Add Language</button>'
-    +'<div class="p-label">New Section</div>'
+    +'<div class="p-label">Section Visibility</div>'
+    +'<button class="p-btn" id="toggle-cert"><span class="pi">&#128065;</span> Show / Hide Certifications</button>'
+    +'<button class="p-btn" id="toggle-award"><span class="pi">&#128065;</span> Show / Hide Awards</button>'
+    +'<div class="p-label">Custom</div>'
     +'<button class="p-btn" id="add-smain"><span class="pi">&#43;</span> Add Section to Main</button>'
     +'<button class="p-btn" id="add-saside"><span class="pi">&#43;</span> Add Section to Sidebar</button>'
     +'</div>'
@@ -1358,6 +1567,21 @@ function buildPanel(){
     +'<div class="p-label">Accent Color</div>'
     +'<div class="color-grid">'+colorsH+'</div>'
     
+    +'<div class="p-label">Sidebar Column Style</div>'
+    +'<div class="aside-mode-grid">'
+    +'<button class="aside-mode-btn" data-aside="light">'
+      +'<div class="aside-mode-swatch"><div class="aside-mode-swatch-main"></div><div class="aside-mode-swatch-side" style="background:#f0f0f0"></div></div>'
+      +'<div class="aside-mode-label">Light</div>'
+    +'</button>'
+    +'<button class="aside-mode-btn" data-aside="colored">'
+      +'<div class="aside-mode-swatch"><div class="aside-mode-swatch-main"></div><div class="aside-mode-swatch-side" style="background:var(--clr-accent,#2a5a2a)"></div></div>'
+      +'<div class="aside-mode-label">Colored</div>'
+    +'</button>'
+    +'<button class="aside-mode-btn" data-aside="dark">'
+      +'<div class="aside-mode-swatch"><div class="aside-mode-swatch-main"></div><div class="aside-mode-swatch-side" style="background:#16202e"></div></div>'
+      +'<div class="aside-mode-label">Dark</div>'
+    +'</button>'
+    +'</div>'
     +'<div class="p-label">Background</div>'
     +'<div class="color-grid">'
     +'<button class="bg-swatch selected" data-bg="#edece8" data-dark="0" style="background:#edece8;border:3px solid #fff;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .15s,border-color .15s;" title="Warm Paper"></button>'
@@ -1407,11 +1631,18 @@ function buildPanel(){
   function gs(id){ return document.getElementById(id); }
   gs('add-exp').onclick   = function(){ var s=gs('sec-experience'); if(s) addToSection(s); };
   gs('add-edu').onclick   = function(){ var s=gs('sec-education'); if(s) addToSection(s); };
+  gs('add-cert').onclick  = function(){ showSection('sec-certifications'); var s=gs('sec-certifications'); if(s) addToSection(s); };
+  gs('add-award').onclick = function(){ showSection('sec-awards'); var s=gs('sec-awards'); if(s) addToSection(s); };
   gs('add-pub').onclick   = function(){ var s=gs('sec-publications'); if(s) addToSection(s); };
-  gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addToSection(s); };
+  gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addSkillBar(s); };
   gs('add-lang').onclick  = function(){ var s=gs('sec-languages'); if(s) addToSection(s); };
+  gs('toggle-cert').onclick  = function(){ toggleSection('sec-certifications'); };
+  gs('toggle-award').onclick = function(){ toggleSection('sec-awards'); };
   gs('add-smain').onclick  = function(){ addSection('.cv__main'); };
   gs('add-saside').onclick = function(){ addSection('.cv__aside'); };
+
+  /* Dock toggle */
+  gs('dock-toggle').onclick = function(){ setDockMode(!dockMode); };
 
   /* Photo */
   gs('upload-photo-btn').onclick = function(){ document.getElementById('photo-input').click(); };
@@ -1472,6 +1703,14 @@ function buildPanel(){
     });
   });
 
+  /* Aside mode */
+  document.querySelectorAll('.aside-mode-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      asideMode=btn.dataset.aside;
+      updateAside();
+    });
+  });
+
   /* Background Colors */
   document.querySelectorAll('.bg-swatch').forEach(function(sw){
     sw.addEventListener('click',function(){
@@ -1517,8 +1756,19 @@ function wireSectionBtns(){
   document.querySelectorAll('.section__add-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       var sec=btn.closest('.section');
-      if(sec) addToSection(sec);
+      if(!sec) return;
+      var t=btn.dataset.type;
+      if(t==='skill-bar') addSkillBar(sec);
+      else addToSection(sec);
     });
+  });
+  // Wire skill-bar live updates
+  document.querySelectorAll('.skill-bar-item').forEach(function(item){
+    var pctEl=item.querySelector('.skill-bar-pct');
+    var fillEl=item.querySelector('.skill-bar-fill');
+    if(pctEl&&fillEl){
+      pctEl.addEventListener('input',function(){ fillEl.style.width=pctEl.textContent.trim(); });
+    }
   });
 }
 
@@ -1528,6 +1778,7 @@ document.addEventListener('DOMContentLoaded',function(){
   setupPhoto();
   loadSaved();
   buildPanel();   // build after loadSaved so controls reflect saved state
+  updateAside();
   syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
   document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
