@@ -7,275 +7,370 @@
   <title>Jacopo Sorani &mdash; Curriculum Vitae</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
 
+/* ── TOKENS ──────────────────────────────────────── */
 :root {
   --font:          'Inter', system-ui, sans-serif;
-  --font-size-base: 62.5%;
-  --clr-text:      #1c1c1e;
-  --clr-sub:       #3a3a3c;
-  --clr-muted:     #6c6c70;
-  --clr-faint:     #9a9a9e;
+  --clr-text:      #111111;
+  --clr-sub:       #2d2d2d;
+  --clr-muted:     #5a5a5a;
+  --clr-faint:     #909090;
   --clr-accent:    #2a5a2a;
   --clr-accent-lt: #e6f0e6;
-  --clr-border:    #e5e5ea;
-  --clr-bg:        #f0f0f5;
+  --clr-border:    #e0e0e0;
+  --clr-bg:        #edece8;
   --clr-card:      #ffffff;
-  --clr-aside:     #fafaf8;
+  --clr-aside:     #f9f9f6;
+  --photo-size:    88px;
+  --photo-radius:  50%;
 }
+
+/* ── RESET ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: var(--font-size-base); }
+html { font-size: 16px; }
 body {
   font-family: var(--font);
-  font-size: 1rem;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--clr-text);
   background: var(--clr-bg);
   -webkit-font-smoothing: antialiased;
-  transition: background .3s;
 }
 a { color: var(--clr-accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ── Page ────────────────────────────────────────── */
-.page { padding: 36px 16px 100px; }
+/* ── PAGE ────────────────────────────────────────── */
+.page { padding: 40px 16px 120px; }
 
-/* ── CV Card ─────────────────────────────────────── */
+/* ── CV CARD ─────────────────────────────────────── */
 .cv {
-  max-width: 940px;
+  max-width: 960px;
   margin: 0 auto;
   background: var(--clr-card);
-  box-shadow: 0 2px 6px rgba(0,0,0,.06), 0 10px 40px rgba(0,0,0,.10);
-  border-radius: 4px;
-  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05), 0 6px 18px rgba(0,0,0,.09), 0 20px 56px rgba(0,0,0,.11);
+  border-radius: 3px;
+  overflow: visible;
 }
 
-/* ── Header ──────────────────────────────────────── */
+/* ── HEADER ──────────────────────────────────────── */
 .cv__header {
-  padding: 40px 46px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 40px 46px 30px;
   border-left: 5px solid var(--clr-accent);
   border-bottom: 1px solid var(--clr-border);
-  background: var(--clr-card);
+  overflow: hidden;
+  border-radius: 3px 3px 0 0;
 }
+.cv__header-left { flex: 1; min-width: 0; }
+
+/* Name — very large & strong */
 .cv__name {
-  font-size: 2.9rem;
-  font-weight: 700;
-  letter-spacing: .13em;
+  font-size: 2.375rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--clr-text);
-  line-height: 1.1;
-  margin-bottom: 4px;
+  line-height: 1.08;
+  margin-bottom: 5px;
 }
+/* Tagline — quiet */
 .cv__tagline {
-  font-size: 1.05rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  color: var(--clr-sub);
+  color: var(--clr-muted);
   margin-bottom: 18px;
-  letter-spacing: .01em;
+  line-height: 1.5;
 }
 .cv__contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px 22px;
+  gap: 5px 18px;
   align-items: center;
 }
 .contact-item {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: .93rem;
+  font-size: 0.78125rem;
   color: var(--clr-muted);
   transition: color .15s;
 }
 .contact-item:hover { color: var(--clr-accent); text-decoration: none; }
 .icon {
-  width: 12px; height: 12px;
+  width: 11px; height: 11px;
   stroke: currentColor; fill: none;
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
   flex-shrink: 0;
 }
 
-/* ── Body grid ───────────────────────────────────── */
+/* ── PHOTO ───────────────────────────────────────── */
+.cv__photo-area {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding-top: 3px;
+}
+.cv__photo-wrap {
+  width: var(--photo-size);
+  height: var(--photo-size);
+  position: relative;
+  cursor: default;
+}
+.cv__photo-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--photo-radius);
+  background: var(--clr-accent-lt);
+  border: 2px dashed var(--clr-accent);
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--clr-accent);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  padding: 8px;
+  opacity: 0.55;
+  transition: opacity .2s;
+}
+.cv__photo-placeholder:hover { opacity: 1; }
+.cv__photo-placeholder svg { width: 22px; height: 22px; stroke: var(--clr-accent); fill: none; stroke-width: 1.5; margin-bottom: 2px; }
+body.edit-mode .cv__photo-placeholder { display: flex; }
+.cv__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--photo-radius);
+  object-fit: cover;
+  border: 3px solid var(--clr-accent);
+  display: none;
+}
+.cv__photo.has-photo { display: block; }
+
+/* ── BODY GRID ───────────────────────────────────── */
 .cv__body {
   display: grid;
   grid-template-columns: 1fr 280px;
 }
 .cv__main {
-  padding: 30px 36px 48px 46px;
+  padding: 32px 38px 52px 46px;
   border-right: 1px solid var(--clr-border);
 }
 .cv__aside {
-  padding: 30px 28px 48px 26px;
+  padding: 32px 28px 52px 26px;
   background: var(--clr-aside);
 }
 
-/* ── Section ─────────────────────────────────────── */
-.section { margin-bottom: 28px; position: relative; }
+/* ── SECTION ─────────────────────────────────────── */
+.section { margin-bottom: 30px; position: relative; }
+
+/* Section title — deliberately tiny & architectural */
 .section__title {
-  font-size: .8rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .24em;
+  letter-spacing: 0.28em;
   color: var(--clr-accent);
-  padding-bottom: 6px;
-  border-bottom: 1.5px solid var(--clr-border);
-  margin-bottom: 14px;
+  padding-bottom: 7px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--clr-border);
+  position: relative;
+}
+.section__title::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 26px;
+  height: 1px;
+  background: var(--clr-accent);
 }
 
-/* ── Entry ───────────────────────────────────────── */
-.entry { margin-bottom: 18px; position: relative; }
-.entry:last-of-type { margin-bottom: 0; }
+/* ── ENTRY ───────────────────────────────────────── */
+.entry {
+  margin-bottom: 0;
+  position: relative;
+  padding: 0 0 18px 0;
+}
+.entry + .entry { padding-top: 16px; border-top: 1px dashed var(--clr-border); }
+.entry:last-of-type { padding-bottom: 0; }
+
 .entry__head {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2px;
 }
+
+/* Entry title — prominent */
 .entry__title {
-  font-size: 1.04rem;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 700;
   color: var(--clr-text);
-  line-height: 1.35;
-  display: flex;
-  align-items: center;
+  line-height: 1.3;
+  display: inline-flex;
+  align-items: flex-start;
   gap: 7px;
   flex-wrap: wrap;
 }
 .entry__tag {
-  font-size: .73rem;
-  font-weight: 500;
+  font-size: 0.625rem;
+  font-weight: 700;
   color: var(--clr-accent);
   background: var(--clr-accent-lt);
-  padding: 2px 9px;
+  padding: 2px 8px;
   border-radius: 20px;
   white-space: nowrap;
-  letter-spacing: .02em;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+  text-transform: uppercase;
 }
 .entry__date {
-  font-size: .88rem;
+  font-size: 0.75rem;
   color: var(--clr-faint);
   white-space: nowrap;
   flex-shrink: 0;
-  margin-top: 2px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
 }
 .entry__org {
-  font-size: .93rem;
+  font-size: 0.8125rem;
   color: var(--clr-muted);
   font-style: italic;
-  margin: 3px 0 6px;
+  margin: 4px 0 7px;
+  line-height: 1.4;
 }
 .entry__desc {
-  font-size: .92rem;
-  color: var(--clr-sub);
-  line-height: 1.68;
-}
-.entry__desc ul { margin: 4px 0 0 15px; }
-.entry__desc li { margin-bottom: 4px; }
-.entry__desc strong { font-weight: 600; color: var(--clr-text); }
-
-/* ── Profile ─────────────────────────────────────── */
-.profile-text {
-  font-size: .92rem;
+  font-size: 0.8125rem;
   color: var(--clr-sub);
   line-height: 1.72;
 }
+.entry__desc ul { margin: 5px 0 0 14px; }
+.entry__desc li { margin-bottom: 4px; }
+.entry__desc strong { font-weight: 700; color: var(--clr-text); }
 
-/* ── Skills ──────────────────────────────────────── */
-.skill-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+/* ── ASIDE ELEMENTS ──────────────────────────────── */
+.profile-text {
+  font-size: 0.8125rem;
+  color: var(--clr-sub);
+  line-height: 1.78;
+}
+
+.skill-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .skill-list li {
-  font-size: .92rem;
+  font-size: 0.8125rem;
   color: var(--clr-sub);
   padding-left: 13px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 .skill-list li::before {
   content: '▸';
   position: absolute;
   left: 0;
   color: var(--clr-accent);
-  font-size: .7rem;
-  top: 2px;
+  font-size: 0.5625rem;
+  top: 3px;
 }
 
-/* ── Languages ───────────────────────────────────── */
-.lang-item { margin-bottom: 12px; position: relative; }
-.lang-info { display: flex; justify-content: space-between; margin-bottom: 5px; }
-.lang-name { font-size: .93rem; font-weight: 600; color: var(--clr-text); }
-.lang-level { font-size: .82rem; color: var(--clr-faint); }
-.lang-bar { height: 3px; background: var(--clr-border); border-radius: 2px; overflow: hidden; }
-.lang-bar__fill { height: 100%; background: var(--clr-accent); border-radius: 2px; transition: width .4s ease; }
+.lang-item { margin-bottom: 13px; position: relative; }
+.lang-info { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+.lang-name { font-size: 0.875rem; font-weight: 600; color: var(--clr-text); }
+.lang-level { font-size: 0.75rem; color: var(--clr-faint); }
+.lang-bar { height: 2px; background: var(--clr-border); border-radius: 2px; overflow: hidden; }
+.lang-bar__fill { height: 100%; background: var(--clr-accent); border-radius: 2px; }
 
-/* ── Publications ────────────────────────────────── */
-.pub { margin-bottom: 15px; padding-left: 10px; border-left: 2px solid var(--clr-border); position: relative; transition: border-color .2s; }
+.pub {
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-left: 2px solid var(--clr-border);
+  position: relative;
+  transition: border-color .2s;
+}
 .pub:hover { border-left-color: var(--clr-accent); }
-.pub__title { font-size: .92rem; font-weight: 600; color: var(--clr-text); line-height: 1.4; }
-.pub__meta { font-size: .82rem; color: var(--clr-muted); margin-top: 3px; }
+.pub__title { font-size: 0.8125rem; font-weight: 700; color: var(--clr-text); line-height: 1.45; }
+.pub__meta { font-size: 0.75rem; color: var(--clr-muted); margin-top: 3px; }
 .pub__journal { color: var(--clr-accent); font-style: italic; }
-.pub__authors { font-size: .8rem; color: var(--clr-faint); margin-top: 1px; }
-.pub__doi { display: inline-block; font-size: .77rem; font-family: 'SF Mono','Fira Code','Consolas',monospace; color: var(--clr-accent); margin-top: 4px; opacity: .8; word-break: break-all; }
+.pub__authors { font-size: 0.71875rem; color: var(--clr-faint); margin-top: 2px; }
+.pub__doi {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  color: var(--clr-accent);
+  margin-top: 4px;
+  opacity: .75;
+  word-break: break-all;
+}
 .pub__doi:hover { opacity: 1; text-decoration: underline; }
 
-/* ── Add entry button (edit mode only) ───────────── */
+/* ── EDIT MODE ───────────────────────────────────── */
 .section__add-btn {
   display: none;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 14px;
   background: transparent;
   border: 1.5px dashed var(--clr-accent);
   color: var(--clr-accent);
-  border-radius: 5px;
-  padding: 6px 0;
+  border-radius: 6px;
+  padding: 7px 0;
   font-family: var(--font);
-  font-size: .88rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   cursor: pointer;
-  opacity: .6;
+  opacity: 0.45;
   transition: opacity .15s, background .15s;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 .section__add-btn:hover { opacity: 1; background: var(--clr-accent-lt); }
 body.edit-mode .section__add-btn { display: flex; }
 
-/* ── Delete button (edit mode, on hover) ─────────── */
 .item-delete {
   display: none;
   position: absolute;
-  top: 0; right: -20px;
-  width: 16px; height: 16px;
+  top: 2px; right: -24px;
+  width: 18px; height: 18px;
   background: #c0392b;
   color: #fff;
   border: none;
   border-radius: 50%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   z-index: 5;
-  transition: background .15s, transform .15s;
   padding: 0;
+  font-weight: 700;
+  transition: background .15s, transform .15s;
 }
-.item-delete:hover { background: #922b21; transform: scale(1.2); }
+.item-delete:hover { background: #922b21; transform: scale(1.15); }
 body.edit-mode .entry:hover > .item-delete,
 body.edit-mode .pub:hover > .item-delete,
 body.edit-mode .lang-item:hover > .item-delete { display: flex; }
-body.edit-mode .skill-list li:hover > .item-delete { display: inline-flex; position: static; margin-left: 6px; }
+body.edit-mode .skill-list li:hover > .item-delete { display: inline-flex; position: static; margin-left: 7px; }
 
-/* ── Edit mode contenteditable ───────────────────── */
 body.edit-mode [contenteditable="true"] {
-  outline: none;
-  border-radius: 2px;
-  cursor: text;
-  min-width: 20px;
-  min-height: 1em;
+  outline: none; border-radius: 2px; cursor: text;
+  min-width: 20px; min-height: 1em;
 }
 body.edit-mode [contenteditable="true"]:hover {
-  background: rgba(42,90,42,.06);
+  background: rgba(42,90,42,.05);
   box-shadow: 0 0 0 1px rgba(42,90,42,.2);
 }
 body.edit-mode [contenteditable="true"]:focus {
@@ -283,11 +378,10 @@ body.edit-mode [contenteditable="true"]:focus {
   box-shadow: 0 0 0 2px var(--clr-accent);
 }
 
-/* ── Floating buttons ────────────────────────────── */
+/* ── FAB BUTTONS ─────────────────────────────────── */
 .fab-group {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: 28px; right: 28px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -295,44 +389,41 @@ body.edit-mode [contenteditable="true"]:focus {
   z-index: 900;
   transition: right .35s cubic-bezier(.4,0,.2,1);
 }
-body.edit-mode .fab-group { right: 388px; }
+body.edit-mode .fab-group { right: 390px; }
 
 .fab {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
+  padding: 10px 20px;
   border-radius: 7px;
   border: none;
   font-family: var(--font);
-  font-size: 1.1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background .18s, transform .18s, box-shadow .18s;
+  transition: transform .18s, box-shadow .18s, background .18s;
   white-space: nowrap;
-  letter-spacing: .02em;
+  letter-spacing: 0.03em;
 }
 .fab:hover { transform: translateY(-2px); }
-.fab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-.fab--print { background: #2a2a2a; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.22); }
-.fab--print:hover { background: #111; box-shadow: 0 5px 16px rgba(0,0,0,.28); }
-
+.fab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.fab--print { background: #1c1c1e; color: #f2f2f7; box-shadow: 0 3px 12px rgba(0,0,0,.28); }
+.fab--print:hover { background: #000; box-shadow: 0 5px 18px rgba(0,0,0,.4); }
 .fab--edit  { background: var(--clr-accent); color: #fff; box-shadow: 0 4px 14px rgba(42,90,42,.35); }
-.fab--edit:hover  { box-shadow: 0 6px 18px rgba(42,90,42,.4); }
-.fab--edit.active { background: #c0392b; box-shadow: 0 4px 14px rgba(192,57,43,.35); }
-.fab--edit.active:hover { background: #922b21; box-shadow: 0 6px 18px rgba(192,57,43,.4); }
+.fab--edit:hover  { box-shadow: 0 6px 20px rgba(42,90,42,.4); }
+.fab--edit.active { background: #c0392b; box-shadow: 0 4px 14px rgba(192,57,43,.4); }
 
-/* ── Editor Panel ────────────────────────────────── */
+/* ── EDITOR PANEL ────────────────────────────────── */
 #editor-panel {
   position: fixed;
   top: 0; right: -380px;
-  width: 360px;
+  width: 370px;
   height: 100vh;
-  background: #1c1c1e;
-  color: #f2f2f7;
-  box-shadow: -6px 0 40px rgba(0,0,0,.4);
-  z-index: 990;
+  background: #111;
+  color: #e0e0e0;
+  box-shadow: -8px 0 50px rgba(0,0,0,.55);
+  z-index: 980;
   display: flex;
   flex-direction: column;
   transition: right .35s cubic-bezier(.4,0,.2,1);
@@ -341,84 +432,91 @@ body.edit-mode .fab-group { right: 388px; }
 #editor-panel.open { right: 0; }
 
 .panel__header {
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid #2a2a2a;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid #1e1e1e;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
+  background: #0a0a0a;
 }
-.panel__title { font-size: 1.2rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
-.panel__close { background: none; border: none; color: #666; cursor: pointer; font-size: 2rem; line-height: 1; transition: color .15s; }
+.panel__title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
+.panel__close { background: none; border: none; color: #444; cursor: pointer; font-size: 1.75rem; line-height: 1; padding: 0; transition: color .15s; }
 .panel__close:hover { color: #fff; }
 
-.panel__tabs { display: flex; border-bottom: 1px solid #2a2a2a; flex-shrink: 0; }
+.panel__tabs { display: flex; border-bottom: 1px solid #1e1e1e; flex-shrink: 0; background: #0a0a0a; }
 .panel__tab {
-  flex: 1;
-  background: none; border: none;
-  color: #666;
-  font-family: var(--font);
-  font-size: 1.05rem; font-weight: 500;
-  padding: 11px 4px;
-  cursor: pointer;
+  flex: 1; background: none; border: none;
+  color: #444; font-family: var(--font);
+  font-size: 0.5625rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  padding: 10px 2px; cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: color .15s, border-color .15s;
-  text-align: center;
+  transition: color .15s, border-color .15s; text-align: center;
 }
-.panel__tab:hover { color: #ccc; }
+.panel__tab:hover { color: #aaa; }
 .panel__tab.active { color: #fff; border-bottom-color: var(--clr-accent, #2a5a2a); }
 
-.panel__body { flex: 1; overflow-y: auto; padding: 14px 18px 16px; }
-.panel__body::-webkit-scrollbar { width: 4px; }
-.panel__body::-webkit-scrollbar-track { background: #111; }
-.panel__body::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
-
+.panel__body { flex: 1; overflow-y: auto; padding: 12px 16px 90px; }
+.panel__body::-webkit-scrollbar { width: 3px; }
+.panel__body::-webkit-scrollbar-track { background: #0a0a0a; }
+.panel__body::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
 .panel__content { display: none; }
 .panel__content.active { display: block; }
 
 .p-label {
-  font-size: .88rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .18em;
-  color: #555; margin: 16px 0 8px;
+  font-size: 0.5625rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.22em;
+  color: #3a3a3a; margin: 16px 0 7px;
 }
-.p-label:first-child { margin-top: 0; }
+.p-label:first-child { margin-top: 2px; }
 
 .p-btn {
   display: flex; align-items: center; gap: 9px;
-  width: 100%; background: #242424;
-  color: #ddd; border: 1px solid #333;
-  border-radius: 7px; padding: 9px 13px;
-  font-family: var(--font); font-size: 1.1rem;
+  width: 100%; background: #1a1a1a;
+  color: #bbb; border: 1px solid #242424;
+  border-radius: 6px; padding: 8px 12px;
+  font-family: var(--font); font-size: 0.8125rem;
   cursor: pointer; margin-bottom: 6px;
-  transition: background .15s, border-color .15s;
-  text-align: left;
+  transition: background .15s, border-color .15s, color .15s; text-align: left;
 }
-.p-btn:hover { background: #2e2e2e; border-color: #555; color: #fff; }
-.p-btn .pi { font-size: 1.3rem; }
+.p-btn:hover { background: #242424; border-color: #3a3a3a; color: #fff; }
+.p-btn .pi { font-size: 1rem; }
 .p-btn--primary { background: var(--clr-accent, #2a5a2a) !important; border-color: var(--clr-accent, #2a5a2a) !important; color: #fff !important; }
-.p-btn--primary:hover { filter: brightness(1.15); }
-.p-btn--danger { background: #3a1515 !important; border-color: #c0392b !important; color: #f9a; }
-.p-btn--danger:hover { background: #4a1a1a !important; }
+.p-btn--primary:hover { filter: brightness(1.2); }
+.p-btn--danger { background: #280e0e !important; border-color: #5a1a1a !important; color: #f9a; }
+.p-btn--danger:hover { background: #361414 !important; border-color: #c0392b !important; }
 
 /* Font grid */
-.font-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 10px; }
+.font-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 8px; }
 .font-opt {
-  background: #242424; border: 2px solid #333;
-  border-radius: 7px; padding: 10px 10px 8px;
-  cursor: pointer; transition: border-color .15s, background .15s;
-  text-align: center;
+  background: #1a1a1a; border: 2px solid #242424;
+  border-radius: 7px; padding: 10px 8px; cursor: pointer;
+  transition: border-color .15s, background .15s; text-align: center;
 }
-.font-opt:hover { background: #2e2e2e; border-color: #555; }
-.font-opt.selected { border-color: var(--clr-accent, #2a5a2a); background: #1a2a1a; }
-.font-opt__name { font-size: 1.15rem; font-weight: 700; color: #fff; display: block; }
-.font-opt__sample { font-size: .85rem; color: #888; display: block; margin-top: 2px; }
+.font-opt:hover { background: #222; border-color: #3a3a3a; }
+.font-opt.selected { border-color: var(--clr-accent, #2a5a2a); background: #111a11; }
+.font-opt__name { font-size: 0.9375rem; font-weight: 700; color: #eee; display: block; }
+.font-opt__sample { font-size: 0.625rem; color: #555; display: block; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Template grid */
+.tmpl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.tmpl-opt {
+  background: #1a1a1a; border: 2px solid #242424;
+  border-radius: 7px; padding: 11px 8px 9px; cursor: pointer;
+  transition: border-color .15s, background .15s; text-align: center;
+}
+.tmpl-opt:hover { background: #222; border-color: #3a3a3a; }
+.tmpl-opt.selected { border-color: #888; }
+.tmpl-dot { width: 22px; height: 22px; border-radius: 50%; margin: 0 auto 6px; border: 2px solid rgba(255,255,255,.1); }
+.tmpl-name { font-size: 0.5625rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.12em; }
 
 /* Color swatches */
 .color-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 10px; }
 .color-swatch {
-  width: 32px; height: 32px; border-radius: 50%;
-  border: 3px solid transparent;
-  cursor: pointer; transition: transform .15s, border-color .15s;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 3px solid transparent; cursor: pointer;
+  transition: transform .15s, border-color .15s;
 }
 .color-swatch:hover { transform: scale(1.18); }
 .color-swatch.selected { border-color: #fff; }
@@ -426,85 +524,105 @@ body.edit-mode .fab-group { right: 388px; }
 /* Size control */
 .size-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .size-btn {
-  background: #242424; border: 1px solid #333;
-  color: #ddd; width: 30px; height: 30px;
-  border-radius: 5px; cursor: pointer;
-  font-size: 1.4rem; display: flex;
+  background: #1a1a1a; border: 1px solid #242424;
+  color: #bbb; width: 32px; height: 32px;
+  border-radius: 6px; cursor: pointer;
+  font-size: 1.25rem; display: flex;
   align-items: center; justify-content: center;
-  transition: background .15s;
-  font-family: var(--font);
+  flex-shrink: 0; font-family: var(--font);
+  transition: background .15s, border-color .15s;
 }
-.size-btn:hover { background: #3a3a3a; }
-.size-label { color: #888; font-size: 1rem; flex: 1; text-align: center; }
+.size-btn:hover { background: #2a2a2a; border-color: #444; color: #fff; }
+.size-label { color: #444; font-size: 0.75rem; flex: 1; text-align: center; }
+
+/* Photo controls */
+.p-range {
+  width: 100%; -webkit-appearance: none;
+  height: 4px; background: #222; border-radius: 2px;
+  outline: none; margin-bottom: 14px; cursor: pointer;
+}
+.p-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px;
+  background: var(--clr-accent, #2a5a2a); border-radius: 50%;
+  cursor: pointer; transition: transform .15s;
+}
+.p-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.shape-grid { display: flex; gap: 8px; margin-bottom: 14px; }
+.shape-btn {
+  flex: 1; background: #1a1a1a; border: 2px solid #242424;
+  color: #666; border-radius: 6px; padding: 8px 4px;
+  cursor: pointer; font-size: 0.625rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  font-family: var(--font); transition: all .15s; text-align: center;
+}
+.shape-btn:hover { border-color: #444; color: #ddd; }
+.shape-btn.selected { border-color: var(--clr-accent, #2a5a2a); color: #fff; background: #111a11; }
+.size-readout { font-size: 0.75rem; color: #555; text-align: center; margin-top: -10px; margin-bottom: 12px; }
 
 /* Symbols */
 .symbol-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin-bottom: 12px; }
 .sym-btn {
-  background: #242424; border: 1px solid #333;
-  color: #ddd; border-radius: 5px;
-  padding: 6px 2px; cursor: pointer;
-  font-size: 1.2rem; line-height: 1;
-  transition: background .15s;
-  text-align: center;
+  background: #1a1a1a; border: 1px solid #242424;
+  color: #bbb; border-radius: 5px; padding: 6px 2px;
+  cursor: pointer; font-size: 1.1rem; line-height: 1;
+  transition: background .15s, border-color .15s; text-align: center;
 }
-.sym-btn:hover { background: #3a3a3a; border-color: var(--clr-accent, #2a5a2a); color: #fff; }
+.sym-btn:hover { background: #282828; border-color: var(--clr-accent, #2a5a2a); color: #fff; }
 
-.panel__footer {
-  padding: 12px 18px;
-  border-top: 1px solid #2a2a2a;
-  display: flex; gap: 8px;
-  flex-shrink: 0;
-}
-.panel__footer .p-btn { margin-bottom: 0; flex: 1; justify-content: center; }
-
-/* Custom input */
 .p-input {
-  width: 100%; background: #242424;
-  border: 1px solid #333; color: #ddd;
-  padding: 9px 12px; border-radius: 7px;
-  font-family: var(--font); font-size: 1.1rem;
-  outline: none; margin-bottom: 7px;
-  transition: border-color .15s;
+  width: 100%; background: #1a1a1a; border: 1px solid #242424;
+  color: #ccc; padding: 8px 12px; border-radius: 6px;
+  font-family: var(--font); font-size: 0.8125rem;
+  outline: none; margin-bottom: 7px; transition: border-color .15s;
 }
 .p-input:focus { border-color: var(--clr-accent, #2a5a2a); }
 
-/* ── Toast ───────────────────────────────────────── */
+/* Panel footer */
+.panel__footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 16px; border-top: 1px solid #1e1e1e;
+  display: flex; gap: 8px; background: #0a0a0a;
+}
+.panel__footer .p-btn { margin-bottom: 0; flex: 1; justify-content: center; }
+
+/* ── TOAST ───────────────────────────────────────── */
 .toast {
   position: fixed; bottom: 90px; left: 50%;
   transform: translateX(-50%) translateY(14px);
-  background: #1c1c1e; color: #fff;
-  padding: 10px 22px; border-radius: 7px;
-  font-size: 1.1rem; font-weight: 500;
+  background: #0a0a0a; color: #fff;
+  padding: 9px 22px; border-radius: 7px;
+  font-size: 0.8125rem; font-weight: 500;
   z-index: 9999; opacity: 0;
   transition: opacity .22s, transform .22s;
   pointer-events: none;
-  box-shadow: 0 4px 16px rgba(0,0,0,.3);
-  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  white-space: nowrap; letter-spacing: 0.02em;
 }
-.toast--show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ── Print ───────────────────────────────────────── */
+/* ── PRINT ───────────────────────────────────────── */
 @media print {
-  body { background: white; }
-  .page { padding: 0; }
-  .cv { box-shadow: none; border-radius: 0; max-width: 100%; }
+  body { background: white !important; }
+  .page { padding: 0 !important; }
+  .cv { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; overflow: visible; }
   .fab-group, #editor-panel, .section__add-btn, .item-delete { display: none !important; }
-  .cv__header, .lang-bar__fill, .entry__tag, .section__title {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  .cv__photo-placeholder { display: none !important; }
+  .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   @page { margin: 0; size: A4 portrait; }
 }
 
-/* ── Responsive ──────────────────────────────────── */
-@media (max-width: 740px) {
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 760px) {
   .cv__body { grid-template-columns: 1fr; }
-  .cv__main { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 20px 18px; }
-  .cv__aside { padding: 20px 18px; }
-  .cv__header { padding: 24px 18px 18px; }
-  .cv__name { font-size: 2.2rem; }
+  .cv__main { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 22px 18px 28px; }
+  .cv__aside { padding: 22px 18px 28px; }
+  .cv__header { padding: 24px 18px 20px; flex-wrap: wrap; }
+  .cv__name { font-size: 1.75rem; }
   #editor-panel { width: 100%; right: -100%; }
-  body.edit-mode .fab-group { right: 16px; bottom: 100px; }
+  body.edit-mode .fab-group { right: 16px; bottom: 110px; }
 }
 
   </style>
@@ -516,30 +634,45 @@ body.edit-mode .fab-group { right: 388px; }
 
   <!-- HEADER -->
   <header class="cv__header">
-    <h1 class="cv__name">Jacopo Sorani</h1>
-    <p class="cv__tagline">PhD Researcher (MSCA) &middot; ETH Z&uuml;rich &amp; Empa &nbsp;|&nbsp; Industrial Chemist &nbsp;|&nbsp; LCA &amp; SSbD Expert</p>
-    <nav class="cv__contacts">
-      <a href="tel:+393333806352" class="contact-item">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
-        +39 333 380 6352
-      </a>
-      <a href="mailto:jacopo.sorani@gmail.com" class="contact-item">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        jacopo.sorani@gmail.com
-      </a>
-      <a href="https://linkedin.com/in/jacoposorani" target="_blank" rel="noopener" class="contact-item">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        linkedin.com/in/jacoposorani
-      </a>
-      <a href="https://github.com/jakxsor" target="_blank" rel="noopener" class="contact-item">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        github.com/jakxsor
-      </a>
-      <span class="contact-item">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Z&uuml;rich, Switzerland
-      </span>
-    </nav>
+    <div class="cv__header-left">
+      <h1 class="cv__name">Jacopo Sorani</h1>
+      <p class="cv__tagline">PhD Researcher (MSCA) &middot; ETH Z&uuml;rich &amp; Empa &nbsp;&mdash;&nbsp; Industrial Chemist &nbsp;&mdash;&nbsp; LCA &amp; SSbD Expert</p>
+      <nav class="cv__contacts">
+        <a href="tel:+393333806352" class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+          +39 333 380 6352
+        </a>
+        <a href="mailto:jacopo.sorani@gmail.com" class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          jacopo.sorani@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/jacoposorani" target="_blank" rel="noopener" class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/jacoposorani
+        </a>
+        <a href="https://github.com/jakxsor" target="_blank" rel="noopener" class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/jakxsor
+        </a>
+        <span class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Z&uuml;rich, Switzerland
+        </span>
+      </nav>
+    </div>
+
+    <!-- PHOTO AREA -->
+    <div class="cv__photo-area" id="photo-area">
+      <div class="cv__photo-wrap">
+        <div class="cv__photo-placeholder" id="photo-placeholder" onclick="document.getElementById('photo-input').click()">
+          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Add Photo
+        </div>
+        <img class="cv__photo" id="cv-photo" src="" alt="Profile photo">
+        <input type="file" id="photo-input" accept="image/*" style="display:none">
+      </div>
+    </div>
+
   </header>
 
   <!-- BODY -->
@@ -548,7 +681,6 @@ body.edit-mode .fab-group { right: 388px; }
     <!-- MAIN COLUMN -->
     <main class="cv__main">
 
-      <!-- Experience -->
       <section class="section" id="sec-experience">
         <h2 class="section__title">Experience</h2>
 
@@ -571,7 +703,7 @@ body.edit-mode .fab-group { right: 388px; }
             <ul>
               <li>Research on Life Cycle Assessment (LCA), Environmental Risk Assessment, Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.</li>
               <li>Contributing to Safe and Sustainable by Design (SSbD) frameworks. Partner in the EU-funded <strong>MELOMANES</strong> project on sustainable nanomedicine innovation.</li>
-              <li>Led two collaborative projects with <strong>Roche</strong>: (1) LCA &amp; energy demand master&rsquo;s thesis; (2) SSbD case study evaluating environmental and safety regulatory compliance from early development stages.</li>
+              <li>Led two collaborative projects with <strong>Roche</strong>: (1) LCA &amp; energy demand master&rsquo;s thesis; (2) SSbD case study on a pharmaceutical product from early development stage.</li>
               <li>Developed a software tool for energy demand estimation in chemical and industrial processes.</li>
             </ul>
           </div>
@@ -585,7 +717,7 @@ body.edit-mode .fab-group { right: 388px; }
           <div class="entry__org">GVS Filter Technology &middot; Bologna, Italy</div>
           <div class="entry__desc">
             <ul>
-              <li>Comprehensive Life Cycle Assessment (LCA) and Mass Flow analysis for medical device production processes using SimaPro.</li>
+              <li>Comprehensive Life Cycle Assessment (LCA) and Mass Flow analysis for medical device production using SimaPro.</li>
               <li>Researched innovative production processes, contributing to sustainable practices in medical device manufacturing.</li>
             </ul>
           </div>
@@ -597,7 +729,7 @@ body.edit-mode .fab-group { right: 388px; }
             <span class="entry__date">Apr 2022 &ndash; Dec 2022</span>
           </div>
           <div class="entry__org">Climate-KIC &middot; Lisbon, Portugal</div>
-          <div class="entry__desc">Developed system thinking skills within a multicultural and interdisciplinary group. Proposed ideas through innovation and leadership to facilitate Lisbon&rsquo;s net-zero goal.</div>
+          <div class="entry__desc">Developed system thinking skills within a multicultural and interdisciplinary group. Proposed innovative ideas to facilitate Lisbon&rsquo;s net-zero transition.</div>
         </article>
 
         <article class="entry">
@@ -606,13 +738,12 @@ body.edit-mode .fab-group { right: 388px; }
             <span class="entry__date">Apr 2022 &ndash; Jun 2022</span>
           </div>
           <div class="entry__org">European Bioeconomy University (EBU) &middot; Bologna, Italy</div>
-          <div class="entry__desc">Qualification covering cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, creativity, and sustainability transformation knowledge.</div>
+          <div class="entry__desc">Qualification covering cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, and sustainability transformation knowledge.</div>
         </article>
 
-        <button class="section__add-btn" data-section="sec-experience">&#xFF0B; Add entry</button>
+        <button class="section__add-btn" data-section="sec-experience">+ Add Entry</button>
       </section>
 
-      <!-- Education -->
       <section class="section" id="sec-education">
         <h2 class="section__title">Education</h2>
 
@@ -648,7 +779,7 @@ body.edit-mode .fab-group { right: 388px; }
           <div class="entry__org">Cavour-Pacinotti</div>
         </article>
 
-        <button class="section__add-btn" data-section="sec-education">&#xFF0B; Add entry</button>
+        <button class="section__add-btn" data-section="sec-education">+ Add Entry</button>
       </section>
 
     </main>
@@ -656,14 +787,11 @@ body.edit-mode .fab-group { right: 388px; }
     <!-- SIDEBAR -->
     <aside class="cv__aside">
 
-      <!-- Profile -->
       <section class="section">
         <h2 class="section__title">Profile</h2>
-        <p class="profile-text">Interested in advanced life cycle assessment, environmental risk management, and in-silico modeling for sustainable innovation. Current PhD work focuses on integrating nanomaterials into SSbD frameworks through interdisciplinary collaboration. Master&rsquo;s education from Bologna emphasized low-carbon technologies and sustainable chemistry.</p>
-        <button class="section__add-btn" data-type="entry">&#xFF0B; Add entry</button>
+        <p class="profile-text">Interested in advanced life cycle assessment, environmental risk management, and in-silico modeling for sustainable innovation. PhD focuses on integrating nanomaterials into SSbD frameworks through interdisciplinary collaboration. Master&rsquo;s from Bologna emphasized low-carbon technologies and sustainable chemistry.</p>
       </section>
 
-      <!-- Skills -->
       <section class="section" id="sec-skills">
         <h2 class="section__title">Key Skills</h2>
         <ul class="skill-list">
@@ -676,10 +804,9 @@ body.edit-mode .fab-group { right: 388px; }
           <li><span class="sk-text">Python &middot; Data Analysis</span></li>
           <li><span class="sk-text">Scientific Writing &amp; Publication</span></li>
         </ul>
-        <button class="section__add-btn" data-type="skill">&#xFF0B; Add skill</button>
+        <button class="section__add-btn" data-type="skill">+ Add Skill</button>
       </section>
 
-      <!-- Languages -->
       <section class="section" id="sec-languages">
         <h2 class="section__title">Languages</h2>
         <div class="lang-item">
@@ -690,40 +817,35 @@ body.edit-mode .fab-group { right: 388px; }
           <div class="lang-info"><span class="lang-name">English</span><span class="lang-level">Proficient (C1)</span></div>
           <div class="lang-bar"><div class="lang-bar__fill" style="width:88%"></div></div>
         </div>
-        <button class="section__add-btn" data-type="language">&#xFF0B; Add language</button>
+        <button class="section__add-btn" data-type="language">+ Add Language</button>
       </section>
 
-      <!-- Publications -->
       <section class="section" id="sec-publications">
         <h2 class="section__title">Publications</h2>
-
         <div class="pub">
           <div class="pub__title">Implementing Safe and Sustainable by Design in Pharmaceutical Innovation</div>
           <div class="pub__meta"><span class="pub__journal">Journal of Cleaner Production</span> &middot; Jan 2026</div>
           <div class="pub__authors">Sorani J., Nowack B., Hischier R.</div>
           <a href="https://doi.org/10.1016/j.jclepro.2025.147280" target="_blank" rel="noopener" class="pub__doi">10.1016/j.jclepro.2025.147280</a>
         </div>
-
         <div class="pub">
-          <div class="pub__title">Nanomedicine Meets Immunotherapy: Advancing Adoptive Cell Therapy with Nanoparticles in Cancer &mdash; Sustainability Perspectives</div>
+          <div class="pub__title">Nanomedicine Meets Immunotherapy: Adoptive Cell Therapy with Nanoparticles &mdash; Sustainability Perspectives</div>
           <div class="pub__meta"><span class="pub__journal">Advanced Science</span> &middot; Jan 2026</div>
           <div class="pub__authors">Multiple authors</div>
           <a href="https://doi.org/10.1002/advs.202522864" target="_blank" rel="noopener" class="pub__doi">10.1002/advs.202522864</a>
         </div>
-
-        <button class="section__add-btn" data-type="publication">&#xFF0B; Add publication</button>
+        <button class="section__add-btn" data-type="publication">+ Add Publication</button>
       </section>
 
     </aside>
-  </div><!-- /cv__body -->
+  </div>
+</div>
+</div>
 
-</div><!-- /cv -->
-</div><!-- /page -->
-
-<!-- Editor Panel -->
+<!-- Editor Panel (built by JS) -->
 <div id="editor-panel"></div>
 
-<!-- FAB group -->
+<!-- FABs -->
 <div class="fab-group">
   <button class="fab fab--print" id="btn-print">
     <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
@@ -737,462 +859,520 @@ body.edit-mode .fab-group { right: 388px; }
 
 <script>
 
-(function() {
+(function(){
 'use strict';
 
-/* ── State ───────────────────────────────────────── */
-var editMode = false;
-var fontSizeBase = 10;
-var currentAccent = '#2a5a2a';
-var currentFont = 'Inter';
+/* ── State ─── */
+var editMode  = false;
+var fontSize  = 16;
+var accent    = '#2a5a2a';
+var font      = 'Inter';
+var photoSize = 88;
+var photoR    = '50%';
 
 var FONTS = [
-  { name: 'Inter',        stack: "'Inter', system-ui, sans-serif",                  sample: 'Aa 123' },
-  { name: 'Playfair',     stack: "'Playfair Display', Georgia, serif",               sample: 'Aa 123' },
-  { name: 'Lato',         stack: "'Lato', system-ui, sans-serif",                    sample: 'Aa 123' },
-  { name: 'Raleway',      stack: "'Raleway', system-ui, sans-serif",                 sample: 'Aa 123' },
-  { name: 'Source Serif', stack: "'Source Serif 4', Georgia, serif",                 sample: 'Aa 123' },
-  { name: 'Georgia',      stack: "Georgia, 'Times New Roman', serif",                sample: 'Aa 123' }
+  { n:'Inter',         s:"'Inter',system-ui,sans-serif",                              x:'Sans' },
+  { n:'Playfair',      s:"'Playfair Display',Georgia,serif",                          x:'Serif' },
+  { n:'Lato',          s:"'Lato',system-ui,sans-serif",                               x:'Clean' },
+  { n:'Raleway',       s:"'Raleway',system-ui,sans-serif",                            x:'Modern' },
+  { n:'Source Serif',  s:"'Source Serif 4',Georgia,serif",                            x:'Academic' },
+  { n:'Georgia',       s:"Georgia,'Times New Roman',serif",                           x:'Classic' }
 ];
 
 var ACCENTS = [
-  { color: '#2a5a2a', lt: '#e6f0e6', name: 'Forest Green' },
-  { color: '#1a3a5c', lt: '#dce8f5', name: 'Navy Blue' },
-  { color: '#5c1a2a', lt: '#f5dce0', name: 'Burgundy' },
-  { color: '#2a2a2a', lt: '#e8e8e8', name: 'Charcoal' },
-  { color: '#1a4a4a', lt: '#dcf0f0', name: 'Teal' },
-  { color: '#4a3a1a', lt: '#f5eddc', name: 'Bronze' }
+  { c:'#2a5a2a', l:'#e6f0e6', n:'Forest' },
+  { c:'#1a3a6a', l:'#dce8f7', n:'Navy' },
+  { c:'#6a1a2a', l:'#f7dce2', n:'Bordeaux' },
+  { c:'#1a1a1a', l:'#ebebeb', n:'Mono' },
+  { c:'#1a4a4a', l:'#dcf0ef', n:'Teal' },
+  { c:'#4a3810', l:'#f5edda', n:'Bronze' }
 ];
 
-var SYMBOLS = [
-  '★','✦','✧','✪','●','◦','•','◆',
-  '→','←','↑','↓','↗','▸','▹','◇',
-  '✓','✔','✗','✘','⊕','⊗','⊙','∞',
-  '§','¶','†','‡','‰','™','®','©',
-  '—','–','·','|','"','"','…','/'
+var TEMPLATES = [
+  { n:'Scholar',    c:'#2a5a2a', l:'#e6f0e6', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#edece8' },
+  { n:'Executive',  c:'#1a3a6a', l:'#dce8f7', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#eaedf2' },
+  { n:'Elegant',    c:'#6a1a2a', l:'#f7dce2', f:'Playfair',     fs:"'Playfair Display',Georgia,serif",   bg:'#f0eeec' },
+  { n:'Mono',       c:'#1a1a1a', l:'#ebebeb', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#f0f0f0' }
 ];
 
 var EDITABLE = [
-  '.cv__name', '.cv__tagline',
-  '.entry__title', '.entry__date', '.entry__org', '.entry__desc',
-  '.entry__tag', '.profile-text', '.sk-text',
-  '.lang-name', '.lang-level',
-  '.pub__title', '.pub__meta span', '.pub__authors', '.pub__doi',
+  '.cv__name','.cv__tagline',
+  '.entry__title','.entry__date','.entry__org','.entry__desc',
+  '.entry__tag','.profile-text','.sk-text',
+  '.lang-name','.lang-level',
+  '.pub__title','.pub__journal','.pub__authors','.pub__doi',
   '.section__title'
 ];
 
-/* ── Toggle edit mode ────────────────────────────── */
-function toggleEdit() {
+var SYMBOLS = [
+  '★','✦','✧','✪','▸','◆','●','◦',
+  '→','←','↑','↓','↗','↘','⟶','⇒',
+  '✓','✔','✗','✘','⊕','⊗','±','∞',
+  '§','¶','†','‡','™','®','©','°',
+  '—','–','·','|','…','"','"','«'
+];
+
+/* ── Toggle Edit ─── */
+function toggleEdit(){
   editMode = !editMode;
   document.body.classList.toggle('edit-mode', editMode);
-  var btn = document.getElementById('btn-edit');
+  var btn   = document.getElementById('btn-edit');
   var panel = document.getElementById('editor-panel');
-
-  if (editMode) {
-    btn.innerHTML = svgX() + ' Stop Editing';
+  if(editMode){
+    btn.innerHTML = xSvg()+' Stop Editing';
     btn.classList.add('active');
     panel.classList.add('open');
     enableEditing();
   } else {
-    btn.innerHTML = svgEdit() + ' Edit CV';
+    btn.innerHTML = editSvg()+' Edit CV';
     btn.classList.remove('active');
     panel.classList.remove('open');
     disableEditing();
   }
 }
+function editSvg(){ return '<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'; }
+function xSvg(){ return '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'; }
 
-function svgEdit() {
-  return '<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>';
+function enableEditing(){
+  EDITABLE.forEach(function(s){ document.querySelectorAll(s).forEach(function(el){ el.contentEditable='true'; }); });
+  attachDeleteBtns();
 }
-function svgX() {
-  return '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-}
-
-/* ── Enable / disable editing ────────────────────── */
-function enableEditing() {
-  EDITABLE.forEach(function(sel) {
-    document.querySelectorAll(sel).forEach(function(el) {
-      el.contentEditable = 'true';
-    });
-  });
-  attachDeleteButtons();
+function disableEditing(){
+  EDITABLE.forEach(function(s){ document.querySelectorAll(s).forEach(function(el){ el.removeAttribute('contenteditable'); }); });
 }
 
-function disableEditing() {
-  EDITABLE.forEach(function(sel) {
-    document.querySelectorAll(sel).forEach(function(el) {
-      el.removeAttribute('contenteditable');
-    });
-  });
-}
-
-/* ── Delete buttons ──────────────────────────────── */
-function attachDeleteButtons() {
-  document.querySelectorAll('.entry, .pub, .lang-item').forEach(function(el) {
-    if (el.querySelector('.item-delete')) return;
-    var btn = mkDeleteBtn(function() { if (confirm('Delete this item?')) el.remove(); });
-    el.appendChild(btn);
-  });
-  document.querySelectorAll('.skill-list li').forEach(function(li) {
-    if (li.querySelector('.item-delete')) return;
-    var btn = mkDeleteBtn(function() { li.remove(); });
-    btn.style.cssText = 'position:static;display:inline-flex;margin-left:8px;flex-shrink:0;';
-    li.appendChild(btn);
-  });
-}
-
-function mkDeleteBtn(handler) {
+/* ── Delete buttons ─── */
+function mkDel(fn){
   var b = document.createElement('button');
-  b.className = 'item-delete';
-  b.innerHTML = '&times;';
-  b.title = 'Delete';
-  b.addEventListener('click', function(e) { e.stopPropagation(); handler(); });
+  b.className='item-delete'; b.innerHTML='&times;'; b.title='Remove';
+  b.addEventListener('click',function(e){ e.stopPropagation(); fn(); });
   return b;
 }
-
-/* ── Add entry to section ────────────────────────── */
-function addEntryToSection(section) {
-  var type = detectSectionType(section);
-  var el;
-
-  if (type === 'skill') {
-    var li = document.createElement('li');
-    li.innerHTML = '<span class="sk-text" contenteditable="true">New Skill</span>';
-    var db = mkDeleteBtn(function() { li.remove(); });
-    db.style.cssText = 'position:static;display:inline-flex;margin-left:8px;flex-shrink:0;';
-    li.appendChild(db);
-    var list = section.querySelector('.skill-list');
-    if (list) { list.appendChild(li); li.querySelector('.sk-text').focus(); }
-    return;
-  }
-
-  if (type === 'language') {
-    el = document.createElement('div');
-    el.className = 'lang-item';
-    el.innerHTML = '<div class="lang-info"><span class="lang-name" contenteditable="true">Language</span><span class="lang-level" contenteditable="true">Level</span></div><div class="lang-bar"><div class="lang-bar__fill" style="width:75%"></div></div>';
-  } else if (type === 'publication') {
-    el = document.createElement('div');
-    el.className = 'pub';
-    el.innerHTML = '<div class="pub__title" contenteditable="true">Publication Title</div>'
-      + '<div class="pub__meta"><span class="pub__journal" contenteditable="true">Journal</span> &middot; <span contenteditable="true">Year</span></div>'
-      + '<div class="pub__authors" contenteditable="true">Authors</div>'
-      + '<a class="pub__doi" href="#" contenteditable="true">DOI or link</a>';
-  } else {
-    el = document.createElement('article');
-    el.className = 'entry';
-    el.innerHTML = '<div class="entry__head"><span class="entry__title" contenteditable="true">New Title</span><span class="entry__date" contenteditable="true">20XX &ndash; 20XX</span></div>'
-      + '<div class="entry__org" contenteditable="true">Organization &middot; Location</div>'
-      + '<div class="entry__desc" contenteditable="true">Description of role and responsibilities.</div>';
-  }
-
-  var db2 = mkDeleteBtn(function() { if (confirm('Delete?')) el.remove(); });
-  el.appendChild(db2);
-  var addBtn = section.querySelector('.section__add-btn');
-  if (addBtn) section.insertBefore(el, addBtn);
-  else section.appendChild(el);
-  var first = el.querySelector('[contenteditable="true"]');
-  if (first) first.focus();
+function attachDeleteBtns(){
+  document.querySelectorAll('.entry,.pub,.lang-item').forEach(function(el){
+    if(el.querySelector('.item-delete')) return;
+    el.appendChild(mkDel(function(){ if(confirm('Remove this item?')) el.remove(); }));
+  });
+  document.querySelectorAll('.skill-list li').forEach(function(li){
+    if(li.querySelector('.item-delete')) return;
+    var b=mkDel(function(){ li.remove(); });
+    b.style.cssText='position:static;display:inline-flex;margin-left:7px;';
+    li.appendChild(b);
+  });
 }
 
-function detectSectionType(section) {
-  if (section.querySelector('.skill-list') || section.dataset.type === 'skill') return 'skill';
-  if (section.querySelector('.lang-item') || section.dataset.type === 'language') return 'language';
-  if (section.querySelector('.pub') || section.dataset.type === 'publication') return 'publication';
+/* ── Add content ─── */
+function secType(sec){
+  if(sec.querySelector('.skill-list')||sec.dataset.type==='skill') return 'skill';
+  if(sec.querySelector('.lang-item')||sec.dataset.type==='language') return 'language';
+  if(sec.querySelector('.pub')||sec.dataset.type==='publication') return 'publication';
   return 'entry';
 }
 
-/* ── Add section ─────────────────────────────────── */
-function addSection(containerSel) {
-  var sec = document.createElement('section');
-  sec.className = 'section';
-  sec.innerHTML = '<h2 class="section__title" contenteditable="true">New Section</h2>'
-    + '<article class="entry">'
-    + '<div class="entry__head"><span class="entry__title" contenteditable="true">Title</span><span class="entry__date" contenteditable="true">Date</span></div>'
-    + '<div class="entry__org" contenteditable="true">Organization</div>'
-    + '<div class="entry__desc" contenteditable="true">Description</div>'
-    + '</article>'
-    + '<button class="section__add-btn">&#xFF0B; Add entry</button>';
+function addToSection(sec){
+  var t = secType(sec);
+  var el;
+  if(t==='skill'){
+    var li=document.createElement('li');
+    li.innerHTML='<span class="sk-text" contenteditable="true">New Skill</span>';
+    var db=mkDel(function(){ li.remove(); });
+    db.style.cssText='position:static;display:inline-flex;margin-left:7px;';
+    li.appendChild(db);
+    var list=sec.querySelector('.skill-list');
+    if(list){ list.appendChild(li); li.querySelector('.sk-text').focus(); }
+    return;
+  }
+  if(t==='language'){
+    el=document.createElement('div'); el.className='lang-item';
+    el.innerHTML='<div class="lang-info"><span class="lang-name" contenteditable="true">Language</span><span class="lang-level" contenteditable="true">Level</span></div><div class="lang-bar"><div class="lang-bar__fill" style="width:70%"></div></div>';
+  } else if(t==='publication'){
+    el=document.createElement('div'); el.className='pub';
+    el.innerHTML='<div class="pub__title" contenteditable="true">Publication Title</div>'
+      +'<div class="pub__meta"><span class="pub__journal" contenteditable="true">Journal</span> &middot; <span contenteditable="true">Year</span></div>'
+      +'<div class="pub__authors" contenteditable="true">Authors</div>'
+      +'<a class="pub__doi" href="#" contenteditable="true">DOI or link</a>';
+  } else {
+    el=document.createElement('article'); el.className='entry';
+    el.innerHTML='<div class="entry__head"><span class="entry__title" contenteditable="true">Position / Role Title</span><span class="entry__date" contenteditable="true">20XX &ndash; 20XX</span></div>'
+      +'<div class="entry__org" contenteditable="true">Organization &middot; Location</div>'
+      +'<div class="entry__desc" contenteditable="true">Describe your responsibilities and achievements here.</div>';
+  }
+  var db2=mkDel(function(){ if(confirm('Remove?')) el.remove(); });
+  el.appendChild(db2);
+  var addBtn=sec.querySelector('.section__add-btn');
+  if(addBtn) sec.insertBefore(el,addBtn); else sec.appendChild(el);
+  var first=el.querySelector('[contenteditable="true"]');
+  if(first) first.focus();
+}
 
-  var db = mkDeleteBtn(function() { if (confirm('Delete section?')) sec.remove(); });
-  db.style.cssText = 'position:absolute;top:0;right:-22px;';
-  sec.style.position = 'relative';
+function addSection(containerSel){
+  var sec=document.createElement('section');
+  sec.className='section'; sec.style.position='relative';
+  sec.innerHTML='<h2 class="section__title" contenteditable="true">New Section</h2>'
+    +'<article class="entry">'
+    +'<div class="entry__head"><span class="entry__title" contenteditable="true">Title</span><span class="entry__date" contenteditable="true">Date</span></div>'
+    +'<div class="entry__org" contenteditable="true">Organization</div>'
+    +'<div class="entry__desc" contenteditable="true">Description</div>'
+    +'</article>'
+    +'<button class="section__add-btn">+ Add Entry</button>';
+  var db=mkDel(function(){ if(confirm('Remove section?')) sec.remove(); });
+  db.style.cssText='position:absolute;top:0;right:-24px;display:flex;';
   sec.appendChild(db);
-
-  var container = document.querySelector(containerSel);
-  if (container) {
+  var container=document.querySelector(containerSel);
+  if(container){
     container.appendChild(sec);
     sec.querySelector('.section__title').focus();
-    sec.querySelector('.section__add-btn').addEventListener('click', function() { addEntryToSection(sec); });
-    var li = sec.querySelector('.entry');
-    var db2 = mkDeleteBtn(function() { if (confirm('Delete?')) li.remove(); });
-    li.appendChild(db2);
+    sec.querySelector('.section__add-btn').addEventListener('click',function(){ addToSection(sec); });
+    var li=sec.querySelector('.entry');
+    li.appendChild(mkDel(function(){ if(confirm('Remove?')) li.remove(); }));
   }
 }
 
-/* ── Font change ─────────────────────────────────── */
-function changeFont(f) {
-  currentFont = f.name;
-  document.documentElement.style.setProperty('--font', f.stack);
-  document.querySelectorAll('.font-opt').forEach(function(opt) {
-    opt.classList.toggle('selected', opt.dataset.font === f.name);
+/* ── Photo ─── */
+function setupPhoto(){
+  var input=document.getElementById('photo-input');
+  var ph=document.getElementById('photo-placeholder');
+  var img=document.getElementById('cv-photo');
+  if(!input) return;
+  input.addEventListener('change',function(e){
+    var file=e.target.files[0]; if(!file) return;
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      img.src=ev.target.result;
+      img.classList.add('has-photo');
+      ph.style.display='none';
+      updatePhoto();
+    };
+    reader.readAsDataURL(file);
   });
+  ph.addEventListener('click',function(){ input.click(); });
+}
+function updatePhoto(){
+  var r=document.documentElement;
+  r.style.setProperty('--photo-size', photoSize+'px');
+  r.style.setProperty('--photo-radius', photoR);
+  var img=document.getElementById('cv-photo');
+  var ph=document.getElementById('photo-placeholder');
+  if(img){ img.style.width=photoSize+'px'; img.style.height=photoSize+'px'; img.style.borderRadius=photoR; }
+  if(ph){ ph.style.width=photoSize+'px'; ph.style.height=photoSize+'px'; ph.style.borderRadius=photoR; }
+  var readout=document.querySelector('.size-readout');
+  if(readout) readout.textContent=photoSize+'px';
+}
+function removePhoto(){
+  var img=document.getElementById('cv-photo');
+  var ph=document.getElementById('photo-placeholder');
+  if(img){ img.src=''; img.classList.remove('has-photo'); }
+  if(ph && editMode) ph.style.display='flex';
+  var input=document.getElementById('photo-input');
+  if(input) input.value='';
+  toast('Photo removed');
 }
 
-/* ── Color change ────────────────────────────────── */
-function changeAccent(a) {
-  currentAccent = a.color;
-  document.documentElement.style.setProperty('--clr-accent', a.color);
-  document.documentElement.style.setProperty('--clr-accent-lt', a.lt);
-  document.querySelectorAll('.color-swatch').forEach(function(sw) {
-    sw.classList.toggle('selected', sw.dataset.color === a.color);
-  });
-  document.querySelectorAll('.panel__tab.active').forEach(function(t) {
-    t.style.borderBottomColor = a.color;
-  });
+/* ── Font / Color / Size ─── */
+function changeFont(f){
+  font=f.n;
+  document.documentElement.style.setProperty('--font',f.s);
+  document.querySelectorAll('.font-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.font===f.n); });
+}
+function changeAccent(a){
+  accent=a.c;
+  document.documentElement.style.setProperty('--clr-accent',a.c);
+  document.documentElement.style.setProperty('--clr-accent-lt',a.l);
+  document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===a.c); });
+  document.querySelectorAll('.panel__tab.active').forEach(function(t){ t.style.borderBottomColor=a.c; });
+}
+function applyTemplate(t){
+  accent=t.c; font=t.f;
+  document.documentElement.style.setProperty('--clr-accent',t.c);
+  document.documentElement.style.setProperty('--clr-accent-lt',t.l);
+  document.documentElement.style.setProperty('--font',t.fs);
+  document.documentElement.style.setProperty('--clr-bg',t.bg);
+  document.querySelectorAll('.tmpl-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.tmpl===t.n); });
+  document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.toggle('selected',s.dataset.c===t.c); });
+  document.querySelectorAll('.font-opt').forEach(function(o){ o.classList.toggle('selected',o.dataset.font===t.f); });
+  toast('Template: '+t.n);
+}
+function changeFontSize(d){
+  fontSize=Math.max(12,Math.min(20,fontSize+d));
+  document.documentElement.style.fontSize=fontSize+'px';
+  var lbl=document.querySelector('.size-label');
+  if(lbl) lbl.textContent=fontSize+'px';
 }
 
-/* ── Font size ───────────────────────────────────── */
-function changeFontSize(delta) {
-  fontSizeBase = Math.max(8, Math.min(13, fontSizeBase + delta));
-  document.documentElement.style.setProperty('--font-size-base', (fontSizeBase / 10 * 62.5) + '%');
-  var lbl = document.querySelector('.size-label');
-  if (lbl) lbl.textContent = fontSizeBase + 'px base';
+/* ── Symbol ─── */
+function insertSymbol(sym){
+  var el=document.activeElement;
+  if(el&&el.getAttribute('contenteditable')==='true'){
+    document.execCommand('insertText',false,sym);
+  } else { toast('Click on a text field first, then insert a symbol'); }
 }
 
-/* ── Insert symbol ───────────────────────────────── */
-function insertSymbol(sym) {
-  var el = document.activeElement;
-  if (el && el.getAttribute('contenteditable') === 'true') {
-    document.execCommand('insertText', false, sym);
-  } else {
-    showToast('Click on a text area first, then choose a symbol');
-  }
-}
-
-/* ── Save / Load ─────────────────────────────────── */
-function save() {
-  try {
-    var clone = document.getElementById('cv-root').cloneNode(true);
-    clone.querySelectorAll('.item-delete, .section__add-btn, [contenteditable]').forEach(function(el) {
+/* ── Save / Load / Export ─── */
+function save(){
+  try{
+    var clone=document.getElementById('cv-root').cloneNode(true);
+    clone.querySelectorAll('.item-delete,.section__add-btn,[contenteditable]').forEach(function(el){
       el.removeAttribute('contenteditable');
     });
-    localStorage.setItem('cv_v3_html', clone.innerHTML);
-    localStorage.setItem('cv_v3_style', JSON.stringify({
-      font: currentFont,
-      fontStack: document.documentElement.style.getPropertyValue('--font'),
-      accent: currentAccent,
-      accentLt: document.documentElement.style.getPropertyValue('--clr-accent-lt'),
-      size: fontSizeBase
+    localStorage.setItem('cv_v5_html',clone.innerHTML);
+    var img=document.getElementById('cv-photo');
+    localStorage.setItem('cv_v5_style',JSON.stringify({
+      accent:accent,
+      accentLt:document.documentElement.style.getPropertyValue('--clr-accent-lt'),
+      font:font,
+      fontS:document.documentElement.style.getPropertyValue('--font'),
+      bg:document.documentElement.style.getPropertyValue('--clr-bg'),
+      size:fontSize, photoSize:photoSize, photoR:photoR,
+      photoSrc:(img&&img.classList.contains('has-photo'))?img.src:''
     }));
-    showToast('✓ Saved to browser');
-  } catch (e) { showToast('Save error: ' + e.message); }
+    toast('Saved \u2713');
+  } catch(e){ toast('Save error: '+e.message); }
+}
+function loadSaved(){
+  try{
+    var st=JSON.parse(localStorage.getItem('cv_v5_style')||'null');
+    if(!st) return;
+    if(st.accent)  { document.documentElement.style.setProperty('--clr-accent',st.accent); accent=st.accent; }
+    if(st.accentLt) document.documentElement.style.setProperty('--clr-accent-lt',st.accentLt);
+    if(st.fontS)   { document.documentElement.style.setProperty('--font',st.fontS); font=st.font||font; }
+    if(st.bg)      document.documentElement.style.setProperty('--clr-bg',st.bg);
+    if(st.size)    { fontSize=st.size; document.documentElement.style.fontSize=fontSize+'px'; }
+    if(st.photoSize){ photoSize=st.photoSize; }
+    if(st.photoR)  { photoR=st.photoR; }
+    if(st.photoSrc){
+      var img=document.getElementById('cv-photo');
+      var ph=document.getElementById('photo-placeholder');
+      if(img){ img.src=st.photoSrc; img.classList.add('has-photo'); }
+      if(ph) ph.style.display='none';
+    }
+    updatePhoto();
+  } catch(e){ console.warn('Load error:',e); }
+}
+function exportHTML(){
+  var clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.section__add-btn,.toast').forEach(function(el){ el.remove(); });
+  clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+  // Embed current CSS vars
+  var extra='<style>:root{'
+    +'--clr-accent:'+getComputedStyle(document.documentElement).getPropertyValue('--clr-accent').trim()+';'
+    +'--clr-accent-lt:'+getComputedStyle(document.documentElement).getPropertyValue('--clr-accent-lt').trim()+';'
+    +'--clr-bg:'+getComputedStyle(document.documentElement).getPropertyValue('--clr-bg').trim()+';'
+    +'--font:'+getComputedStyle(document.documentElement).getPropertyValue('--font').trim()+';'
+    +'--photo-size:'+photoSize+'px;--photo-radius:'+photoR+';'
+    +'}</style>';
+  var head=clone.querySelector('head');
+  if(head) head.insertAdjacentHTML('beforeend',extra);
+  var blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='jacopo-sorani-cv.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast('\u2b07 Downloading...');
+}
+function resetAll(){
+  if(!confirm('Reset all styles to default?')) return;
+  localStorage.removeItem('cv_v5_style');
+  ['--clr-accent','--clr-accent-lt','--clr-bg','--font'].forEach(function(p){
+    document.documentElement.style.removeProperty(p);
+  });
+  document.documentElement.style.fontSize='16px';
+  fontSize=16; accent='#2a5a2a'; font='Inter'; photoSize=88; photoR='50%';
+  updatePhoto();
+  toast('Reset to default');
 }
 
-function loadSaved() {
-  try {
-    var st = JSON.parse(localStorage.getItem('cv_v3_style') || 'null');
-    if (!st) return;
-    if (st.fontStack) document.documentElement.style.setProperty('--font', st.fontStack);
-    if (st.accent)    document.documentElement.style.setProperty('--clr-accent', st.accent);
-    if (st.accentLt)  document.documentElement.style.setProperty('--clr-accent-lt', st.accentLt);
-    if (st.size)      { fontSizeBase = st.size; document.documentElement.style.setProperty('--font-size-base', (fontSizeBase / 10 * 62.5) + '%'); }
-    if (st.font)  currentFont  = st.font;
-    if (st.accent) currentAccent = st.accent;
-  } catch (e) { console.warn('Load error:', e); }
-}
-
-/* ── Export HTML ─────────────────────────────────── */
-function exportHTML() {
-  var clone = document.documentElement.cloneNode(true);
-  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.section__add-btn,.toast').forEach(function(el) { el.remove(); });
-  clone.querySelectorAll('[contenteditable]').forEach(function(el) { el.removeAttribute('contenteditable'); });
-  var blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], { type: 'text/html' });
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'jacopo-sorani-cv.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  showToast('\u2b07 Downloading HTML file...');
-}
-
-/* ── Reset ───────────────────────────────────────── */
-function resetStyles() {
-  if (!confirm('Reset all style changes (font, color, size)?')) return;
-  localStorage.removeItem('cv_v3_style');
-  document.documentElement.style.removeProperty('--font');
-  document.documentElement.style.removeProperty('--clr-accent');
-  document.documentElement.style.removeProperty('--clr-accent-lt');
-  document.documentElement.style.removeProperty('--font-size-base');
-  fontSizeBase = 10; currentFont = 'Inter'; currentAccent = '#2a5a2a';
-  document.querySelectorAll('.font-opt').forEach(function(o) { o.classList.toggle('selected', o.dataset.font === 'Inter'); });
-  document.querySelectorAll('.color-swatch').forEach(function(s) { s.classList.toggle('selected', s.dataset.color === '#2a5a2a'); });
-  showToast('Styles reset to default');
-}
-
-/* ── Toast ───────────────────────────────────────── */
-function showToast(msg) {
-  var old = document.querySelector('.toast');
-  if (old) old.remove();
-  var t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
+/* ── Toast ─── */
+function toast(msg){
+  var old=document.querySelector('.toast'); if(old) old.remove();
+  var t=document.createElement('div'); t.className='toast'; t.textContent=msg;
   document.body.appendChild(t);
-  setTimeout(function() { t.classList.add('toast--show'); }, 10);
-  setTimeout(function() { t.classList.remove('toast--show'); setTimeout(function() { if(t.parentNode) t.remove(); }, 300); }, 2400);
+  setTimeout(function(){ t.classList.add('show'); },10);
+  setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.remove(); },300); },2400);
 }
 
-/* ── Build editor panel ──────────────────────────── */
-function buildPanel() {
-  var fontsHTML = FONTS.map(function(f) {
-    var sel = f.name === 'Inter' ? ' selected' : '';
-    return '<div class="font-opt' + sel + '" data-font="' + f.name + '" style="font-family:' + f.stack + '">'
-      + '<span class="font-opt__name">' + f.name + '</span>'
-      + '<span class="font-opt__sample">' + f.sample + '</span>'
-      + '</div>';
+/* ── Build Panel ─── */
+function buildPanel(){
+  var fontsH = FONTS.map(function(f){
+    return '<div class="font-opt'+(f.n==='Inter'?' selected':'')+'" data-font="'+f.n+'" style="font-family:'+f.s+'">'
+      +'<span class="font-opt__name">'+f.n+'</span>'
+      +'<span class="font-opt__sample">'+f.x+'</span></div>';
   }).join('');
-
-  var colorsHTML = ACCENTS.map(function(a) {
-    var sel = a.color === '#2a5a2a' ? ' selected' : '';
-    return '<button class="color-swatch' + sel + '" data-color="' + a.color + '" data-lt="' + a.lt + '" style="background:' + a.color + '" title="' + a.name + '"></button>';
+  var colorsH = ACCENTS.map(function(a){
+    return '<button class="color-swatch'+(a.c==='#2a5a2a'?' selected':'')+'" data-c="'+a.c+'" data-l="'+a.l+'" style="background:'+a.c+'" title="'+a.n+'"></button>';
   }).join('');
-
-  var symHTML = SYMBOLS.map(function(s) {
-    return '<button class="sym-btn">' + s + '</button>';
+  var tmplH = TEMPLATES.map(function(t,i){
+    return '<div class="tmpl-opt'+(i===0?' selected':'')+'" data-tmpl="'+t.n+'">'
+      +'<div class="tmpl-dot" style="background:'+t.c+'"></div>'
+      +'<div class="tmpl-name">'+t.n+'</div></div>';
   }).join('');
+  var symH = SYMBOLS.map(function(s){ return '<button class="sym-btn">'+s+'</button>'; }).join('');
 
   document.getElementById('editor-panel').innerHTML =
-    '<div class="panel__header">'
-    + '<span class="panel__title">&#10022; CV Editor</span>'
-    + '<button class="panel__close" id="panel-close">&times;</button>'
-    + '</div>'
-    + '<div class="panel__tabs">'
-    + '<button class="panel__tab active" data-tab="tab-content">&#128221; Content</button>'
-    + '<button class="panel__tab" data-tab="tab-style">&#127912; Style</button>'
-    + '<button class="panel__tab" data-tab="tab-symbols">&#10022; Symbols</button>'
-    + '</div>'
-    + '<div class="panel__body">'
+    '<div class="panel__header"><span class="panel__title">&#9998; CV Editor</span><button class="panel__close" id="panel-close">&times;</button></div>'
+    +'<div class="panel__tabs">'
+    +'<button class="panel__tab active" data-tab="t-content">&#128221;&nbsp;Content</button>'
+    +'<button class="panel__tab" data-tab="t-photo">&#128247;&nbsp;Photo</button>'
+    +'<button class="panel__tab" data-tab="t-style">&#127912;&nbsp;Style</button>'
+    +'<button class="panel__tab" data-tab="t-sym">&#10022;&nbsp;Symbols</button>'
+    +'</div>'
+    +'<div class="panel__body">'
 
-    /* Content tab */
-    + '<div class="panel__content active" id="tab-content">'
-    + '<div class="p-label">Add to Experience</div>'
-    + '<button class="p-btn" id="add-exp"><span class="pi">&#128188;</span> Add Experience Entry</button>'
-    + '<div class="p-label">Add to Education</div>'
-    + '<button class="p-btn" id="add-edu"><span class="pi">&#127891;</span> Add Education Entry</button>'
-    + '<div class="p-label">Add to Sidebar</div>'
-    + '<button class="p-btn" id="add-pub"><span class="pi">&#128196;</span> Add Publication</button>'
-    + '<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill</button>'
-    + '<button class="p-btn" id="add-lang"><span class="pi">&#127757;</span> Add Language</button>'
-    + '<div class="p-label">New Section</div>'
-    + '<button class="p-btn" id="add-sec-main"><span class="pi">&#65291;</span> Add to Main Column</button>'
-    + '<button class="p-btn" id="add-sec-aside"><span class="pi">&#65291;</span> Add to Sidebar</button>'
-    + '</div>'
+    /* Content */
+    +'<div class="panel__content active" id="t-content">'
+    +'<div class="p-label">Experience &amp; Education</div>'
+    +'<button class="p-btn" id="add-exp"><span class="pi">&#128188;</span> Add Experience Entry</button>'
+    +'<button class="p-btn" id="add-edu"><span class="pi">&#127891;</span> Add Education Entry</button>'
+    +'<div class="p-label">Sidebar</div>'
+    +'<button class="p-btn" id="add-pub"><span class="pi">&#128196;</span> Add Publication</button>'
+    +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill</button>'
+    +'<button class="p-btn" id="add-lang"><span class="pi">&#127757;</span> Add Language</button>'
+    +'<div class="p-label">New Section</div>'
+    +'<button class="p-btn" id="add-smain"><span class="pi">&#43;</span> Add Section to Main</button>'
+    +'<button class="p-btn" id="add-saside"><span class="pi">&#43;</span> Add Section to Sidebar</button>'
+    +'</div>'
 
-    /* Style tab */
-    + '<div class="panel__content" id="tab-style">'
-    + '<div class="p-label">Font Family</div>'
-    + '<div class="font-grid">' + fontsHTML + '</div>'
-    + '<div class="p-label">Accent Color</div>'
-    + '<div class="color-grid">' + colorsHTML + '</div>'
-    + '<div class="p-label">Font Size</div>'
-    + '<div class="size-row"><button class="size-btn" id="size-dn">&#8722;</button><span class="size-label">10px base</span><button class="size-btn" id="size-up">&#43;</button></div>'
-    + '<button class="p-btn p-btn--danger" id="btn-reset">&#8635; Reset Styles to Default</button>'
-    + '</div>'
+    /* Photo */
+    +'<div class="panel__content" id="t-photo">'
+    +'<div class="p-label">Upload</div>'
+    +'<button class="p-btn" id="upload-photo-btn"><span class="pi">&#128247;</span> Choose Photo from Device</button>'
+    +'<button class="p-btn p-btn--danger" id="remove-photo-btn"><span class="pi">&#10005;</span> Remove Photo</button>'
+    +'<div class="p-label">Size &mdash; <span class="size-readout">88px</span></div>'
+    +'<input type="range" class="p-range" id="photo-size-slider" min="60" max="160" value="88">'
+    +'<div class="p-label">Shape</div>'
+    +'<div class="shape-grid">'
+    +'<button class="shape-btn selected" data-r="50%">&#9679; Circle</button>'
+    +'<button class="shape-btn" data-r="10px">&#11036; Rounded</button>'
+    +'<button class="shape-btn" data-r="0">&#9632; Square</button>'
+    +'</div>'
+    +'</div>'
 
-    /* Symbols tab */
-    + '<div class="panel__content" id="tab-symbols">'
-    + '<div class="p-label">Click to insert at cursor position</div>'
-    + '<div class="symbol-grid">' + symHTML + '</div>'
-    + '<div class="p-label">Custom text</div>'
-    + '<input class="p-input" id="custom-sym" type="text" placeholder="Type text, then click Insert">'
-    + '<button class="p-btn" id="insert-custom"><span class="pi">&#8629;</span> Insert Custom Text</button>'
-    + '</div>'
+    /* Style */
+    +'<div class="panel__content" id="t-style">'
+    +'<div class="p-label">Templates</div>'
+    +'<div class="tmpl-grid">'+tmplH+'</div>'
+    +'<div class="p-label">Font Family</div>'
+    +'<div class="font-grid">'+fontsH+'</div>'
+    +'<div class="p-label">Accent Color</div>'
+    +'<div class="color-grid">'+colorsH+'</div>'
+    +'<div class="p-label">Font Size</div>'
+    +'<div class="size-row"><button class="size-btn" id="size-dn">&#8722;</button><span class="size-label">16px</span><button class="size-btn" id="size-up">&#43;</button></div>'
+    +'<button class="p-btn p-btn--danger" id="btn-reset">&#8635; Reset All Styles</button>'
+    +'</div>'
 
-    + '</div>'/* /panel__body */
+    /* Symbols */
+    +'<div class="panel__content" id="t-sym">'
+    +'<div class="p-label">Click a symbol to insert at cursor</div>'
+    +'<div class="symbol-grid">'+symH+'</div>'
+    +'<div class="p-label">Custom text / character</div>'
+    +'<input class="p-input" id="custom-sym" type="text" placeholder="Type text, then Insert...">'
+    +'<button class="p-btn" id="insert-custom"><span class="pi">&#8629;</span> Insert</button>'
+    +'</div>'
 
-    + '<div class="panel__footer">'
-    + '<button class="p-btn p-btn--primary" id="save-btn">&#128190; Save</button>'
-    + '<button class="p-btn" id="export-btn">&#11015; Export HTML</button>'
-    + '</div>';
+    +'</div>' /* /panel__body */
+    +'<div class="panel__footer">'
+    +'<button class="p-btn p-btn--primary" id="save-btn">&#128190; Save</button>'
+    +'<button class="p-btn" id="export-btn">&#11015; Export HTML</button>'
+    +'</div>';
 
-  /* Wire events */
+  /* Wire tabs */
   document.getElementById('panel-close').onclick = toggleEdit;
-
-  /* Tabs */
-  document.querySelectorAll('.panel__tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.panel__tab').forEach(function(t) { t.classList.remove('active'); t.style.borderBottomColor = ''; });
-      document.querySelectorAll('.panel__content').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelectorAll('.panel__tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.panel__tab').forEach(function(t){ t.classList.remove('active'); t.style.borderBottomColor=''; });
+      document.querySelectorAll('.panel__content').forEach(function(c){ c.classList.remove('active'); });
       tab.classList.add('active');
-      tab.style.borderBottomColor = currentAccent;
-      var tc = document.getElementById(tab.dataset.tab);
-      if (tc) tc.classList.add('active');
+      tab.style.borderBottomColor=accent;
+      var c=document.getElementById(tab.dataset.tab);
+      if(c) c.classList.add('active');
     });
   });
 
   /* Content */
-  function getSection(id) { return document.getElementById(id); }
+  function gs(id){ return document.getElementById(id); }
+  gs('add-exp').onclick   = function(){ var s=gs('sec-experience'); if(s) addToSection(s); };
+  gs('add-edu').onclick   = function(){ var s=gs('sec-education'); if(s) addToSection(s); };
+  gs('add-pub').onclick   = function(){ var s=gs('sec-publications'); if(s) addToSection(s); };
+  gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addToSection(s); };
+  gs('add-lang').onclick  = function(){ var s=gs('sec-languages'); if(s) addToSection(s); };
+  gs('add-smain').onclick  = function(){ addSection('.cv__main'); };
+  gs('add-saside').onclick = function(){ addSection('.cv__aside'); };
 
-  document.getElementById('add-exp').onclick   = function() { var s = getSection('sec-experience'); if(s) addEntryToSection(s); };
-  document.getElementById('add-edu').onclick   = function() { var s = getSection('sec-education'); if(s) addEntryToSection(s); };
-  document.getElementById('add-pub').onclick   = function() { var s = getSection('sec-publications'); if(s) addEntryToSection(s); };
-  document.getElementById('add-skill').onclick = function() { var s = getSection('sec-skills'); if(s) addEntryToSection(s); };
-  document.getElementById('add-lang').onclick  = function() { var s = getSection('sec-languages'); if(s) addEntryToSection(s); };
-  document.getElementById('add-sec-main').onclick  = function() { addSection('.cv__main'); };
-  document.getElementById('add-sec-aside').onclick = function() { addSection('.cv__aside'); };
-
-  /* Style - fonts */
-  document.querySelectorAll('.font-opt').forEach(function(opt) {
-    opt.addEventListener('click', function() {
-      var match = FONTS.filter(function(f) { return f.name === opt.dataset.font; });
-      if (match.length) changeFont(match[0]);
+  /* Photo */
+  gs('upload-photo-btn').onclick = function(){ document.getElementById('photo-input').click(); };
+  gs('remove-photo-btn').onclick = removePhoto;
+  gs('photo-size-slider').addEventListener('input',function(){
+    photoSize=parseInt(this.value);
+    updatePhoto();
+  });
+  document.querySelectorAll('.shape-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.shape-btn').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      photoR=btn.dataset.r;
+      updatePhoto();
     });
   });
 
-  /* Style - colors */
-  document.querySelectorAll('.color-swatch').forEach(function(sw) {
-    sw.addEventListener('click', function() {
-      changeAccent({ color: sw.dataset.color, lt: sw.dataset.lt, name: sw.title });
+  /* Templates */
+  document.querySelectorAll('.tmpl-opt').forEach(function(opt){
+    opt.addEventListener('click',function(){
+      var match=TEMPLATES.filter(function(t){ return t.n===opt.dataset.tmpl; });
+      if(match.length) applyTemplate(match[0]);
     });
   });
 
-  /* Style - size */
-  document.getElementById('size-dn').onclick = function() { changeFontSize(-0.5); };
-  document.getElementById('size-up').onclick = function() { changeFontSize(0.5); };
-  document.getElementById('btn-reset').onclick = resetStyles;
+  /* Fonts */
+  document.querySelectorAll('.font-opt').forEach(function(opt){
+    opt.addEventListener('click',function(){
+      var match=FONTS.filter(function(f){ return f.n===opt.dataset.font; });
+      if(match.length) changeFont(match[0]);
+    });
+  });
+
+  /* Colors */
+  document.querySelectorAll('.color-swatch').forEach(function(sw){
+    sw.addEventListener('click',function(){
+      changeAccent({c:sw.dataset.c, l:sw.dataset.l, n:sw.title});
+    });
+  });
+
+  /* Size */
+  gs('size-dn').onclick = function(){ changeFontSize(-1); };
+  gs('size-up').onclick = function(){ changeFontSize(1); };
+  gs('btn-reset').onclick = resetAll;
 
   /* Symbols */
-  document.querySelectorAll('.sym-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() { insertSymbol(btn.textContent); });
+  document.querySelectorAll('.sym-btn').forEach(function(b){
+    b.addEventListener('click',function(){ insertSymbol(b.textContent); });
   });
-  document.getElementById('insert-custom').onclick = function() {
-    var val = document.getElementById('custom-sym').value;
-    if (val) { insertSymbol(val); document.getElementById('custom-sym').value = ''; }
+  gs('insert-custom').onclick = function(){
+    var v=gs('custom-sym').value;
+    if(v){ insertSymbol(v); gs('custom-sym').value=''; }
   };
 
   /* Footer */
-  document.getElementById('save-btn').onclick   = save;
-  document.getElementById('export-btn').onclick = exportHTML;
+  gs('save-btn').onclick   = save;
+  gs('export-btn').onclick = exportHTML;
 }
 
-/* ── Wire section add buttons ────────────────────── */
-function wireSectionAddBtns() {
-  document.querySelectorAll('.section__add-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var sec = btn.closest('.section');
-      if (sec) addEntryToSection(sec);
+/* ── Wire add buttons on sections ─── */
+function wireSectionBtns(){
+  document.querySelectorAll('.section__add-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var sec=btn.closest('.section');
+      if(sec) addToSection(sec);
     });
   });
 }
 
-/* ── Init ────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', function() {
+/* ── INIT ─── */
+document.addEventListener('DOMContentLoaded',function(){
   buildPanel();
-  wireSectionAddBtns();
+  wireSectionBtns();
+  setupPhoto();
   loadSaved();
-
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
-  document.getElementById('btn-print').addEventListener('click', function() { window.print(); });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
 });
 
 })();
