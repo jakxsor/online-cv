@@ -774,12 +774,18 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
 /* ── PRINT ───────────────────────────────────────── */
 @media print {
-  body { background: white !important; }
-  .page { padding: 0 !important; }
-  .cv { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; overflow: visible; }
+  body { background: white !important; margin: 0 !important; }
+  .page { padding: 0 !important; margin: 0 !important; }
+  .cv {
+    box-shadow: none !important; border-radius: 0 !important;
+    max-width: 100% !important; width: 100% !important;
+    overflow: visible; page-break-inside: avoid;
+  }
+  .cv__body { page-break-inside: avoid; }
   .fab-group, #editor-panel, .section__add-btn, .item-delete, .item-move, .tag-del, .tag-add { display: none !important; }
   .cv__photo-placeholder { display: none !important; }
-  .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag {
+  .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag,
+  .cv__main, .cv__body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -1893,7 +1899,19 @@ document.addEventListener('DOMContentLoaded',function(){
   updateAside();
   syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
-  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('btn-print').addEventListener('click', function(){
+    var cv = document.getElementById('cv-root');
+    // A4 height in CSS px: 297mm × (96px/25.4mm)
+    var a4h = Math.round(297 * 96 / 25.4); // ~1122px
+    var cvh = cv.scrollHeight;
+    var scale = cvh > a4h ? +(a4h / cvh).toFixed(4) : 1;
+    var st = document.createElement('style');
+    st.id = '__fit_print';
+    st.textContent = '@media print { html { zoom: ' + scale + '; } }';
+    document.head.appendChild(st);
+    window.print();
+    setTimeout(function(){ var s=document.getElementById('__fit_print'); if(s) s.remove(); }, 2000);
+  });
 });
 
 })();
