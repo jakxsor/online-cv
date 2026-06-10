@@ -1,24 +1,237 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jacopo Sorani — PhD Researcher (MSCA), Industrial Chemist, LCA & SSbD Expert">
+  <meta property="og:title" content="Jacopo Sorani — CV">
+  <meta property="og:description" content="PhD Researcher at ETH Zürich & Empa | LCA | SSbD | Industrial Chemistry">
+  <title>Jacopo Sorani — Curriculum Vitae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/cv.css">
+</head>
+<body>
 
+  <button class="btn-print no-print" onclick="window.print()" aria-label="Print or save as PDF">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Print / PDF
+  </button>
 
-{% include career-profile.html %}
+  <div class="page">
+    <div class="cv">
 
-{% unless site.data.data.sidebar.education %}
-  {% include education.html %}
-{% endunless %}
+      <!-- ── HEADER ─────────────────────────────────────── -->
+      <header class="cv__header">
+        <div class="cv__name-block">
+          <h1 class="cv__name">Jacopo Sorani</h1>
+          <p class="cv__tagline">PhD Researcher (MSCA) &middot; ETH Zürich &amp; Empa &nbsp;|&nbsp; Industrial Chemist &nbsp;|&nbsp; LCA &amp; SSbD</p>
+        </div>
+        <nav class="cv__contacts" aria-label="Contact information">
+          <a href="tel:+393333806352" class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+            +39 333 380 6352
+          </a>
+          <a href="mailto:jacopo.sorani@gmail.com" class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            jacopo.sorani@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/jacoposorani" target="_blank" rel="noopener" class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/jacoposorani
+          </a>
+          <a href="https://github.com/jakxsor" target="_blank" rel="noopener" class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            github.com/jakxsor
+          </a>
+          <span class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Zürich, Switzerland
+          </span>
+        </nav>
+      </header>
 
-{% include experiences.html %}
+      <!-- ── BODY ──────────────────────────────────────── -->
+      <div class="cv__body">
 
-{% include certifications.html %}
+        <!-- ── MAIN COLUMN ────── -->
+        <main class="cv__main">
 
-{% include projects.html %}
+          <section class="section">
+            <h2 class="section__title">Experience</h2>
 
-{% include oss-contributions.html %}
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">Policy Analyst / Foresight <span class="entry__tag">Visiting Scientist</span></span>
+                <span class="entry__date">Apr 2026 – Sep 2026</span>
+              </div>
+              <div class="entry__org">Joint Research Centre (JRC) — European Commission &middot; Brussels, Belgium</div>
+              <div class="entry__desc">
+                Intern in the EU Policy Lab of the JRC, supporting corporate decision-making through future scenario creation and foresight methodologies, alongside sustainability assessment, data analysis, and regulatory support.
+              </div>
+            </article>
 
-{% include publications.html %}
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">PhD Student <span class="entry__tag">MSCA Fellow</span></span>
+                <span class="entry__date">Sep 2023 – Present</span>
+              </div>
+              <div class="entry__org">Empa — Swiss Federal Laboratories for Materials Science &amp; Technology &middot; St. Gallen, Switzerland</div>
+              <div class="entry__desc">
+                <ul>
+                  <li>Research on Life Cycle Assessment (LCA), Environmental Risk Assessment, Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.</li>
+                  <li>Contributing to Safe and Sustainable by Design (SSbD) frameworks. Partner in the EU-funded <strong>MELOMANES</strong> project on sustainable nanomedicine innovation.</li>
+                  <li>Initiated and led two collaborative projects with <strong>Roche</strong>: (1) an LCA &amp; energy master's thesis; (2) an SSbD case study evaluating environmental and safety regulatory compliance from early development stages.</li>
+                  <li>Developed a software tool for energy demand estimation in chemical and industrial processes.</li>
+                </ul>
+              </div>
+            </article>
 
-{% include recommendations.html %}
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">R&amp;D Intern — LCA Analysis</span>
+                <span class="entry__date">Feb 2023 – Jul 2023</span>
+              </div>
+              <div class="entry__org">GVS Filter Technology &middot; Bologna, Italy</div>
+              <div class="entry__desc">
+                <ul>
+                  <li>Comprehensive Life Cycle Assessment (LCA) and Mass Flow analysis for medical device production processes using SimaPro.</li>
+                  <li>Researched innovative production processes, contributing to sustainable practices in medical device manufacturing.</li>
+                </ul>
+              </div>
+            </article>
 
-{% include skills.html %}
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">Climate Leadership Journey — Participant</span>
+                <span class="entry__date">Apr 2022 – Dec 2022</span>
+              </div>
+              <div class="entry__org">Climate-KIC &middot; Lisbon, Portugal</div>
+              <div class="entry__desc">
+                Developed system thinking skills within a multicultural and interdisciplinary group. Proposed ideas through innovation and leadership to facilitate the net-zero goal of Lisbon.
+              </div>
+            </article>
+
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">EBU Label — Bioeconomy Qualification</span>
+                <span class="entry__date">Apr 2022 – Jun 2022</span>
+              </div>
+              <div class="entry__org">European Bioeconomy University (EBU) &middot; Bologna, Italy</div>
+              <div class="entry__desc">
+                Qualification supplement covering cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, creativity, and sustainability transformation knowledge.
+              </div>
+            </article>
+
+          </section>
+
+          <section class="section">
+            <h2 class="section__title">Education</h2>
+
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">Doctor of Philosophy (PhD) — Environmental Health Engineering</span>
+                <span class="entry__date">2023 – Present</span>
+              </div>
+              <div class="entry__org">ETH Zürich</div>
+            </article>
+
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">MSc — Industrial Chemistry, Low Carbon Technologies &amp; Sustainable Chemistry</span>
+                <span class="entry__date">2021 – 2023</span>
+              </div>
+              <div class="entry__org">Alma Mater Studiorum — Università di Bologna</div>
+            </article>
+
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">BSc — Natural Sciences</span>
+                <span class="entry__date">2017 – 2021</span>
+              </div>
+              <div class="entry__org">Università degli Studi di Firenze</div>
+            </article>
+
+            <article class="entry">
+              <div class="entry__head">
+                <span class="entry__title">High School Diploma — Economics</span>
+                <span class="entry__date">2011 – 2014</span>
+              </div>
+              <div class="entry__org">Cavour-Pacinotti</div>
+            </article>
+
+          </section>
+
+        </main>
+
+        <!-- ── SIDEBAR ─────────── -->
+        <aside class="cv__aside">
+
+          <section class="section">
+            <h2 class="section__title">Profile</h2>
+            <p class="profile-text">
+              Interested in advanced life cycle assessment, environmental risk management, and in-silico modeling for sustainable innovation. Current PhD work focuses on integrating nanomaterials into Safe and Sustainable by Design (SSbD) frameworks through interdisciplinary collaboration. Master's education from the University of Bologna emphasized low-carbon technologies and sustainable chemistry.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2 class="section__title">Key Skills</h2>
+            <ul class="skill-list">
+              <li>Life Cycle Assessment (LCA)</li>
+              <li>SimaPro &middot; OpenLCA</li>
+              <li>Safe &amp; Sustainable by Design (SSbD)</li>
+              <li>Environmental Risk Assessment</li>
+              <li>Occupational &amp; Social LCA</li>
+              <li>Foresight &amp; Policy Analysis</li>
+              <li>Python &middot; Data Analysis</li>
+              <li>Scientific Writing &amp; Publication</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2 class="section__title">Languages</h2>
+            <div class="lang-item">
+              <div class="lang-info">
+                <span class="lang-name">Italian</span>
+                <span class="lang-level">Native</span>
+              </div>
+              <div class="lang-bar"><div class="lang-bar__fill" style="width:100%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-info">
+                <span class="lang-name">English</span>
+                <span class="lang-level">Proficient (C1)</span>
+              </div>
+              <div class="lang-bar"><div class="lang-bar__fill" style="width:88%"></div></div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2 class="section__title">Publications</h2>
+
+            <div class="pub">
+              <div class="pub__title">Implementing Safe and Sustainable by Design in Pharmaceutical Innovation</div>
+              <div class="pub__meta"><span class="pub__journal">Journal of Cleaner Production</span> &middot; Jan 2026</div>
+              <div class="pub__authors">Sorani J., Nowack B., Hischier R.</div>
+              <a href="https://doi.org/10.1016/j.jclepro.2025.147280" target="_blank" rel="noopener" class="pub__doi">10.1016/j.jclepro.2025.147280</a>
+            </div>
+
+            <div class="pub">
+              <div class="pub__title">Nanomedicine Meets Immunotherapy: Advancing Adoptive Cell Therapy with Nanoparticles in Cancer — Sustainability Perspectives</div>
+              <div class="pub__meta"><span class="pub__journal">Advanced Science</span> &middot; Jan 2026</div>
+              <div class="pub__authors">Multiple authors</div>
+              <a href="https://doi.org/10.1002/advs.202522864" target="_blank" rel="noopener" class="pub__doi">10.1002/advs.202522864</a>
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div><!-- /cv__body -->
+
+    </div><!-- /cv -->
+  </div><!-- /page -->
+
+</body>
+</html>
