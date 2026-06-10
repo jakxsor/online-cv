@@ -392,6 +392,32 @@ body.edit-mode .entry:hover > .item-move,
 body.edit-mode .pub:hover > .item-move,
 body.edit-mode .lang-item:hover > .item-move { display: flex; }
 
+/* ── Tag add/delete buttons ─────────────────────── */
+.tag-del {
+  display: none;
+  background: #c0392b; color: #fff; border: none; border-radius: 50%;
+  width: 13px; height: 13px; font-size: 0.6rem; font-weight: 700;
+  cursor: pointer; padding: 0; line-height: 1;
+  align-items: center; justify-content: center;
+  vertical-align: super; margin-left: 1px;
+  transition: background .12s;
+}
+.tag-del:hover { background: #922b21; }
+body.edit-mode .tag-del { display: inline-flex; }
+
+.tag-add {
+  display: none;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.04em;
+  background: var(--clr-accent); color: #fff;
+  border: none; border-radius: 12px; padding: 2px 7px;
+  cursor: pointer; margin-left: 6px; vertical-align: middle;
+  opacity: 0; transition: opacity .15s;
+  font-family: var(--font);
+}
+body.edit-mode .entry:hover .tag-add,
+body.edit-mode .entry:focus-within .tag-add { display: inline-block; opacity: 0.8; }
+body.edit-mode .tag-add:hover { opacity: 1; }
+
 body.edit-mode [contenteditable="true"] {
   outline: none; border-radius: 2px; cursor: text;
   min-width: 20px; min-height: 1em;
@@ -751,7 +777,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
   body { background: white !important; }
   .page { padding: 0 !important; }
   .cv { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; overflow: visible; }
-  .fab-group, #editor-panel, .section__add-btn, .item-delete, .item-move { display: none !important; }
+  .fab-group, #editor-panel, .section__add-btn, .item-delete, .item-move, .tag-del, .tag-add { display: none !important; }
   .cv__photo-placeholder { display: none !important; }
   .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag {
     -webkit-print-color-adjust: exact !important;
@@ -1174,6 +1200,41 @@ function attachDeleteBtns(){
     b.style.cssText='position:static;display:inline-flex;margin-left:7px;';
     li.appendChild(b);
   });
+  document.querySelectorAll('.entry').forEach(function(el){ attachTagBtns(el); });
+}
+
+function mkTagDel(tag){
+  var b=document.createElement('button');
+  b.className='tag-del'; b.innerHTML='&times;'; b.title='Remove tag';
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    b.remove(); tag.remove();
+  });
+  return b;
+}
+
+function attachTagBtns(entry){
+  var title=entry.querySelector('.entry__title');
+  if(!title) return;
+  title.querySelectorAll('.entry__tag').forEach(function(tag){
+    if(tag.nextSibling && tag.nextSibling.classList && tag.nextSibling.classList.contains('tag-del')) return;
+    tag.after(mkTagDel(tag));
+  });
+  if(title.querySelector('.tag-add')) return;
+  var a=document.createElement('button');
+  a.className='tag-add'; a.textContent='+ tag'; a.title='Add tag';
+  a.addEventListener('click',function(e){
+    e.stopPropagation();
+    var tag=document.createElement('span');
+    tag.className='entry__tag'; tag.contentEditable='true'; tag.textContent='New Tag';
+    var del=mkTagDel(tag);
+    title.insertBefore(tag, a);
+    title.insertBefore(del, a);
+    tag.focus();
+    var r=document.createRange(); r.selectNodeContents(tag);
+    window.getSelection().removeAllRanges(); window.getSelection().addRange(r);
+  });
+  title.appendChild(a);
 }
 
 /* ── Add content ─── */
@@ -1477,7 +1538,7 @@ function loadSaved(){
 }
 function exportHTML(){
   var clone=document.documentElement.cloneNode(true);
-  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.item-move,.section__add-btn,.toast').forEach(function(el){ el.remove(); });
+  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.item-move,.tag-del,.tag-add,.section__add-btn,.toast').forEach(function(el){ el.remove(); });
   clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
   // Embed current CSS vars
   var extra='<style>:root{'
