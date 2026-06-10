@@ -1034,11 +1034,16 @@ var FONTS = [
 var ACCENTS = [
   { c:'#2a5a2a', l:'#e6f0e6', n:'Forest' },
   { c:'#1a3a6a', l:'#dce8f7', n:'Navy' },
+  { c:'#1565c0', l:'#d9e9fc', n:'Royal' },
+  { c:'#0277bd', l:'#e0f3fc', n:'Sky' },
+  { c:'#1976d2', l:'#dbecfb', n:'Azure' },
+  { c:'#0d3c7a', l:'#d9e7fa', n:'Cobalt' },
+  { c:'#2c3e7a', l:'#dde3f8', n:'Indigo' },
+  { c:'#37607a', l:'#ddeaf3', n:'Steel' },
   { c:'#6a1a2a', l:'#f7dce2', n:'Bordeaux' },
   { c:'#1a1a1a', l:'#ebebeb', n:'Mono' },
   { c:'#1a4a4a', l:'#dcf0ef', n:'Teal' },
   { c:'#4a3810', l:'#f5edda', n:'Bronze' },
-  { c:'#2c3e7a', l:'#dde3f8', n:'Indigo' },
   { c:'#5a2d82', l:'#f0e6f8', n:'Plum' },
   { c:'#7a3c00', l:'#f8eddf', n:'Rust' },
   { c:'#004d40', l:'#e0f5f0', n:'Emerald' }
@@ -1047,11 +1052,13 @@ var ACCENTS = [
 var TEMPLATES = [
   { n:'Scholar',    c:'#2a5a2a', l:'#e6f0e6', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#edece8', dark:false },
   { n:'Executive',  c:'#1a3a6a', l:'#dce8f7', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#eaedf2', dark:false },
-  { n:'Elegant',    c:'#6a1a2a', l:'#f7dce2', f:'Playfair',     fs:"'Playfair Display',Georgia,serif",   bg:'#f0eeec', dark:false },
-  { n:'Mono',       c:'#1a1a1a', l:'#ebebeb', f:'Lato',         fs:"'Lato',system-ui,sans-serif",        bg:'#f5f5f5', dark:false },
+  { n:'Blueprint',  c:'#1565c0', l:'#d9e9fc', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#edf1f8', dark:false },
+  { n:'Ocean',      c:'#0277bd', l:'#e0f3fc', f:'Raleway',      fs:"'Raleway',system-ui,sans-serif",     bg:'#eef5fb', dark:false },
   { n:'Night',      c:'#818cf8', l:'#1e1b4b', f:'Inter',        fs:"'Inter',system-ui,sans-serif",       bg:'#0f1117', dark:true  },
+  { n:'Elegant',    c:'#6a1a2a', l:'#f7dce2', f:'Playfair',     fs:"'Playfair Display',Georgia,serif",   bg:'#f0eeec', dark:false },
   { n:'Academic',   c:'#004d40', l:'#e0f5f0', f:'Source Serif', fs:"'Source Serif 4',Georgia,serif",     bg:'#f5f5f5', dark:false },
   { n:'Classic',    c:'#2c3e7a', l:'#dde3f8', f:'Georgia',      fs:"Georgia,'Times New Roman',serif",    bg:'#ffffff', dark:false },
+  { n:'Mono',       c:'#1a1a1a', l:'#ebebeb', f:'Lato',         fs:"'Lato',system-ui,sans-serif",        bg:'#f5f5f5', dark:false },
   { n:'Plum',       c:'#5a2d82', l:'#f0e6f8', f:'Raleway',      fs:"'Raleway',system-ui,sans-serif",     bg:'#f9f6fc', dark:false }
 ];
 
@@ -1509,7 +1516,7 @@ function buildPanel(){
     +'<button class="p-btn" id="add-award"><span class="pi">&#127942;</span> Add Award / Honor</button>'
     +'<div class="p-label">Sidebar Column</div>'
     +'<button class="p-btn" id="add-pub"><span class="pi">&#128196;</span> Add Publication</button>'
-    +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill (bar)</button>'
+    +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill</button>'
     +'<button class="p-btn" id="add-lang"><span class="pi">&#127757;</span> Add Language</button>'
     +'<div class="p-label">Section Visibility</div>'
     +'<button class="p-btn" id="toggle-cert"><span class="pi">&#128065;</span> Show / Hide Certifications</button>'
@@ -1542,8 +1549,13 @@ function buildPanel(){
     +'<div class="p-color-pick">'
     +'<button class="p-color-dot" data-bc="#2a5a2a" style="background:#2a5a2a" title="Forest"></button>'
     +'<button class="p-color-dot" data-bc="#1a3a6a" style="background:#1a3a6a" title="Navy"></button>'
+    +'<button class="p-color-dot" data-bc="#1565c0" style="background:#1565c0" title="Royal"></button>'
+    +'<button class="p-color-dot" data-bc="#0277bd" style="background:#0277bd" title="Sky"></button>'
+    +'<button class="p-color-dot" data-bc="#1976d2" style="background:#1976d2" title="Azure"></button>'
+    +'<button class="p-color-dot" data-bc="#0d3c7a" style="background:#0d3c7a" title="Cobalt"></button>'
     +'<button class="p-color-dot" data-bc="#6a1a2a" style="background:#6a1a2a" title="Bordeaux"></button>'
     +'<button class="p-color-dot" data-bc="#1a4a4a" style="background:#1a4a4a" title="Teal"></button>'
+    +'<button class="p-color-dot" data-bc="#5a2d82" style="background:#5a2d82" title="Plum"></button>'
     +'<button class="p-color-dot" data-bc="#4a3810" style="background:#4a3810" title="Bronze"></button>'
     +'<button class="p-color-dot" data-bc="#1a1a1a" style="background:#1a1a1a" title="Black"></button>'
     +'<button class="p-color-dot" data-bc="#ffffff" style="background:#fff;border-color:#555 !important" title="White"></button>'
@@ -1627,7 +1639,7 @@ function buildPanel(){
   gs('add-cert').onclick  = function(){ showSection('sec-certifications'); var s=gs('sec-certifications'); if(s) addToSection(s); };
   gs('add-award').onclick = function(){ showSection('sec-awards'); var s=gs('sec-awards'); if(s) addToSection(s); };
   gs('add-pub').onclick   = function(){ var s=gs('sec-publications'); if(s) addToSection(s); };
-  gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addSkillBar(s); };
+  gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addToSection(s); };
   gs('add-lang').onclick  = function(){ var s=gs('sec-languages'); if(s) addToSection(s); };
   gs('toggle-cert').onclick  = function(){ toggleSection('sec-certifications'); };
   gs('toggle-award').onclick = function(){ toggleSection('sec-awards'); };
