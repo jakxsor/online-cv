@@ -368,6 +368,30 @@ body.edit-mode .pub:hover > .item-delete,
 body.edit-mode .lang-item:hover > .item-delete { display: flex; }
 body.edit-mode .skill-list li:hover > .item-delete { display: inline-flex; position: static; margin-left: 7px; }
 
+.item-move {
+  display: none;
+  position: absolute;
+  width: 18px; height: 18px;
+  background: #3a3a3a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  padding: 0;
+  transition: background .15s, transform .15s;
+  right: -24px;
+}
+.item-move:hover { background: #111; transform: scale(1.15); }
+.item-move-up { top: 24px; }
+.item-move-dn { top: 44px; }
+body.edit-mode .entry:hover > .item-move,
+body.edit-mode .pub:hover > .item-move,
+body.edit-mode .lang-item:hover > .item-move { display: flex; }
+
 body.edit-mode [contenteditable="true"] {
   outline: none; border-radius: 2px; cursor: text;
   min-width: 20px; min-height: 1em;
@@ -727,7 +751,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
   body { background: white !important; }
   .page { padding: 0 !important; }
   .cv { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; overflow: visible; }
-  .fab-group, #editor-panel, .section__add-btn, .item-delete { display: none !important; }
+  .fab-group, #editor-panel, .section__add-btn, .item-delete, .item-move { display: none !important; }
   .cv__photo-placeholder { display: none !important; }
   .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag {
     -webkit-print-color-adjust: exact !important;
@@ -1110,17 +1134,39 @@ function disableEditing(){
   EDITABLE.forEach(function(s){ document.querySelectorAll(s).forEach(function(el){ el.removeAttribute('contenteditable'); }); });
 }
 
-/* ── Delete buttons ─── */
+/* ── Delete / Move buttons ─── */
 function mkDel(fn){
   var b = document.createElement('button');
   b.className='item-delete'; b.innerHTML='&times;'; b.title='Remove';
   b.addEventListener('click',function(e){ e.stopPropagation(); fn(); });
   return b;
 }
+function mkMove(el, dir){
+  var b = document.createElement('button');
+  b.className='item-move item-move-'+(dir<0?'up':'dn');
+  b.innerHTML = dir<0 ? '&#9650;' : '&#9660;';
+  b.title = dir<0 ? 'Move up' : 'Move down';
+  b.addEventListener('click', function(e){
+    e.stopPropagation();
+    var par = el.parentNode;
+    if(dir < 0){
+      var prev = el.previousElementSibling;
+      if(prev) par.insertBefore(el, prev);
+    } else {
+      var next = el.nextElementSibling;
+      if(next && next.classList.contains('section__add-btn')) return;
+      if(next) par.insertBefore(next, el);
+    }
+    toast(dir<0 ? 'Moved up' : 'Moved down');
+  });
+  return b;
+}
 function attachDeleteBtns(){
   document.querySelectorAll('.entry,.pub,.lang-item').forEach(function(el){
     if(el.querySelector('.item-delete')) return;
     el.appendChild(mkDel(function(){ if(confirm('Remove this item?')) el.remove(); }));
+    el.appendChild(mkMove(el, -1));
+    el.appendChild(mkMove(el,  1));
   });
   document.querySelectorAll('.skill-list li').forEach(function(li){
     if(li.querySelector('.item-delete')) return;
@@ -1375,7 +1421,7 @@ function insertSymbol(sym){
 function save(){
   try{
     var clone=document.getElementById('cv-root').cloneNode(true);
-    clone.querySelectorAll('.item-delete,.section__add-btn,[contenteditable]').forEach(function(el){
+    clone.querySelectorAll('.item-delete,.item-move,.section__add-btn,[contenteditable]').forEach(function(el){
       el.removeAttribute('contenteditable');
     });
     localStorage.setItem('cv_v5_html',clone.innerHTML);
@@ -1431,7 +1477,7 @@ function loadSaved(){
 }
 function exportHTML(){
   var clone=document.documentElement.cloneNode(true);
-  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.section__add-btn,.toast').forEach(function(el){ el.remove(); });
+  clone.querySelectorAll('#editor-panel,.fab-group,.item-delete,.item-move,.section__add-btn,.toast').forEach(function(el){ el.remove(); });
   clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
   // Embed current CSS vars
   var extra='<style>:root{'
