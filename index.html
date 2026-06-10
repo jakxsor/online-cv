@@ -1899,18 +1899,27 @@ document.addEventListener('DOMContentLoaded',function(){
   updateAside();
   syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
-  document.getElementById('btn-print').addEventListener('click', function(){
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+
+  // A4 in CSS px at 96dpi: 210mm=794px wide, 297mm=1122px tall
+  var A4W = Math.round(210 * 96 / 25.4);
+  var A4H = Math.round(297 * 96 / 25.4);
+
+  window.addEventListener('beforeprint', function(){
     var cv = document.getElementById('cv-root');
-    // A4 height in CSS px: 297mm × (96px/25.4mm)
-    var a4h = Math.round(297 * 96 / 25.4); // ~1122px
-    var cvh = cv.scrollHeight;
-    var scale = cvh > a4h ? +(a4h / cvh).toFixed(4) : 1;
-    var st = document.createElement('style');
-    st.id = '__fit_print';
-    st.textContent = '@media print { html { zoom: ' + scale + '; } }';
-    document.head.appendChild(st);
-    window.print();
-    setTimeout(function(){ var s=document.getElementById('__fit_print'); if(s) s.remove(); }, 2000);
+    // Simulate print layout width to get accurate print height
+    var prevW = cv.style.width, prevMax = cv.style.maxWidth;
+    cv.style.width = A4W + 'px';
+    cv.style.maxWidth = A4W + 'px';
+    var printH = cv.scrollHeight;
+    cv.style.width = prevW;
+    cv.style.maxWidth = prevMax;
+    var scale = printH > A4H ? A4H / printH : 1;
+    document.documentElement.style.zoom = scale < 1 ? scale : '';
+  });
+
+  window.addEventListener('afterprint', function(){
+    document.documentElement.style.zoom = '';
   });
 });
 
