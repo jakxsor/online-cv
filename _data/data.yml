@@ -3,284 +3,237 @@
 #
 
 sidebar:
-  position: right # position of the sidebar : left or right
-  about: True # set to False or comment line if you want to remove the "how to use?" in the sidebar
-  education: True # set to False if you want education in main section instead of in sidebar
+  position: right
+  about: False
+  education: True
 
   # Profile information
-  name: Alan Doe
-  tagline: Full Stack Developer
-  avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+  name: Jacopo Sorani
+  tagline: PhD Researcher (MSCA) | Industrial Chemist | LCA & SSbD Expert
+  avatar: profile.png
 
   # Sidebar links
-  email: example@email.com
-  phone: 012 345 6789
-  timezone: America/Cancun # Enter your timezone, e.g., America/Havana, Africa/Casablanca, America/North_Dakota/Center
-  citizenship:
-  website: https://example.com/ # Include the full website URL, including "http://" or "https://".
-  linkedin: alandoe
-  xing: alandoe
-  github: jekyll
-  telegram: # add your nickname without '@' sign
+  email: jacopo.sorani@gmail.com
+  phone: +39 333 380 6352
+  timezone: Europe/Zurich
+  citizenship: Italian
+  website: https://www.linkedin.com/in/jacoposorani/
+  linkedin: jacoposorani
+  github: jakxsor
+  telegram:
   gitlab:
   bitbucket:
-  bluesky: '@jekyllrb.bsky.social' # Specify your full Bluesky handle
-  twitter: '@jekyllrb'
-  stack-overflow: # Number/Username, e.g. 123456/alandoe
+  bluesky:
+  twitter:
+  stack-overflow:
   codewars:
-  goodreads: # Number-Username, e.g. 123456-alandoe
-  mastodon: # Please include your full Mastodon link here.
-  hackerrank: # Please provide your HackerRank username.
-  leetcode: # Please provide your LeetCode username.
-  pdf: # Add a PDF link here if you want to include a PDF custom version in your resume.
+  goodreads:
+  mastodon:
+  hackerrank:
+  leetcode:
+  pdf:
 
   languages:
     title: Languages
     info:
-    - idiom: English
+    - idiom: Italian
       level: Native
 
-    - idiom: French
-      level: Professional
-
-    - idiom: Spanish
-      level: Professional
+    - idiom: English
+      level: Proficient
 
   interests:
     title: Interests
     info:
-    - item: Climbing
+    - item: Sustainability & Green Chemistry
       link:
 
-
-    - item: Snowboarding
+    - item: Foresight & Policy Analysis
       link:
 
-
-    - item: Cooking
+    - item: Nanomedicine & Innovation
       link:
-
 
 career-profile:
   title: Career Profile
   summary: |
-    Summarise your career here lorem ipsum dolor sit amet, consectetuer
-    adipiscing elit. You can [download this free resume/CV template here]().
-    Aenean commodo ligula eget dolor aenean massa. Cum sociis natoque
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Donec quam felis, ultricies nec, pellentesque eu.
-    Second paragraph if required.
+    PhD researcher (Marie Skłodowska-Curie Actions) at Empa / ETH Zürich, focused on Life Cycle
+    Assessment (LCA), Environmental Risk Assessment, Occupational Safety, and Social LCA in
+    pharmaceutical and nanomaterial development. Contributing to the design and implementation of
+    Safe and Sustainable by Design (SSbD) frameworks. Currently visiting scientist at the EU Joint
+    Research Center (JRC) in Brussels, supporting corporate decision-making through foresight
+    methodologies and sustainability assessment. Passionate about integrating nanomaterials into
+    SSbD frameworks and leveraging interdisciplinary collaboration for sustainable innovation.
+
 education:
   title: Education
   info:
-  - degree: MSc in Computer Science
-    university: University of London
-    time: 2011 - 2012
+  - degree: Doctor of Philosophy (PhD) — Environmental & Environmental Health Engineering
+    university: ETH Zürich
+    time: 2023 - Present
     details: |
-      Describe your study here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-      sociis natoque penatibus et magnis dis parturient montes, nascetur
-      ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-      pretium quis, sem.
-        - Bullet point
-        - Bullet point
-  - degree: BSc in Applied Mathematics
-    university: Bristol University
-    time: 2007 - 2011
+      Research focus on Life Cycle Assessment (LCA), Environmental Risk Assessment,
+      Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.
+      Partner in the EU-funded MELOMANES project on sustainable nanomedicine innovation.
+
+  - degree: Master's Degree — Industrial Chemistry, Low Carbon Technologies & Sustainable Chemistry
+    university: Alma Mater Studiorum — Università di Bologna
+    time: 2021 - 2023
     details: |
-      Describe your study here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-      sociis natoque penatibus et magnis dis parturient montes, nascetur
-      ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-      pretium quis, sem.
-        - Bullet point
-        - Bullet point
+      Master's education emphasizing low-carbon technologies and sustainable chemistry.
+      Thesis work contributed to evaluating industrial processes through LCA tools.
+
+  - degree: Bachelor's Degree — Natural Sciences
+    university: Università degli Studi di Firenze
+    time: 2017 - 2021
+    details: |
+      Foundational studies in natural sciences providing the basis for advanced
+      research in chemistry and environmental sciences.
+
+  - degree: High School Diploma — Economics
+    university: Cavour-Pacinotti
+    time: 2011 - 2014
+    details: |
 
 experiences:
   title: Experiences
   info:
-  - role: Lead Developer
-    time: 2015 - Present
-    company: Startup Hubs, San Francisco
+  - role: Policy Analyst / Foresight (Visiting Scientist)
+    time: 04/2026 - 09/2026
+    company: Joint Research Centre (JRC) — European Commission, Brussels
     details: |
-      Describe your role here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-      Cum sociis natoque penatibus et magnis dis parturient montes,
-      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-      pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-      enim. Donec pede justo. Sed ut perspiciatis unde omnis iste natus
-      error sit voluptatem accusantium doloremque laudantium, totam rem
-      aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-      architecto beatae vitae dicta sunt explicabo.
-        - Bullet point
-        - Bullet point
-  - role: Senior Software Engineer
-    time: 2014 - 2015
-    company: Google, London
+      Intern in the EU Policy Lab of the Joint Research Center (JRC), supporting corporate
+      decision-making through future scenario creation and foresight methodologies,
+      alongside sustainability assessment, data analysis, and regulatory support.
+
+  - role: PhD Student (Marie Skłodowska-Curie Actions)
+    time: 09/2023 - Present
+    company: Empa, St. Gallen — Switzerland
     details: |
-      Describe your role here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-      Cum sociis natoque penatibus et magnis dis parturient montes,
-      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-      pellentesque eu, pretium quis, sem.
-        - Bullet point
-        - Bullet point
-  - role: UI Developer
-    time: 2012 - 2014
-    company: Amazon, London
+      Research focus on Life Cycle Assessment (LCA), Environmental Risk Assessment,
+      Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.
+      Contributing to Safe and Sustainable by Design (SSbD) frameworks. Partner in the
+      EU-funded MELOMANES project on sustainable nanomedicine innovation.
+        - Led two collaborative projects with Roche: an LCA and energy calculation master's thesis,
+          and an SSbD case study on a Roche pharmaceutical product.
+        - Developed a software tool to support energy calculations for chemical and industrial processes.
+
+  - role: Research & Development Intern — LCA Analysis
+    time: 02/2023 - 07/2023
+    company: GVS Filter Technology, Bologna
     details: |
-      Describe your role here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-      Cum sociis natoque penatibus et magnis dis parturient montes,
-      nascetur ridiculus mus. Donec quam felis, ultricies nec,
-      pellentesque eu, pretium quis, sem.
-        - Bullet point
-        - Bullet point
+      Conducted comprehensive Life Cycle Assessment (LCA) and Mass Flow analysis for medical
+      device production processes using SimaPro. Researched innovative production processes,
+      contributing to sustainable practices in medical device manufacturing.
+
+  - role: Participant — Climate Leadership Journey
+    time: 04/2022 - 12/2022
+    company: Climate-KIC, Lisbon
+    details: |
+      Developed system thinking skills within a multicultural and interdisciplinary group.
+      Proposed ideas through innovation and leadership to facilitate the net-zero goal of Lisbon.
+
+  - role: EBU Label Program — Bioeconomy Qualification
+    time: 04/2022 - 06/2022
+    company: European Bioeconomy University (EBU), Bologna
+    details: |
+      Common qualification supplement offered by the six EBU partner universities, covering
+      cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, creativity,
+      problem-solving, and sustainability transformation knowledge.
 
 certifications:
   title: Certifications
   list:
-  - name: CV Builder
-    start: 2020
-    end: 2021
-    organization: Microsoft
-    credentialid: 111-222
-    credentialurl: www.google.com
-    credentialname: Google
+  - name: EBU Label — Bioeconomy Qualification
+    start: 2022
+    end: 2022
+    organization: European Bioeconomy University
+    credentialid:
+    credentialurl: www.bioeconomy-university.eu
+    credentialname: EBU
     details: |
-      Details about cert. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit.
-      Nullam eget orci purus. Nullam ultrices neque nibh.
-      Aenean fermentum, felis vulputate suscipit accumsan,
-      sem enim bibendum augue, sed convallis arcu lacus at dui.
-      Pellentesque et nibh suscipit, vestibulum turpis eu, semper tortor.
-      Praesent felis nibh, eleifend id eleifend id, dictum id enim.
-      Praesent venenatis erat non augue suscipit consectetur.
-
-      Second paragraph. Sed eleifend enim ante, vitae efficitur purus
-      fringilla vel. Ut euismod, sem sed vulputate venenatis,
-      justo diam viverra velit, sed rhoncus leo leo eu justo.
-      Suspendisse placerat risus ante, sed porta nisi blandit at.
-  - name: Git learning
-    start: 2019
-    end:
-    organization: Microsoft
-    credentialid: 111-222
-    credentialurl: www.github.com
-    credentialname: Github
-    details: |
-      Older certification. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit.
-      Nullam eget orci purus. Nullam ultrices neque nibh.
-      Aenean fermentum, felis vulputate suscipit accumsan,
-      sem enim bibendum augue, sed convallis arcu lacus at dui.
-      Pellentesque et nibh suscipit, vestibulum turpis eu, semper tortor.
-      Praesent felis nibh, eleifend id eleifend id, dictum id enim.
-      Praesent venenatis erat non augue suscipit consectetur.
+      Common qualification supplement covering bioeconomy curricula including cross-sectoral
+      mindset, inter- and trans-disciplinarity, critical thinking, and sustainability
+      transformation knowledge.
 
 projects:
   title: Projects
   intro: >
-    You can list your side projects in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.
+    Selected research projects and collaborative initiatives developed during my PhD and
+    professional experience.
   assignments:
-  - title: Velocity
-    link: "#hook"
-    tagline: "A responsive website template designed to help startups promote, market and sell their products."
-
-  - title: DevStudio
+  - title: MELOMANES — EU-funded Nanomedicine Project
     link: "#"
-    tagline: "A responsive website template designed to help web developers/designers market their services."
+    tagline: "EU-funded project on sustainable nanomedicine innovation, integrating SSbD principles into nanomaterial and pharmaceutical development."
 
-  - title: Tempo
+  - title: Roche SSbD Case Study
     link: "#"
-    tagline: "A responsive website template designed to help startups promote their products or services and to attract users &amp; investors"
+    tagline: "Safe and Sustainable by Design case study on a Roche pharmaceutical product, evaluating environmental and safety regulatory compliance from early development stages."
 
-  - title: Atom
+  - title: Energy Calculation Software Tool
     link: "#"
-    tagline: "A comprehensive website template solution for startups/developers to market their mobile apps."
+    tagline: "Developed a software tool to support energy demand estimation for chemical and industrial processes."
 
-  - title: Delta
+  - title: LCA for Medical Device Production (GVS)
     link: "#"
-    tagline: "A responsive Bootstrap one page theme designed to help app developers promote their mobile apps"
+    tagline: "Comprehensive Life Cycle Assessment and Mass Flow analysis for medical device production processes using SimaPro."
 
 oss:
   title: OSS Contributions
   intro: >
-    You can list your open source software contributions in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.
+    Open source tools and resources related to sustainability assessment and SSbD methodology.
   contributions:
-  - title: Tempo
-    link: "#"
-    tagline: "A responsive website template designed to help startups promote their products or services and to attract users &amp; investors"
-
-  - title: Atom
-    link: "#"
-    tagline: "A comprehensive website template solution for startups/developers to market their mobile apps."
-
-  - title: Delta
-    link: "#"
-    tagline: "A responsive Bootstrap one page theme designed to help app developers promote their mobile apps"
+  - title: Group Assignment Algorithm
+    link: "https://github.com/jakxsor/online-cv"
+    tagline: "Algorithm for heterogeneous group assignments with multi-criteria scoring, diversity optimization, and Excel reporting."
 
 publications:
   title: Publications
   intro: |
-    You can list your publications in this section. Lorem ipsum dolor sit
-    amet, consectetur adipiscing elit. Vestibulum et ligula in nunc
-    bibendum fringilla a eu lectus.
+    Peer-reviewed scientific publications in the field of Life Cycle Assessment,
+    Safe and Sustainable by Design, and nanomedicine.
   papers:
-  - title: The Art of Computer Programming
-    link: "#"
-    authors: Donald E. Knuth
-    conference: Addison-Wesley, 1968
+  - title: "Implementing Safe and Sustainable by Design in Pharmaceutical Innovation"
+    link: "https://doi.org/10.1016/j.jclepro.2025.147280"
+    authors: Jacopo Sorani, Bernd Nowack, Roland Hischier
+    conference: "Journal of Cleaner Production, January 2026 — DOI: 10.1016/j.jclepro.2025.147280"
 
-  - title: "Genetic Programming III: Darwinian Invention &amp; Problem Solving"
-    link: "#"
-    authors: Koza, J.R., Andre, D., Bennett, F.H., Keane, M.A.
-    conference: "Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 1st edn. (1999)"
-
-  - title: A syntax directed compiler for Algol 60
-    link: "#"
-    authors: Edgar T. Irons
-    conference: "Comm. ACM 4 (1961), 51–55"
+  - title: "Nanomedicine Meets Immunotherapy: Advancing Adoptive Cell Therapy with Nanoparticles in the Treatment of Cancer with Sustainability Perspectives"
+    link: "https://doi.org/10.1002/advs.202522864"
+    authors: Multiple authors
+    conference: "Advanced Science, January 2026 — DOI: 10.1002/advs.202522864"
 
 recommendations:
   title: Recommendations
   list:
-  - person: Yareli Perez
-    email: perezyareli@example.com
-    phone: 012 345 6789
-    role: General Director at example.com
+  - person: Colleague / Supervisor
+    email:
+    phone:
+    role: ETH Zürich / Empa
     recommendation: |
-      Alan Doe is a super employee!
-  - person: Lara Henderson
-    email: larah@example.com
-    phone: 012 345 6789
-    role: General Director at example.com
-    recommendation: |
-      I would like to work with Alan Doe again!
-
-      He is a great employee!
+      Available upon request.
 
 skills:
   title: Skills &amp; Proficiency
 
   toolset:
-  - name: Python & Django
-    level: 98%
-
-  - name: Javascript & jQuery
-    level: 98%
-
-  - name: Angular
-    level: 98%
-
-  - name: HTML5 & CSS
+  - name: Life Cycle Assessment (LCA) & SimaPro
     level: 95%
 
-  - name: Ruby on Rails
+  - name: Safe and Sustainable by Design (SSbD)
+    level: 95%
+
+  - name: Environmental Risk Assessment
+    level: 90%
+
+  - name: Python & Data Analysis
+    level: 80%
+
+  - name: Foresight & Policy Analysis
+    level: 75%
+
+  - name: Scientific Writing & Publication
     level: 85%
 
-  - name: Sketch & Photoshop
-    level: 60%
-
 footer: >
-  Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
+  Jacopo Sorani — PhD Researcher (MSCA) at ETH Zürich &amp; Empa
