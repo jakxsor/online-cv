@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
 
 /* ── TOKENS ──────────────────────────────────────── */
@@ -773,107 +772,73 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 .p-color-dot:hover { transform: scale(1.2); }
 .p-color-dot.selected { border-color: #fff; transform: scale(1.15); }
 
-/* ── PRINT ───────────────────────────────────────── */
-/* ── PDF EXPORT COMPACT MODE ─────────────────────── */
-#cv-root.cv--pdf { font-size: 12px !important; box-shadow: none !important; border-radius: 0 !important; }
-#cv-root.cv--pdf .cv__header { padding: 18px 24px 12px !important; gap: 16px !important; }
-#cv-root.cv--pdf .cv__name { font-size: 1.85rem !important; margin-bottom: 2px !important; }
-#cv-root.cv--pdf .cv__tagline { font-size: 0.78rem !important; margin-bottom: 8px !important; line-height: 1.4 !important; }
-#cv-root.cv--pdf .cv__contacts { gap: 2px 12px !important; }
-#cv-root.cv--pdf .contact-item { font-size: 0.72rem !important; }
-#cv-root.cv--pdf .cv__photo { width: 68px !important; height: 68px !important; }
-#cv-root.cv--pdf .cv__body { grid-template-columns: 1fr 220px !important; }
-#cv-root.cv--pdf .cv__main { padding: 14px 20px 16px 22px !important; }
-#cv-root.cv--pdf .cv__aside { padding: 14px 14px 16px 16px !important; }
-#cv-root.cv--pdf .section { margin-bottom: 12px !important; }
-#cv-root.cv--pdf .section__title { padding-bottom: 4px !important; margin-bottom: 8px !important; font-size: 0.58rem !important; }
-#cv-root.cv--pdf .entry { padding: 0 0 8px 0 !important; }
-#cv-root.cv--pdf .entry + .entry { padding-top: 8px !important; }
-#cv-root.cv--pdf .entry__title { font-size: 0.82rem !important; }
-#cv-root.cv--pdf .entry__date { font-size: 0.68rem !important; }
-#cv-root.cv--pdf .entry__org { font-size: 0.72rem !important; margin: 2px 0 4px !important; }
-#cv-root.cv--pdf .entry__desc { font-size: 0.72rem !important; line-height: 1.45 !important; }
-#cv-root.cv--pdf .entry__desc li { margin-bottom: 2px !important; }
-#cv-root.cv--pdf .entry__tag { font-size: 0.55rem !important; padding: 1px 5px !important; }
-#cv-root.cv--pdf .profile-text { font-size: 0.72rem !important; line-height: 1.45 !important; }
-#cv-root.cv--pdf .skill-list { gap: 3px !important; }
-#cv-root.cv--pdf .skill-list li { font-size: 0.72rem !important; }
-#cv-root.cv--pdf .lang-item { margin-bottom: 7px !important; }
-#cv-root.cv--pdf .lang-name { font-size: 0.78rem !important; }
-#cv-root.cv--pdf .pub { margin-bottom: 8px !important; padding-left: 7px !important; }
-#cv-root.cv--pdf .pub__title { font-size: 0.72rem !important; line-height: 1.35 !important; }
-#cv-root.cv--pdf .pub__authors { font-size: 0.64rem !important; }
-#cv-root.cv--pdf .pub__meta { font-size: 0.66rem !important; margin-top: 1px !important; }
-#cv-root.cv--pdf .pub__doi { font-size: 0.6rem !important; }
-#cv-root.cv--pdf .item-delete,
-#cv-root.cv--pdf .item-move,
-#cv-root.cv--pdf .tag-del,
-#cv-root.cv--pdf .tag-add,
-#cv-root.cv--pdf .section__add-btn,
-#cv-root.cv--pdf .cv__photo-placeholder { display: none !important; }
-
 @media print {
-  /* ── base ── */
-  html { font-size: 11px !important; }
-  body { background: white !important; margin: 0 !important; line-height: 1.4 !important; }
+  @page { size: A4 portrait; margin: 10mm 12mm; }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html { font-size: 10px !important; }
+  body { background: white !important; margin: 0 !important; padding: 0 !important; }
   .page { padding: 0 !important; margin: 0 !important; }
+
   .cv {
     box-shadow: none !important; border-radius: 0 !important;
-    max-width: 100% !important; width: 100% !important;
-    overflow: hidden; page-break-inside: avoid;
+    width: 100% !important; max-width: 100% !important;
   }
 
-  /* ── header ── */
-  .cv__header { padding: 16px 22px 12px !important; gap: 16px !important; border-left-width: 4px !important; }
-  .cv__name { font-size: 1.8rem !important; margin-bottom: 2px !important; letter-spacing: 0.06em !important; }
-  .cv__tagline { font-size: 0.78rem !important; margin-bottom: 8px !important; line-height: 1.35 !important; }
-  .cv__contacts { gap: 2px 12px !important; }
-  .contact-item { font-size: 0.72rem !important; }
-  .cv__photo { width: 68px !important; height: 68px !important; }
+  /* Header */
+  .cv__header {
+    padding: 12px 16px 10px !important;
+    gap: 14px !important;
+    border-left-width: 3px !important;
+  }
+  .cv__name    { font-size: 1.75rem !important; margin-bottom: 1px !important; letter-spacing: 0.05em !important; }
+  .cv__tagline { font-size: 0.82rem !important; margin-bottom: 6px !important; line-height: 1.35 !important; }
+  .cv__contacts { gap: 1px 10px !important; }
+  .contact-item { font-size: 0.75rem !important; }
+  .cv__photo   { width: 62px !important; height: 62px !important; }
 
-  /* ── body grid ── */
-  .cv__body { grid-template-columns: 1fr 220px !important; page-break-inside: avoid; }
-  .cv__main  { padding: 14px 20px 16px 22px !important; }
-  .cv__aside { padding: 14px 14px 16px 16px !important; }
+  /* Body */
+  .cv__body  { grid-template-columns: 1fr 200px !important; }
+  .cv__main  { padding: 12px 16px 12px 18px !important; border-right-width: 1px !important; }
+  .cv__aside { padding: 12px 12px 12px 14px !important; }
 
-  /* ── sections ── */
-  .section { margin-bottom: 12px !important; }
-  .section__title { padding-bottom: 4px !important; margin-bottom: 8px !important; font-size: 0.58rem !important; letter-spacing: 0.24em !important; }
+  /* Sections */
+  .section       { margin-bottom: 10px !important; }
+  .section__title {
+    font-size: 0.6rem !important; letter-spacing: 0.2em !important;
+    padding-bottom: 3px !important; margin-bottom: 7px !important;
+  }
 
-  /* ── entries ── */
-  .entry { padding: 0 0 8px 0 !important; }
-  .entry + .entry { padding-top: 8px !important; }
-  .entry__title { font-size: 0.82rem !important; }
-  .entry__date  { font-size: 0.68rem !important; }
-  .entry__org   { font-size: 0.72rem !important; margin: 2px 0 4px !important; }
-  .entry__desc  { font-size: 0.72rem !important; line-height: 1.45 !important; }
-  .entry__desc ul { margin-top: 3px !important; }
-  .entry__desc li { margin-bottom: 2px !important; }
-  .entry__tag   { font-size: 0.55rem !important; padding: 1px 5px !important; }
+  /* Entries */
+  .entry          { padding: 0 0 6px 0 !important; page-break-inside: avoid; }
+  .entry + .entry { padding-top: 6px !important; }
+  .entry__title   { font-size: 0.85rem !important; line-height: 1.25 !important; }
+  .entry__date    { font-size: 0.7rem !important; }
+  .entry__org     { font-size: 0.75rem !important; margin: 1px 0 3px !important; }
+  .entry__desc    { font-size: 0.75rem !important; line-height: 1.42 !important; }
+  .entry__desc ul { margin-top: 2px !important; margin-left: 12px !important; }
+  .entry__desc li { margin-bottom: 1px !important; }
+  .entry__tag     { font-size: 0.56rem !important; padding: 1px 5px !important; }
 
-  /* ── aside ── */
-  .profile-text { font-size: 0.72rem !important; line-height: 1.45 !important; }
-  .skill-list   { gap: 3px !important; }
-  .skill-list li { font-size: 0.72rem !important; }
-  .lang-item    { margin-bottom: 7px !important; }
-  .lang-name    { font-size: 0.78rem !important; }
-  .lang-level   { font-size: 0.68rem !important; }
-  .pub          { margin-bottom: 8px !important; padding-left: 7px !important; }
-  .pub__title   { font-size: 0.72rem !important; line-height: 1.35 !important; }
-  .pub__authors { font-size: 0.64rem !important; }
-  .pub__meta    { font-size: 0.66rem !important; margin-top: 1px !important; }
-  .pub__doi     { font-size: 0.6rem !important; }
+  /* Aside */
+  .profile-text { font-size: 0.75rem !important; line-height: 1.42 !important; }
+  .skill-list   { gap: 2px !important; }
+  .skill-list li { font-size: 0.75rem !important; padding-left: 10px !important; }
+  .lang-item    { margin-bottom: 6px !important; }
+  .lang-name    { font-size: 0.8rem !important; }
+  .lang-level   { font-size: 0.7rem !important; }
+  .lang-bar     { height: 2px !important; }
+  .pub          { margin-bottom: 7px !important; padding-left: 6px !important; page-break-inside: avoid; }
+  .pub__title   { font-size: 0.75rem !important; line-height: 1.3 !important; }
+  .pub__authors { font-size: 0.66rem !important; margin-top: 1px !important; }
+  .pub__meta    { font-size: 0.68rem !important; margin-top: 1px !important; }
+  .pub__doi     { font-size: 0.62rem !important; margin-top: 1px !important; }
 
-  /* ── hide UI ── */
-  .fab-group, #editor-panel, .section__add-btn, .item-delete, .item-move, .tag-del, .tag-add { display: none !important; }
+  /* Hide all UI chrome */
+  .fab-group, #editor-panel, .section__add-btn,
+  .item-delete, .item-move, .tag-del, .tag-add,
   .cv__photo-placeholder { display: none !important; }
-
-  /* ── color accuracy ── */
-  .cv__header, .cv__aside, .lang-bar__fill, .section__title, .entry__tag, .cv__main, .cv__body {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-  @page { margin: 0; size: A4 portrait; }
 }
 
 /* ── RESPONSIVE ──────────────────────────────────── */
@@ -1984,56 +1949,8 @@ document.addEventListener('DOMContentLoaded',function(){
   syncPanelControls();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
   document.getElementById('btn-print').addEventListener('click', function(){
-    var btn = this;
-    var origHTML = btn.innerHTML;
-
-    if(editMode){ toggleEdit(); }
-
-    btn.innerHTML = '&#8987; Generando PDF…';
-    btn.disabled = true;
-
-    var cv = document.getElementById('cv-root');
-    cv.classList.add('cv--pdf');
-
-    // Let the browser apply the compact styles before capturing
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        var opt = {
-          margin: 0,
-          filename: 'CV_Jacopo_Sorani.pdf',
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: {
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            windowWidth: 960
-          },
-          jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-          },
-          pagebreak: {
-            mode: ['css', 'legacy'],
-            avoid: ['.entry', '.pub', '.lang-item', '.section']
-          }
-        };
-
-        html2pdf().set(opt).from(cv).save()
-          .then(function(){
-            cv.classList.remove('cv--pdf');
-            btn.innerHTML = origHTML;
-            btn.disabled = false;
-            toast('PDF scaricato!');
-          })
-          .catch(function(){
-            cv.classList.remove('cv--pdf');
-            btn.innerHTML = origHTML;
-            btn.disabled = false;
-            toast('Errore PDF');
-          });
-      });
-    });
+    if(editMode) toggleEdit();
+    window.print();
   });
 });
 
