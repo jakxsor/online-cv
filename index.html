@@ -293,6 +293,9 @@ body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
 .entry__desc ul { margin: 5px 0 0 14px; }
 .entry__desc li { margin-bottom: 4px; }
 .entry__desc strong { font-weight: 700; color: var(--clr-text); }
+.entry--compact { padding-bottom: 4px !important; }
+.entry--compact + .entry--compact { padding-top: 4px !important; }
+.entry--compact .entry__org { margin: 1px 0 0; }
 
 /* ── ASIDE ELEMENTS ──────────────────────────────── */
 .profile-text {
@@ -301,14 +304,23 @@ body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
   line-height: 1.5;
 }
 
-.skill-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.skill-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 6px;
+}
 .skill-list li {
-  font-size: 0.8125rem;
+  font-size: 0.775rem;
   color: var(--clr-sub);
-  padding-left: 13px;
+  padding-left: 11px;
   position: relative;
   display: flex;
   align-items: baseline;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .skill-list li::before {
   content: '▸';
@@ -955,7 +967,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
       <section class="section" id="sec-education">
         <h2 class="section__title">Education</h2>
 
-        <article class="entry">
+        <article class="entry entry--compact">
           <div class="entry__head">
             <span class="entry__title">Doctor of Philosophy (PhD) &mdash; Environmental Health Engineering</span>
             <span class="entry__date">2023 &ndash; Present</span>
@@ -963,7 +975,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
           <div class="entry__org">ETH Z&uuml;rich</div>
         </article>
 
-        <article class="entry">
+        <article class="entry entry--compact">
           <div class="entry__head">
             <span class="entry__title">MSc &mdash; Industrial Chemistry, Low Carbon Technologies &amp; Sustainable Chemistry</span>
             <span class="entry__date">2021 &ndash; 2023</span>
@@ -971,7 +983,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
           <div class="entry__org">Alma Mater Studiorum &mdash; Universit&agrave; di Bologna</div>
         </article>
 
-        <article class="entry">
+        <article class="entry entry--compact">
           <div class="entry__head">
             <span class="entry__title">BSc &mdash; Natural Sciences</span>
             <span class="entry__date">2017 &ndash; 2021</span>
@@ -979,7 +991,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
           <div class="entry__org">Universit&agrave; degli Studi di Firenze</div>
         </article>
 
-        <article class="entry">
+        <article class="entry entry--compact">
           <div class="entry__head">
             <span class="entry__title">High School Diploma &mdash; Economics</span>
             <span class="entry__date">2011 &ndash; 2014</span>
