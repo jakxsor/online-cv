@@ -306,37 +306,46 @@ body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
 
 .skill-list {
   list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 5px;
 }
 .skill-list li {
-  font-size: 0.775rem;
+  font-size: 0.6875rem;
   color: var(--clr-sub);
-  padding-left: 11px;
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.skill-list li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--clr-accent);
-  font-size: 0.5625rem;
-  top: 3px;
+  border: 1px solid var(--clr-border);
+  border-radius: 3px;
+  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1.55;
 }
 
-.lang-item { margin-bottom: 9px; position: relative; }
-.lang-info { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-.lang-name { font-size: 0.875rem; font-weight: 600; color: var(--clr-text); }
-.lang-level { font-size: 0.75rem; color: var(--clr-faint); }
-.lang-bar { height: 2px; background: var(--clr-border); border-radius: 2px; overflow: hidden; }
-.lang-bar__fill { height: 100%; background: var(--clr-accent); border-radius: 2px; }
+.lang-chips { font-size: 0.8125rem; line-height: 2; }
+.lang-chip { display: inline-block; position: relative; white-space: nowrap; }
+.lang-chip + .lang-chip::before { content: ' · '; color: var(--clr-faint); white-space: pre; }
+.lang-chip .lang-name { font-weight: 600; color: var(--clr-text); }
+.lang-chip .lang-level { color: var(--clr-sub); }
+.lang-add-form {
+  display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; align-items: center;
+}
+.lang-add-form input, .lang-add-form select {
+  font-size: 0.75rem; padding: 3px 6px;
+  border: 1px solid var(--clr-border); border-radius: 3px;
+  background: var(--clr-card); color: var(--clr-text); outline: none;
+}
+.lang-add-form input { width: 90px; }
+.lang-add-form .lang-add-ok {
+  font-size: 0.75rem; padding: 3px 9px;
+  border: 1px solid var(--clr-accent); border-radius: 3px;
+  background: var(--clr-accent); color: #fff; cursor: pointer;
+}
+.lang-add-form .lang-add-cancel {
+  font-size: 0.75rem; padding: 3px 7px;
+  border: 1px solid var(--clr-border); border-radius: 3px;
+  background: transparent; color: var(--clr-sub); cursor: pointer;
+}
 
 .pub {
   margin-bottom: 10px;
@@ -408,7 +417,7 @@ body.edit-mode .section__add-btn { display: flex; }
 .item-delete:hover { background: #922b21; transform: scale(1.15); }
 body.edit-mode .entry:hover > .item-delete,
 body.edit-mode .pub:hover > .item-delete,
-body.edit-mode .lang-item:hover > .item-delete { display: flex; }
+body.edit-mode .lang-chip:hover > .item-delete { display: flex; }
 body.edit-mode .skill-list li:hover > .item-delete { display: inline-flex; position: static; margin-left: 7px; }
 
 .item-move {
@@ -433,7 +442,7 @@ body.edit-mode .skill-list li:hover > .item-delete { display: inline-flex; posit
 .item-move-dn { top: 44px; }
 body.edit-mode .entry:hover > .item-move,
 body.edit-mode .pub:hover > .item-move,
-body.edit-mode .lang-item:hover > .item-move { display: flex; }
+body.edit-mode .lang-chip:hover > .item-move { display: flex; }
 
 /* ── Tag add/delete buttons ─────────────────────── */
 .tag-del {
@@ -734,10 +743,8 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 .cv--aside-colored .cv__aside .pub__authors { color: rgba(255,255,255,.72); }
 .cv--aside-colored .cv__aside .pub__title { color: #fff; font-weight: 700; }
 .cv--aside-colored .cv__aside .pub__doi { color: rgba(255,255,255,.78); }
-.cv--aside-colored .cv__aside .lang-bar { background: rgba(255,255,255,.25); }
-.cv--aside-colored .cv__aside .lang-bar__fill { background: rgba(255,255,255,.9); }
-.cv--aside-colored .cv__aside .skill-list li { color: #fff; font-weight: 500; }
-.cv--aside-colored .cv__aside .skill-list li::before { color: rgba(255,255,255,.7); }
+.cv--aside-colored .cv__aside .skill-list li { color: #fff; border-color: rgba(255,255,255,.4); }
+.cv--aside-colored .cv__aside .lang-chip::before { color: rgba(255,255,255,.5); }
 .cv--aside-colored .cv__aside .entry__date { color: rgba(255,255,255,.65); }
 .cv--aside-colored .cv__aside .entry__org { color: rgba(255,255,255,.78); }
 .cv--aside-colored .cv__aside .entry__desc { color: rgba(255,255,255,.9); }
@@ -760,10 +767,10 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 .cv--aside-dark .cv__aside .pub__title { color: #dce9f8; font-weight: 700; }
 .cv--aside-dark .cv__aside .pub__doi,
 .cv--aside-dark .cv__aside .entry__org { color: rgba(200,220,240,.72); }
-.cv--aside-dark .cv__aside .lang-bar { background: rgba(200,220,240,.18); }
-.cv--aside-dark .cv__aside .lang-bar__fill { background: var(--clr-accent); }
-.cv--aside-dark .cv__aside .skill-list li { color: rgba(200,220,240,.95); font-weight: 500; }
-.cv--aside-dark .cv__aside .skill-list li::before { color: rgba(200,220,240,.55); }
+.cv--aside-dark .cv__aside .skill-list li { color: rgba(200,220,240,.95); border-color: rgba(200,220,240,.22); }
+.cv--aside-dark .cv__aside .lang-chip .lang-name { color: #dce9f8; }
+.cv--aside-dark .cv__aside .lang-chip .lang-level { color: rgba(200,220,240,.72); }
+.cv--aside-dark .cv__aside .lang-chip::before { color: rgba(200,220,240,.4); }
 .cv--aside-dark .cv__aside .pub { border-left-color: rgba(200,220,240,.18); }
 
 /* Aside mode toggle buttons */
@@ -830,7 +837,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
   .fab-group, #editor-panel, .section__add-btn,
   .item-delete, .item-move, .tag-del, .tag-add,
-  .cv__photo-placeholder { display: none !important; }
+  .lang-add-form, .cv__photo-placeholder { display: none !important; }
 }
 
 /* ── RESPONSIVE ──────────────────────────────────── */
@@ -1054,14 +1061,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
       <section class="section" id="sec-languages">
         <h2 class="section__title">Languages</h2>
-        <div class="lang-item">
-          <div class="lang-info"><span class="lang-name">Italian</span><span class="lang-level">Native</span></div>
-          <div class="lang-bar"><div class="lang-bar__fill" style="width:100%"></div></div>
-        </div>
-        <div class="lang-item">
-          <div class="lang-info"><span class="lang-name">English</span><span class="lang-level">Proficient (C1)</span></div>
-          <div class="lang-bar"><div class="lang-bar__fill" style="width:88%"></div></div>
-        </div>
+        <div class="lang-chips"><span class="lang-chip"><span class="lang-name">Italian</span> &mdash; <span class="lang-level">Native</span></span><span class="lang-chip"><span class="lang-name">English</span> &mdash; <span class="lang-level">C1</span></span></div>
         <button class="section__add-btn" data-type="language">+ Add Language</button>
       </section>
 
@@ -1235,7 +1235,7 @@ function mkMove(el, dir){
   return b;
 }
 function attachDeleteBtns(){
-  document.querySelectorAll('.entry,.pub,.lang-item').forEach(function(el){
+  document.querySelectorAll('.entry,.pub,.lang-chip').forEach(function(el){
     if(el.querySelector('.item-delete')) return;
     el.appendChild(mkDel(function(){ if(confirm('Remove this item?')) el.remove(); }));
     el.appendChild(mkMove(el, -1));
@@ -1287,7 +1287,7 @@ function attachTagBtns(entry){
 /* ── Add content ─── */
 function secType(sec){
   if(sec.querySelector('.skill-list')||sec.dataset.type==='skill') return 'skill';
-  if(sec.querySelector('.lang-item')||sec.dataset.type==='language') return 'language';
+  if(sec.querySelector('.lang-chips')||sec.querySelector('.lang-chip')||sec.dataset.type==='language') return 'language';
   if(sec.querySelector('.pub')||sec.dataset.type==='publication') return 'publication';
   return 'entry';
 }
@@ -1306,8 +1306,34 @@ function addToSection(sec){
     return;
   }
   if(t==='language'){
-    el=document.createElement('div'); el.className='lang-item';
-    el.innerHTML='<div class="lang-info"><span class="lang-name" contenteditable="true">Language</span><span class="lang-level" contenteditable="true">Level</span></div><div class="lang-bar"><div class="lang-bar__fill" style="width:70%"></div></div>';
+    var chips=sec.querySelector('.lang-chips');
+    var addBtn2=sec.querySelector('.section__add-btn');
+    // show inline add form, hide add button
+    if(sec.querySelector('.lang-add-form')) return;
+    addBtn2.style.display='none';
+    var form=document.createElement('div'); form.className='lang-add-form';
+    var inp=document.createElement('input'); inp.type='text'; inp.placeholder='Language'; inp.maxLength=30;
+    var sel=document.createElement('select');
+    ['Native','C2','C1','B2','B1','A2','A1'].forEach(function(v){ var o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); });
+    var okBtn=document.createElement('button'); okBtn.className='lang-add-ok'; okBtn.textContent='Add';
+    var cancelBtn=document.createElement('button'); cancelBtn.className='lang-add-cancel'; cancelBtn.textContent='Cancel';
+    form.appendChild(inp); form.appendChild(sel); form.appendChild(okBtn); form.appendChild(cancelBtn);
+    function removeForm(){ form.remove(); addBtn2.style.display=''; }
+    cancelBtn.onclick=removeForm;
+    okBtn.onclick=function(){
+      var name=inp.value.trim(); if(!name) return;
+      var chip=document.createElement('span'); chip.className='lang-chip';
+      chip.innerHTML='<span class="lang-name">'+name+'</span> &mdash; <span class="lang-level">'+sel.value+'</span>';
+      chips.appendChild(chip);
+      var db=mkDel(function(){ if(confirm('Remove?')) chip.remove(); });
+      chip.appendChild(db);
+      chip.appendChild(mkMove(chip,-1)); chip.appendChild(mkMove(chip,1));
+      removeForm();
+    };
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); okBtn.click(); } if(e.key==='Escape') removeForm(); });
+    sec.insertBefore(form, addBtn2);
+    inp.focus();
+    return;
   } else if(t==='publication'){
     el=document.createElement('div'); el.className='pub';
     el.innerHTML='<div class="pub__title" contenteditable="true">Publication Title</div>'
