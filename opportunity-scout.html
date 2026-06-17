@@ -354,8 +354,8 @@
     <div class="topbar">
       <div>
         <div class="eyebrow">Opportunity Scout</div>
-        <h1>Find relevant roles, calls and collaborations by country.</h1>
-        <p class="lead">A country-aware scouting cockpit built around Jacopo Sorani's CV: LCA, Safe and Sustainable by Design, environmental risk, occupational exposure, foresight, EU policy, pharmaceuticals and nanomedicine.</p>
+        <h1>High-signal opportunity scout for jobs, calls and hidden leads.</h1>
+        <p class="lead">A country-aware scouting cockpit built around Jacopo Sorani's CV. It searches official career pages, job boards, EU portals, research institutes, pharma, chemicals, consultancies and impact platforms using targeted Boolean and site-specific searches.</p>
       </div>
       <div class="top-actions">
         <a class="btn" href="./">Back to CV</a>
@@ -371,7 +371,7 @@
           <span class="pill" id="todayLabel"></span>
         </div>
         <div class="panel__body">
-          <div class="notice">This static page does not send applications automatically. It prepares targeted searches and application drafts, then asks for explicit authorisation before opening an email draft.</div>
+          <div class="notice">This is a static, safe scout: it opens high-quality searches and saves leads locally. It cannot silently scrape or submit applications, but it can prepare targeted drafts and asks for explicit authorisation before opening any email draft.</div>
 
           <div class="grid2">
             <div>
@@ -392,11 +392,16 @@
             <div>
               <label for="roleType">Opportunity type</label>
               <select id="roleType">
-                <option value="all">Jobs, fellowships, calls and collaborations</option>
+                <option value="all">All high-signal sources</option>
                 <option value="industry">Industry R&D / sustainability</option>
+                <option value="pharma">Pharma / medtech / biotech</option>
+                <option value="chemicals">Chemicals / materials</option>
+                <option value="consulting">LCA / sustainability consulting</option>
                 <option value="policy">Policy, foresight and EU institutions</option>
                 <option value="academic">Academic / postdoc / research</option>
+                <option value="research">Research institutes</option>
                 <option value="funding">Funding calls and grants</option>
+                <option value="impact">Climate / impact jobs</option>
               </select>
             </div>
           </div>
@@ -408,7 +413,8 @@
 
           <div class="toolbar">
             <button class="btn btn--primary" id="runScoutBtn">Build scout links</button>
-            <button class="btn" id="openAllBtn">Open top searches</button>
+            <button class="btn" id="openAllBtn">Open best 12</button>
+            <button class="btn" id="copyQueryBtn">Copy Boolean query</button>
             <button class="btn btn--warn" id="addManualBtn">Add opportunity</button>
           </div>
         </div>
@@ -433,7 +439,7 @@
                 <div class="source__name">Best target organisations</div>
                 <span class="score">B</span>
               </div>
-              <div class="source__meta">JRC, ECHA, EEA, EFSA, OECD, consultancies, pharma sustainability teams, chemical safety/R&D groups, university labs.</div>
+              <div class="source__meta">EU agencies, OECD, pharma/medtech, chemical companies, LCA consultancies, impact job boards and research institutes.</div>
             </div>
             <div class="source">
               <div class="source__top">
@@ -467,7 +473,7 @@
       </div>
     </section>
 
-    <p class="footer">Suggested workflow: choose country and domains, open official searches, save interesting opportunities, score them, generate a tailored draft, authorise manually if you want to send.</p>
+    <p class="footer">Suggested workflow: choose country and domains, open the best 12 searches, save promising roles, score them, generate a tailored draft, authorise manually if you want to send.</p>
   </main>
 
   <div class="modal" id="modal">
@@ -522,98 +528,93 @@
       remote: 'Remote / hybrid Europe'
     };
 
+    const roleTypeWords = {
+      all: 'job OR vacancy OR position OR fellowship OR internship OR call OR grant',
+      industry: 'job OR vacancy OR scientist OR sustainability OR R&D',
+      pharma: 'pharmaceutical OR pharma OR biotech OR medtech OR drug development',
+      chemicals: 'chemical OR materials OR regulatory OR REACH OR product stewardship',
+      consulting: 'consultant OR analyst OR life cycle assessment OR sustainability consulting',
+      policy: 'policy analyst OR regulatory science OR foresight OR EU policy',
+      academic: 'postdoc OR PhD OR researcher OR scientist OR fellowship',
+      research: 'research scientist OR postdoc OR project scientist OR technology transfer',
+      funding: 'call OR grant OR fellowship OR funding OR Horizon Europe',
+      impact: 'climate OR sustainability OR circular economy OR responsible innovation'
+    };
+
     const sourceTemplates = [
-      {
-        name: 'EURAXESS Jobs',
-        type: 'academic',
-        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
-        base: 'https://euraxess.ec.europa.eu/jobs/search',
-        note: 'Researcher jobs, postdocs and EU academic positions.'
-      },
-      {
-        name: 'EURES Job Mobility Portal',
-        type: 'industry',
-        scope: ['eu','it','de','nl','fr','dk','se','remote'],
-        base: 'https://eures.europa.eu/index_en',
-        note: 'EU public employment network for cross-border jobs.'
-      },
-      {
-        name: 'EU Funding & Tenders Portal',
-        type: 'funding',
-        scope: ['eu','ch','it','de','nl','fr','dk','se','remote'],
-        base: 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home',
-        note: 'Horizon Europe calls, partnerships and funding opportunities.'
-      },
-      {
-        name: 'JRC Jobs',
-        type: 'policy',
-        scope: ['eu','it','de','nl','remote'],
-        base: 'https://joint-research-centre.ec.europa.eu/working-us/jobs-jrc_en',
-        note: 'European Commission Joint Research Centre roles and traineeships.'
-      },
-      {
-        name: 'EU Careers',
-        type: 'policy',
-        scope: ['eu','it','de','nl','fr','remote'],
-        base: 'https://eu-careers.europa.eu/en',
-        note: 'EU institution competitions, contract agent roles and traineeships.'
-      },
-      {
-        name: 'ECHA Vacancies',
-        type: 'policy',
-        scope: ['eu','remote'],
-        base: 'https://echa.europa.eu/about-us/jobs/open-positions',
-        note: 'Chemical safety, REACH, CLP and regulatory science roles.'
-      },
-      {
-        name: 'EEA Careers',
-        type: 'policy',
-        scope: ['eu','dk','remote'],
-        base: 'https://www.eea.europa.eu/en/about/careers',
-        note: 'European Environment Agency policy and assessment opportunities.'
-      },
-      {
-        name: 'EFSA Careers',
-        type: 'policy',
-        scope: ['eu','it','remote'],
-        base: 'https://www.efsa.europa.eu/en/careers',
-        note: 'Scientific risk assessment and EU agency opportunities.'
-      },
-      {
-        name: 'OECD Careers',
-        type: 'policy',
-        scope: ['fr','eu','remote'],
-        base: 'https://www.oecd.org/en/about/careers.html',
-        note: 'Policy analyst and sustainability roles.'
-      },
-      {
-        name: 'ETH Zurich Jobs',
-        type: 'academic',
-        scope: ['ch'],
-        base: 'https://jobs.ethz.ch/',
-        note: 'Swiss academic and research roles.'
-      },
-      {
-        name: 'Empa Jobs',
-        type: 'academic',
-        scope: ['ch'],
-        base: 'https://www.empa.ch/web/empa/jobs',
-        note: 'Materials, environmental engineering and technology research.'
-      },
-      {
-        name: 'LinkedIn Targeted Search',
-        type: 'industry',
-        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
-        base: 'https://www.linkedin.com/jobs/search/',
-        note: 'Industry, consulting and policy-facing roles. Requires LinkedIn login.'
-      },
-      {
-        name: 'Google Scholar / Web Search',
-        type: 'all',
-        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
-        base: 'https://www.google.com/search',
-        note: 'Broad scan for new programmes, calls, workshops and hidden roles.'
-      }
+      { name: 'LinkedIn Jobs', types: ['industry','pharma','chemicals','consulting','policy','research','impact'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'linkedin', base: 'https://www.linkedin.com/jobs/search/', note: 'Highest-volume job source. Requires login for best results.', priority: 95 },
+      { name: 'Indeed', types: ['industry','pharma','chemicals','consulting','research','impact'], scope: ['ch','it','de','nl','fr','uk','remote'], mode: 'indeed', base: 'https://www.indeed.com/jobs', note: 'Broad job index; useful for hidden company postings.', priority: 82 },
+      { name: 'Google Jobs / Web Sweep', types: ['industry','pharma','chemicals','consulting','policy','academic','research','funding','impact'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'google', base: 'https://www.google.com/search', note: 'Broad web scan across job pages, calls and new announcements.', priority: 88 },
+      { name: 'EURAXESS Jobs', types: ['academic','research','funding'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'euraxess', base: 'https://euraxess.ec.europa.eu/jobs/search', note: 'Research jobs, postdocs and EU academic positions.', priority: 90 },
+      { name: 'Academic Positions', types: ['academic','research'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'academicpositions.com', note: 'Good European academic and research job board.', priority: 84 },
+      { name: 'Nature Careers', types: ['academic','research','pharma'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'nature.com/naturecareers/jobs', note: 'High-quality scientific roles and postdocs.', priority: 84 },
+      { name: 'Science Careers', types: ['academic','research','pharma'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'science.org/content/page/science-careers', note: 'Research-heavy jobs, fellowships and scientific careers.', priority: 78 },
+      { name: 'Times Higher Education Jobs', types: ['academic','research'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'timeshighereducation.com/unijobs', note: 'University and research roles across Europe.', priority: 76 },
+      { name: 'ResearchGate Jobs', types: ['academic','research'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'researchgate.net/jobs', note: 'Academic and research job postings.', priority: 72 },
+
+      { name: 'EU Careers', types: ['policy'], scope: ['eu','it','de','nl','fr','remote'], mode: 'direct', base: 'https://eu-careers.europa.eu/en', note: 'EU institution competitions, contract agent roles and traineeships.', priority: 88 },
+      { name: 'JRC Jobs', types: ['policy','research'], scope: ['eu','it','de','nl','remote'], mode: 'direct', base: 'https://joint-research-centre.ec.europa.eu/working-us/jobs-jrc_en', note: 'European Commission Joint Research Centre roles and traineeships.', priority: 92 },
+      { name: 'ECHA Vacancies', types: ['policy','chemicals','risk'], scope: ['eu','remote'], mode: 'direct', base: 'https://echa.europa.eu/about-us/jobs/open-positions', note: 'Chemical safety, REACH, CLP and regulatory science roles.', priority: 94 },
+      { name: 'EEA Careers', types: ['policy','impact'], scope: ['eu','dk','remote'], mode: 'direct', base: 'https://www.eea.europa.eu/en/about/careers', note: 'European Environment Agency assessment and policy roles.', priority: 82 },
+      { name: 'EFSA Careers', types: ['policy','risk'], scope: ['eu','it','remote'], mode: 'direct', base: 'https://www.efsa.europa.eu/en/careers', note: 'Scientific risk assessment and EU agency opportunities.', priority: 80 },
+      { name: 'OECD Careers', types: ['policy','impact'], scope: ['fr','eu','remote'], mode: 'direct', base: 'https://www.oecd.org/en/about/careers.html', note: 'Policy analyst and sustainability roles.', priority: 78 },
+      { name: 'UN Jobs', types: ['policy','impact'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'unjobs.org', note: 'UN and international organisation vacancies.', priority: 76 },
+      { name: 'Impactpool', types: ['policy','impact'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'impactpool.org/jobs', note: 'International organisations, EU policy and impact roles.', priority: 80 },
+      { name: 'Devex', types: ['policy','impact'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'devex.com/jobs', note: 'Development, policy and sustainability roles.', priority: 70 },
+
+      { name: 'Climatebase', types: ['impact','industry','consulting'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'climatebase.org/jobs', note: 'Climate-tech and sustainability jobs.', priority: 88 },
+      { name: 'GreenJobs Europe', types: ['impact','industry'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'greenjobs.co.uk', note: 'Environment and sustainability job board.', priority: 70 },
+      { name: 'SustainableJobs', types: ['impact','industry'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'sustainablejobs.nl', note: 'Dutch and European sustainability roles.', priority: 72 },
+
+      { name: 'Roche Careers', types: ['pharma','industry'], scope: ['ch','de','eu','remote'], mode: 'site', site: 'careers.roche.com', note: 'Pharma sustainability, R&D and product stewardship roles.', priority: 94 },
+      { name: 'Novartis Careers', types: ['pharma','industry'], scope: ['ch','eu','de','it','remote'], mode: 'site', site: 'novartis.com/careers', note: 'Pharma R&D, sustainability and environmental roles.', priority: 92 },
+      { name: 'Lonza Careers', types: ['pharma','chemicals','industry'], scope: ['ch','eu','de','remote'], mode: 'site', site: 'lonza.com/careers', note: 'Biopharma manufacturing, EHS and sustainability roles.', priority: 82 },
+      { name: 'Sandoz Careers', types: ['pharma','industry'], scope: ['ch','de','it','eu','remote'], mode: 'site', site: 'sandoz.com/careers', note: 'Pharma sustainability and technical roles.', priority: 76 },
+      { name: 'Merck KGaA Careers', types: ['pharma','chemicals','industry'], scope: ['de','ch','eu','remote'], mode: 'site', site: 'merckgroup.com/en/careers', note: 'Life science, chemicals, EHS and sustainability roles.', priority: 84 },
+      { name: 'Bayer Careers', types: ['pharma','chemicals','industry'], scope: ['de','eu','ch','remote'], mode: 'site', site: 'career.bayer.com', note: 'Pharma/crop science sustainability, regulatory and R&D roles.', priority: 80 },
+      { name: 'Sanofi Careers', types: ['pharma','industry'], scope: ['fr','de','eu','remote'], mode: 'site', site: 'sanofi.com/en/careers', note: 'Pharma R&D and sustainability roles.', priority: 78 },
+      { name: 'Novo Nordisk Careers', types: ['pharma','industry'], scope: ['dk','eu','remote'], mode: 'site', site: 'novonordisk.com/careers', note: 'Pharma sustainability and R&D roles.', priority: 78 },
+      { name: 'AstraZeneca Careers', types: ['pharma','industry'], scope: ['se','uk','eu','remote'], mode: 'site', site: 'careers.astrazeneca.com', note: 'Pharma sustainability, product and R&D positions.', priority: 76 },
+      { name: 'GSK Careers', types: ['pharma','industry'], scope: ['uk','eu','remote'], mode: 'site', site: 'jobs.gsk.com', note: 'Pharma R&D, EHS and sustainability roles.', priority: 74 },
+      { name: 'Johnson & Johnson Careers', types: ['pharma','medtech','industry'], scope: ['ch','it','de','nl','fr','uk','eu','remote'], mode: 'site', site: 'careers.jnj.com', note: 'Pharma and medtech sustainability roles.', priority: 74 },
+      { name: 'Medtronic Careers', types: ['pharma','medtech','industry'], scope: ['ch','it','de','nl','fr','uk','eu','remote'], mode: 'site', site: 'medtronic.com/us-en/about/careers.html', note: 'Medical device sustainability and EHS roles.', priority: 70 },
+
+      { name: 'BASF Careers', types: ['chemicals','industry'], scope: ['de','ch','eu','remote'], mode: 'site', site: 'basf.com/global/en/careers', note: 'Chemical sustainability, product stewardship and LCA roles.', priority: 88 },
+      { name: 'DSM-Firmenich Careers', types: ['chemicals','industry'], scope: ['ch','nl','eu','remote'], mode: 'site', site: 'dsm-firmenich.com/careers', note: 'Sustainability, ingredients, materials and LCA roles.', priority: 82 },
+      { name: 'Clariant Careers', types: ['chemicals','industry'], scope: ['ch','de','eu','remote'], mode: 'site', site: 'clariant.com/en/Careers', note: 'Specialty chemicals, product stewardship and sustainability.', priority: 78 },
+      { name: 'Syngenta Careers', types: ['chemicals','industry'], scope: ['ch','eu','uk','remote'], mode: 'site', site: 'syngenta.com/careers', note: 'Agrochemicals, sustainability and regulatory science roles.', priority: 76 },
+      { name: 'Solvay Careers', types: ['chemicals','industry'], scope: ['eu','fr','de','it','remote'], mode: 'site', site: 'solvay.com/en/careers', note: 'Materials, chemicals and sustainability roles.', priority: 76 },
+      { name: 'Covestro Careers', types: ['chemicals','industry'], scope: ['de','eu','remote'], mode: 'site', site: 'covestro.com/en/career', note: 'Materials, circularity and sustainability roles.', priority: 74 },
+
+      { name: 'Quantis Careers', types: ['consulting','industry'], scope: ['ch','fr','de','it','eu','remote'], mode: 'site', site: 'quantis.com/careers', note: 'Top-fit LCA and sustainability consulting.', priority: 94 },
+      { name: 'PRé Sustainability Careers', types: ['consulting','industry'], scope: ['nl','eu','remote'], mode: 'site', site: 'pre-sustainability.com/careers', note: 'LCA methodology, SimaPro and sustainability consulting.', priority: 90 },
+      { name: 'Sphera Careers', types: ['consulting','industry'], scope: ['eu','de','uk','remote'], mode: 'site', site: 'sphera.com/careers', note: 'LCA software, product sustainability and consulting roles.', priority: 86 },
+      { name: 'ERM Careers', types: ['consulting','industry','impact'], scope: ['ch','it','de','nl','fr','uk','eu','remote'], mode: 'site', site: 'erm.com/careers', note: 'EHS, sustainability and consulting roles.', priority: 82 },
+      { name: 'Ramboll Careers', types: ['consulting','industry','impact'], scope: ['dk','de','nl','uk','eu','remote'], mode: 'site', site: 'ramboll.com/careers', note: 'Sustainability, environment and policy consulting.', priority: 80 },
+      { name: 'Anthesis Careers', types: ['consulting','industry','impact'], scope: ['uk','de','eu','remote'], mode: 'site', site: 'anthesisgroup.com/careers', note: 'Sustainability consulting and climate roles.', priority: 78 },
+      { name: 'Ecochain Careers', types: ['consulting','industry'], scope: ['nl','eu','remote'], mode: 'site', site: 'ecochain.com/careers', note: 'LCA software and product footprint roles.', priority: 78 },
+      { name: 'GreenDelta Careers', types: ['consulting','industry','research'], scope: ['de','eu','remote'], mode: 'site', site: 'greendelta.com/jobs', note: 'openLCA, LCA data and software roles.', priority: 78 },
+      { name: 'Carbon Minds Careers', types: ['consulting','chemicals','industry'], scope: ['de','eu','remote'], mode: 'site', site: 'carbon-minds.com/career', note: 'Chemical LCA, data and product footprinting.', priority: 82 },
+
+      { name: 'ETH Zurich Jobs', types: ['academic','research'], scope: ['ch'], mode: 'direct', base: 'https://jobs.ethz.ch/', note: 'Swiss academic and research roles.', priority: 82 },
+      { name: 'Empa Jobs', types: ['academic','research'], scope: ['ch'], mode: 'direct', base: 'https://www.empa.ch/web/empa/jobs', note: 'Materials, environmental engineering and technology research.', priority: 84 },
+      { name: 'EPFL Jobs', types: ['academic','research'], scope: ['ch'], mode: 'site', site: 'epfl.ch/about/working', note: 'Swiss academic and research roles.', priority: 76 },
+      { name: 'Eawag Jobs', types: ['academic','research','impact'], scope: ['ch'], mode: 'direct', base: 'https://www.eawag.ch/en/about-us/working/employment/', note: 'Environmental research roles in Switzerland.', priority: 78 },
+      { name: 'PSI Jobs', types: ['academic','research'], scope: ['ch'], mode: 'direct', base: 'https://www.psi.ch/en/pa/job-opportunities', note: 'Swiss research institute roles.', priority: 70 },
+      { name: 'CSEM Jobs', types: ['research','industry'], scope: ['ch'], mode: 'direct', base: 'https://www.csem.ch/jobs/', note: 'Applied research and technology roles.', priority: 68 },
+      { name: 'TNO Careers', types: ['research','industry','policy'], scope: ['nl','eu'], mode: 'site', site: 'tno.nl/en/careers', note: 'Dutch applied research and policy-facing roles.', priority: 80 },
+      { name: 'RIVM Vacancies', types: ['research','policy','risk'], scope: ['nl','eu'], mode: 'site', site: 'rivm.nl/en/about-rivm/working-at-rivm', note: 'Risk assessment, environment and public health roles.', priority: 78 },
+      { name: 'VITO Jobs', types: ['research','industry','impact'], scope: ['eu','nl','fr','de'], mode: 'site', site: 'vito.be/en/jobs', note: 'Sustainability, materials and circular economy research.', priority: 78 },
+      { name: 'Fraunhofer Jobs', types: ['research','industry','chemicals'], scope: ['de','eu'], mode: 'site', site: 'fraunhofer.de/en/jobs-career', note: 'Applied research roles in Germany.', priority: 78 },
+      { name: 'Helmholtz Jobs', types: ['research','academic'], scope: ['de','eu'], mode: 'site', site: 'helmholtz.de/en/career/jobs', note: 'Large German research network.', priority: 74 },
+      { name: 'DTU Jobs', types: ['academic','research'], scope: ['dk','eu'], mode: 'site', site: 'dtu.dk/english/about/job-and-career', note: 'Danish technical university jobs.', priority: 72 },
+      { name: 'RISE Jobs', types: ['research','industry','impact'], scope: ['se','eu'], mode: 'site', site: 'ri.se/en/work-with-us', note: 'Swedish applied research institute.', priority: 70 },
+      { name: 'SINTEF Jobs', types: ['research','industry','impact'], scope: ['se','dk','eu'], mode: 'site', site: 'sintef.no/en/career', note: 'Nordic applied research and sustainability roles.', priority: 70 },
+
+      { name: 'EU Funding & Tenders Portal', types: ['funding','research','academic'], scope: ['eu','ch','it','de','nl','fr','dk','se','remote'], mode: 'direct', base: 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home', note: 'Horizon Europe calls, partnerships and funding opportunities.', priority: 90 },
+      { name: 'MSCA Calls', types: ['funding','academic','research'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'marie-sklodowska-curie-actions.ec.europa.eu', note: 'MSCA fellowships, doctoral networks and mobility calls.', priority: 82 },
+      { name: 'SETAC Jobs / Community Search', types: ['academic','research','consulting'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'setac.org', note: 'LCA, ecotoxicology and environmental science network.', priority: 70 },
+      { name: 'ISIE Jobs / Community Search', types: ['academic','research','consulting'], scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'], mode: 'site', site: 'is4ie.org', note: 'Industrial ecology and LCA community opportunities.', priority: 68 }
     ];
 
     let selectedDomains = new Set(['lca','ssbd','risk','policy','pharma']);
@@ -630,13 +631,26 @@
         .slice(0, 10);
     }
 
+    function sourceTypes(source) {
+      return source.types || [source.type || 'all'];
+    }
+
+    function scoutQuery() {
+      const country = countryNames[qs('country').value];
+      const roleType = qs('roleType').value;
+      const terms = activeTerms().slice(0, 6).map(t => `"${t}"`).join(' OR ');
+      return `(${terms}) (${roleTypeWords[roleType] || roleTypeWords.all}) "${country}"`;
+    }
+
     function queryFor(source) {
       const country = countryNames[qs('country').value];
-      const terms = activeTerms().slice(0, 4).join(' OR ');
-      const baseQuery = `(${terms}) ${country} sustainability researcher policy LCA SSbD`;
-      if (source.name.includes('LinkedIn')) return `${source.base}?keywords=${encode(baseQuery)}&location=${encode(country)}`;
-      if (source.name.includes('Google')) return `${source.base}?q=${encode(baseQuery + ' jobs OR fellowship OR call OR grant')}`;
-      if (source.name.includes('EURAXESS')) return `${source.base}?keywords=${encode(terms)}&sort_by=created`;
+      const terms = activeTerms().slice(0, 5).join(' OR ');
+      const query = scoutQuery();
+      if (source.mode === 'linkedin') return `${source.base}?keywords=${encode(query)}&location=${encode(country)}`;
+      if (source.mode === 'indeed') return `${source.base}?q=${encode(query)}&l=${encode(country)}`;
+      if (source.mode === 'google') return `${source.base}?q=${encode(query)}`;
+      if (source.mode === 'site') return `https://www.google.com/search?q=${encode(`site:${source.site} ${query}`)}`;
+      if (source.mode === 'euraxess') return `${source.base}?keywords=${encode(terms)}&sort_by=created`;
       return source.base;
     }
 
@@ -660,20 +674,25 @@
       const roleType = qs('roleType').value;
       currentSources = sourceTemplates
         .filter(s => s.scope.includes(country))
-        .filter(s => roleType === 'all' || s.type === roleType || s.type === 'all')
+        .filter(s => roleType === 'all' || sourceTypes(s).includes(roleType) || sourceTypes(s).includes('all'))
         .map(s => ({ ...s, url: queryFor(s), score: scoreSource(s) }))
         .sort((a,b) => b.score - a.score);
       renderSources();
     }
 
     function scoreSource(source) {
-      let score = 50;
-      if (source.type === qs('roleType').value) score += 20;
-      if (source.type === 'policy' && selectedDomains.has('policy')) score += 12;
-      if (source.type === 'academic' && (selectedDomains.has('ssbd') || selectedDomains.has('nano'))) score += 8;
+      const types = sourceTypes(source);
+      let score = source.priority || 50;
+      if (types.includes(qs('roleType').value)) score += 18;
+      if (types.includes('policy') && selectedDomains.has('policy')) score += 12;
+      if (types.includes('academic') && (selectedDomains.has('ssbd') || selectedDomains.has('nano'))) score += 8;
+      if (types.includes('pharma') && (selectedDomains.has('pharma') || selectedDomains.has('nano'))) score += 12;
+      if (types.includes('chemicals') && (selectedDomains.has('chemicals') || selectedDomains.has('risk'))) score += 12;
+      if (types.includes('consulting') && selectedDomains.has('lca')) score += 12;
       if (source.name.includes('ECHA') && (selectedDomains.has('risk') || selectedDomains.has('chemicals'))) score += 18;
       if (source.name.includes('JRC') && selectedDomains.has('foresight')) score += 18;
       if (source.name.includes('Funding') && selectedDomains.has('ssbd')) score += 10;
+      if (source.mode === 'site') score += 4;
       return Math.min(score, 99);
     }
 
@@ -693,9 +712,10 @@
             <span class="score">${s.score}</span>
           </div>
           <div class="match">
-            <span>${s.type}</span>
+            <span>${sourceTypes(s).slice(0, 3).join(' / ')}</span>
             <span>${countryNames[qs('country').value]}</span>
             <span>${activeTerms().slice(0, 3).join(', ')}</span>
+            ${s.mode === 'site' ? '<span>site search</span>' : ''}
           </div>
           <div class="split-actions">
             <a class="btn btn--primary" href="${s.url}" target="_blank" rel="noopener">Open search</a>
@@ -716,7 +736,7 @@
         title,
         org,
         country: countryNames[qs('country').value],
-        type: source.type,
+        type: sourceTypes(source)[0],
         url: source.url,
         notes: source.note,
         created: new Date().toISOString()
@@ -896,7 +916,13 @@ Opportunity link: ${item.url || 'not provided'}`;
     }
 
     function openTopSearches() {
-      currentSources.slice(0, 5).forEach((s, i) => setTimeout(() => window.open(s.url, '_blank', 'noopener'), i * 180));
+      currentSources.slice(0, 12).forEach((s, i) => setTimeout(() => window.open(s.url, '_blank', 'noopener'), i * 160));
+    }
+
+    async function copyBooleanQuery() {
+      await navigator.clipboard.writeText(scoutQuery());
+      qs('copyQueryBtn').textContent = 'Copied query';
+      setTimeout(() => { qs('copyQueryBtn').textContent = 'Copy Boolean query'; }, 1400);
     }
 
     function init() {
@@ -908,6 +934,7 @@ Opportunity link: ${item.url || 'not provided'}`;
       qs('roleType').addEventListener('change', buildScout);
       qs('runScoutBtn').addEventListener('click', buildScout);
       qs('openAllBtn').addEventListener('click', openTopSearches);
+      qs('copyQueryBtn').addEventListener('click', copyBooleanQuery);
       qs('addManualBtn').addEventListener('click', addManualOpportunity);
       qs('closeModalBtn').addEventListener('click', closeModal);
       qs('exportBtn').addEventListener('click', exportJson);
