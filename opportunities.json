@@ -1,62 +1,743 @@
 {
-  "generatedAt": "2026-06-17T15:20:00Z",
-  "sourceNote": "Seed feed generated from public job feeds checked on 2026-06-17. GitHub Actions can refresh this file daily from public feeds.",
+  "generatedAt": "2026-06-17T17:46:27Z",
+  "sourceNote": "Generated from public job feeds. The static site filters these direct openings locally by country, type and CV domains.",
   "opportunities": [
     {
-      "title": "Betriebsingenieur (m/w/d) fuer die Pharmaindustrie",
-      "org": "agap2 - moOngy GmbH",
-      "country": "Duesseldorf, Germany",
-      "scope": ["de", "eu"],
+      "title": "Clinical Research Associate I",
+      "org": "Precision Medicine Group",
+      "country": "Italy",
+      "scope": [
+        "it",
+        "eu",
+        "remote"
+      ],
       "type": "pharma",
-      "types": ["pharma", "consulting", "industry"],
-      "url": "https://www.arbeitnow.com/jobs/companies/agap2-moongy-gmbh/betriebsingenieur-fur-die-pharmaindustrie-dusseldorf-77127",
-      "source": "Arbeitnow",
-      "notes": "Operational consulting role in science and engineering for the pharmaceutical industry.",
+      "types": [
+        "pharma",
+        "chemicals",
+        "policy",
+        "academic",
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/144318-clinical-research-associate-i-2",
+      "source": "Jobicy",
+      "notes": "Precision for Medicine is not your typical CRO. We are passionate about cultivating our culture and are proud to share extremely high CRA retention rates compared to industry averages. CRAs join us, love their jobs, and stay because of the amazing people and e",
       "deadline": "",
-      "discoveredAt": "2026-06-17T15:20:00Z",
-      "sourceScore": 68
-    },
-    {
-      "title": "Ingenieur (m/w/d) fuer Facility Management in der Pharmaindustrie",
-      "org": "agap2 - moOngy GmbH",
-      "country": "Cuxhaven, Germany",
-      "scope": ["de", "eu"],
-      "type": "pharma",
-      "types": ["pharma", "industry"],
-      "url": "https://www.arbeitnow.com/jobs/companies/agap2-moongy-gmbh/ingenieur-fur-facility-management-in-der-pharmaindustrie-cuxhaven-148473",
-      "source": "Arbeitnow",
-      "notes": "Engineering role in a pharma-industry environment; potentially relevant for process, EHS and operational sustainability positioning.",
-      "deadline": "",
-      "discoveredAt": "2026-06-17T15:20:00Z",
-      "sourceScore": 62
+      "language": "en",
+      "discoveredAt": "2026-05-20T10:54:36Z",
+      "sourceScore": 125
     },
     {
       "title": "Scientist, Operations",
       "org": "The Coca-Cola Company",
       "country": "Brussels, Belgium",
-      "scope": ["eu"],
-      "type": "research",
-      "types": ["research", "industry"],
+      "scope": [
+        "eu"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "policy",
+        "research",
+        "industry"
+      ],
       "url": "https://www.themuse.com/jobs/thecocacolacompany/scientist-operations-efc033",
       "source": "The Muse",
-      "notes": "Scientist role in Brussels with industrial operations context; useful as a lower-priority R&D/process screening lead.",
+      "notes": "We provide high-quality products and cutting-edge ingredients sourced sustainably and ethically. One of our top priorities is ensuring we are providing consumer quality products that live up to our brand names. We are seeking a highly skilled and detail-orient",
       "deadline": "",
-      "discoveredAt": "2026-06-17T15:20:00Z",
-      "sourceScore": 54
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:25Z",
+      "sourceScore": 91
+    },
+    {
+      "title": "(Senior) Produktentwickler - Home & Personal Care (m/w/d)",
+      "org": "everdrop GmbH",
+      "country": "Aachen",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "policy",
+      "types": [
+        "policy",
+        "impact",
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/everdrop-gmbh/senior-produktentwickler-home-personal-care-aachen-408121",
+      "source": "Arbeitnow",
+      "notes": "DAS IST DER JOB Du willst nicht nur Rezepturen rühren, sondern die Zukunft nachhaltiger Konsumgüter aktiv gestalten? Übernimm strategische und operative Verantwortung für die Produktentwicklung und -optimierung unserer Wasch-, Putz-, Reinigungsmittel sowie Kos",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T11:20:12Z",
+      "sourceScore": 68
     },
     {
       "title": "Pharmacology Research Specialist",
       "org": "STEM Sync AI",
       "country": "Remote",
-      "scope": ["remote"],
+      "scope": [
+        "remote"
+      ],
       "type": "pharma",
-      "types": ["pharma", "research"],
+      "types": [
+        "pharma",
+        "research"
+      ],
       "url": "https://remoteOK.com/remote-jobs/remote-pharmacology-research-specialist-stem-sync-ai-1133451",
       "source": "RemoteOK",
-      "notes": "Remote pharmacology research role. Medium fit: scientific/pharma relevance, but less direct on LCA/SSbD.",
+      "notes": "Posted 10:45:13 AM. Biology Research Scientist Remote | Contract | $50 $70/hr | 10 20 hrs/week Quick SnapshotVerifyâ¦See this and similar jobs on LinkedIn. Please mention the word **SOLICITOUS** and tag RMmEwMjphMDNmOjY4YzI6YzQwMDo0ZDc4OmM2YzU6YjdiODo3Yjky wh",
       "deadline": "",
-      "discoveredAt": "2026-06-17T15:20:00Z",
-      "sourceScore": 50
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 67
+    },
+    {
+      "title": "Head of Value Engineering - Nordics",
+      "org": "Celonis",
+      "country": "Stockholm, Sweden",
+      "scope": [
+        "se",
+        "eu"
+      ],
+      "type": "consulting",
+      "types": [
+        "consulting",
+        "policy",
+        "impact",
+        "industry"
+      ],
+      "url": "https://www.themuse.com/jobs/celonis/head-of-value-engineering-nordics-59c6d8",
+      "source": "The Muse",
+      "notes": "Celonis is the global leader in Process Intelligence and the pioneer of Process Mining technology. As one of the world’s fastest-growing enterprise SaaS companies, we are changemakers pushing the boundaries of what’s possible. We invest heavily in advanced AI ",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:25Z",
+      "sourceScore": 65
+    },
+    {
+      "title": "Senior Data Scientist – Product Insights",
+      "org": "Catawiki",
+      "country": "Netherlands",
+      "scope": [
+        "nl",
+        "eu",
+        "remote"
+      ],
+      "type": "policy",
+      "types": [
+        "policy",
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/144140-senior-data-scientist-product-insights",
+      "source": "Jobicy",
+      "notes": "At Catawiki, every day brings the extraordinary! Whether it’s Daniel Ricciardo’s Formula 1 Car , a Woolly Mammoth’s Skeleton , Lady Gaga's Jumpsuit or Usain Bolt’s running shoe , we encounter exceptional objects every day. We're a one-of-a-kind marketplace for",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-05-18T10:38:04Z",
+      "sourceScore": 47
+    },
+    {
+      "title": "Data Scientist",
+      "org": "Cint",
+      "country": "UK",
+      "scope": [
+        "uk",
+        "remote"
+      ],
+      "type": "research",
+      "types": [
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/145945-data-scientist-6",
+      "source": "Jobicy",
+      "notes": "Company Description Who We Are Cint is a pioneer in research technology (ResTech). Our customers use the Cint platform to post questions and get answers from real people to build business strategies, confidently publish research, accurately measure the impact ",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-10T05:43:09Z",
+      "sourceScore": 45
+    },
+    {
+      "title": "Design Engineer",
+      "org": "USB Club",
+      "country": "Remote",
+      "scope": [
+        "remote"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "research",
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-design-engineer-usb-club-1133430",
+      "source": "RemoteOK",
+      "notes": "We areÂ  USB Club Â and we are hiring looking for a multi-faceted design engineer to help us push forward our sneaker net for designers, artists, DJs, writers, musicians, researchers, engineers. Original Job posting link here Responsibilities Ideally you are s",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 44
+    },
+    {
+      "title": "Data Scientist (Python & SQL) – Freelance AI Trainer",
+      "org": "Mindrift",
+      "country": "Romania",
+      "scope": [
+        "remote"
+      ],
+      "type": "research",
+      "types": [
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/145280-data-scientist-python-sql-freelance-ai-trainer-2",
+      "source": "Jobicy",
+      "notes": "Please submit your CV in English and indicate your level of English proficiency. Mindrift connects specialists with project-based AI opportunities for leading tech companies, focused on testing, evaluating, and improving AI systems. Participation is project-ba",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-02T11:03:40Z",
+      "sourceScore": 40
+    },
+    {
+      "title": "Machine Learning Research Manager",
+      "org": "Miro",
+      "country": "EMEA, Denmark, UK",
+      "scope": [
+        "dk",
+        "uk",
+        "eu",
+        "remote"
+      ],
+      "type": "policy",
+      "types": [
+        "policy",
+        "academic",
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/146983-machine-learning-research-manager",
+      "source": "Jobicy",
+      "notes": "Miro is the online workspace for innovation, used by 100M+ people to build the next big thing. We are seeking a Research Manager to lead the team defining the brain behind the \"Intelligent Canvas.\" This is not for building a standard GenAI or Recommendation en",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T05:09:30Z",
+      "sourceScore": 39
+    },
+    {
+      "title": "Sales Manager – Weather & Climate (EMEA & APAC)",
+      "org": "Spire",
+      "country": "Europe",
+      "scope": [
+        "remote",
+        "eu"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "policy",
+        "impact",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/146743-sales-manager-weather-climate-emea-apac",
+      "source": "Jobicy",
+      "notes": "We are seeking an ambitious, self-directed Sales Manager to accelerate revenue growth across EMEA and APAC and advance the digitization of the global weather and climate ecosystem. Operating with the autonomy of a regional owner, you will expand Spire’s market",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-16T04:06:51Z",
+      "sourceScore": 39
+    },
+    {
+      "title": "Project Director, Qualitative Research",
+      "org": "M3 USA",
+      "country": "UK",
+      "scope": [
+        "uk",
+        "remote"
+      ],
+      "type": "research",
+      "types": [
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/145885-project-director-qualitative-research",
+      "source": "Jobicy",
+      "notes": "Company Description About M3:  A Japanese global leader in the provision of ground-breaking and innovative technological and research solutions to the healthcare industry. The M3 Group operates in the US, Asia, and Europe with over 5.8 million physician member",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-09T10:52:55Z",
+      "sourceScore": 34
+    },
+    {
+      "title": "Data & AI Engineer (m/w/d)",
+      "org": "Team Passerelle",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/team-passerelle/data-ai-engineer-berlin-118584",
+      "source": "Arbeitnow",
+      "notes": "Wir sind das Team Passerelle, eine 2025 in Berlin gegründete KI-Beratung aus dem gewerkschaftlichen Umfeld. Unser Name ist Programm: Passerelle bedeutet Brücke. Wir sind angetreten, um inmitten der größten Transformation der Arbeitswelt genau diese Brücke in d",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T16:30:37Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "Founder's Associate (Pflichtpraktikum)",
+      "org": "Heidi Systems GmbH",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "impact",
+      "types": [
+        "impact",
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/heidi-systems-gmbh/founders-associate-pflichtpraktikum-berlin-78263",
+      "source": "Arbeitnow",
+      "notes": "Berlin based | German native speaker | Pflichtpraktikum | Rolling intake MAXIMALE VERANTWORTUNG. STEILE LERNKURVE. FAST PACE. Wenn du einen Job suchst, in dem du nur Folien bastelst und zuarbeitest, ist das NICHT dein Job. Heidi Systems digitalisiert einen der",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T15:00:35Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "Junior Social Media Manager (w/m/d)",
+      "org": "saint sass",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/saint-sass/junior-social-media-manager-berlin-423744",
+      "source": "Arbeitnow",
+      "notes": "saint sass ist mehr als Fashion: wir sind Haltung, Sexiness und Self-Empowerment in einem. Mit unserer super starken Community von über 300.000 Menschen weltweit, unseren mutigen und sarkastischen Statements und Looks, die nicht nur schön, sondern laut und hot",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T14:01:56Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "Digital Media & Content Manager (m/w/d)",
+      "org": "RFM MediaMix AG",
+      "country": "Munich",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/rfm-mediamix-ag/digital-media-content-manager-munich-460483",
+      "source": "Arbeitnow",
+      "notes": "Wir sind eine unabhängige, datengetriebene Mediaagentur. Wir planen und buchen Kampagnen für unsere Kunden – und wir glauben, dass eine Agentur ihr eigenes Marketing genauso gut machen sollte wie das ihrer Kunden. Genau da kommst du ins Spiel. Diese Stelle hat",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T11:30:45Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "Software Engineer (all genders)",
+      "org": "NFON",
+      "country": "Munich",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/nfon/software-engineer-all-genders-munich-61655",
+      "source": "Arbeitnow",
+      "notes": "Dein neuer Job Mit Begeisterung für Conversational AI entwickelst du eine skalierbare Multi-Tenant-Plattform, die den Zugang zu Cutting-Edge-LLM-Technologien öffnet und Unternehmen die Zukunft der Kommunikation näherbringt. Woran du mitwirken wirst In enger Zu",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T10:00:49Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "Senior Product Manager",
+      "org": "Distru",
+      "country": "Remote",
+      "scope": [
+        "remote"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-senior-product-manager-distru-1133455",
+      "source": "RemoteOK",
+      "notes": "Powering Trade For The Emerging Cannabis Industry &nbsp; Distru is the #1 ERP in the Cannabis Industry with $3B in annual sales processed through our platform! We are a fully remote and global team building a software platform to streamline the supply chain fo",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 32
+    },
+    {
+      "title": "AP Operations Analyst",
+      "org": "D2B",
+      "country": "Remote",
+      "scope": [
+        "remote"
+      ],
+      "type": "policy",
+      "types": [
+        "policy",
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-ap-operations-analyst-d2b-1133421",
+      "source": "RemoteOK",
+      "notes": "Note: This is for active pooling purposes only. Submitting your application does not guarantee employment. Your details will be kept on file and considered for future opportunities as they become available. We are seeking a detail-oriented and process-driven O",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 31
+    },
+    {
+      "title": "Ingenieur (m/w/d) für Facility Management in der Pharmaindustrie",
+      "org": "agap2 - moOngy GmbH",
+      "country": "Cuxhaven",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "pharma",
+      "types": [
+        "pharma",
+        "consulting",
+        "policy",
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/agap2-moongy-gmbh/ingenieur-fur-facility-management-in-der-pharmaindustrie-cuxhaven-148473",
+      "source": "Arbeitnow",
+      "notes": "Wir sind agap2, ein Unternehmen für operatives Consulting in den Bereichen Science und Engineering. Wir sind ein starkes Team aus Ingenieur:innen, Pharmazeut:innen und Naturwissenschaftler:innen. Wir helfen unseren renommierten Kunden, komplexe Projekte erfolg",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T13:00:49Z",
+      "sourceScore": 30
+    },
+    {
+      "title": "Senior Implementation Project Manager / Implementation Project Lead (m/w/d)",
+      "org": "PADOA GmbH",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/padoa-gmbh/senior-implementation-project-manager-implementation-project-lead-berlin-187450",
+      "source": "Arbeitnow",
+      "notes": "Möchtest du deinem Talent Sinn verleihen und einen positiven Einfluss auf die Welt haben? Gegründet im Jahr 2016, vereint padoa heute über 350 leidenschaftliche Mitarbeiterinnen und Mitarbeiter rund um eine Software und ein Serviceangebot, die darauf ausgerich",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T10:30:44Z",
+      "sourceScore": 28
+    },
+    {
+      "title": "Junior Produktentwickler - Home & Personal Care (m/w/d)",
+      "org": "everdrop GmbH",
+      "country": "Aachen",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/everdrop-gmbh/junior-produktentwickler-home-personal-care-aachen-78423",
+      "source": "Arbeitnow",
+      "notes": "DAS IST DER JOB Du suchst keinen klassischen, monotonen Laboranten-Job, sondern willst die Entwicklung von Wasch-/Putz-/Reinigungsmittel- und Kosmetikrezepturen aktiv mitgestalten? Dann bist du als Junior Produktentwickler - Home &amp; Personal Care (m/w/d) be",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T11:20:12Z",
+      "sourceScore": 22
+    },
+    {
+      "title": "Content Creation (m/w/d) Minijob oder Teilzeit",
+      "org": "CAPULET Jewelry",
+      "country": "Munich",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/capulet-jewelry/content-creation-minijob-oder-teilzeit-munich-393883",
+      "source": "Arbeitnow",
+      "notes": "📍 München | ⏳ Minijob | 15–25 Stunden pro Woche Du liebst Social Media, fühlst Dich vor der Kamera wohl und hast Lust, Teil einer schnell wachsenden Schmuckmarke zu werden? ✨ CAPULET Jewelry steht für handgefertigten Schmuck aus München. Jedes Schmuckstück wir",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T11:30:45Z",
+      "sourceScore": 22
+    },
+    {
+      "title": "Kundenberater/in im kommunalen Kundenservice, Schulung vor Ort, dann 100% Home-Office in Hamburg (m/w/d)",
+      "org": "hey contact heroes GmbH",
+      "country": "Hamburg",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/hey-contact-heroes-gmbh/kundenberater-in-im-kommunalen-kundenservice-schulung-vor-ort-dann-100-home-office-in-hamburg-353319",
+      "source": "Arbeitnow",
+      "notes": "Werde Teil der hey contact heroes Du hast Erfahrung im Kundenservice, kennst dich mit SAP IS-U aus und möchtest nach einer intensiven Einarbeitung flexibel im Home-Office arbeiten? Dann passt diese Stelle perfekt zu dir. Für ein spannendes Kundenservice-Projek",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T15:00:35Z",
+      "sourceScore": 22
+    },
+    {
+      "title": "Financial Data Application Specialist Corporate",
+      "org": "AlphaSense",
+      "country": "Remote - United States",
+      "scope": [
+        "remote"
+      ],
+      "type": "research",
+      "types": [
+        "research",
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-financial-data-application-specialist-corporate-alphasense-1133432",
+      "source": "RemoteOK",
+      "notes": "About AlphaSense: The worldâs most sophisticated companies rely on AlphaSense to remove uncertainty from decision-making. With market intelligence and search built on proven AI, AlphaSense delivers insights that matter from content you can trust. Our univers",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 19
+    },
+    {
+      "title": "Senior Atlassian Consultant (m/w/d)",
+      "org": "XALT Business Consulting GmbH",
+      "country": "Munich",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "consulting",
+      "types": [
+        "consulting"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/xalt-business-consulting-gmbh/senior-atlassian-consultant-munich-268183",
+      "source": "Arbeitnow",
+      "notes": "Bist du genauso begeistert von Atlassian-Tools wie Jira und Confluence, Goals, Rovo ? Verfügst du über ausgeprägte Teamfähigkeit und brillierst in der Kommunikation? Dann lass uns zusammenarbeiten, sei es remote, in München oder Leipzig, und werde als Senior A",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T09:00:31Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Textile Certification Manager",
+      "org": "circular.fashion",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "consulting",
+      "types": [
+        "consulting",
+        "impact",
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/circularfashion/textile-certification-manager-berlin-208028",
+      "source": "Arbeitnow",
+      "notes": "circular. fashion - a catalyst guiding, verifying and scaling circular productsA circular. fashion sets standards in the textile industry, creates a Circular Design Software, a digital platform for circular design and closed-loop recycling, and renders consult",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T15:00:35Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Junior ML Engineer",
+      "org": "Work Force Nexus",
+      "country": "Remote,",
+      "scope": [
+        "remote"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-junior-ml-engineer-work-force-nexus-1133365",
+      "source": "RemoteOK",
+      "notes": "Posted 12:46:38 PM. Job Title: Junior ML EngineerLocation: Remote, UKEmployment Type: Full-time PermanentWorkâ¦See this and similar jobs on LinkedIn. Please mention the word **PERMISSIBLE** and tag RMmEwMjphMDNmOjY4YzI6YzQwMDo0ZDc4OmM2YzU6YjdiODo3Yjky when ap",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Strategische:r E-Commerce Manager:in",
+      "org": "HOLZRICHTER Berlin",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/holzrichter-berlin/strategischer-e-commerce-managerin-berlin-93944",
+      "source": "Arbeitnow",
+      "notes": "Als E-Commerce Manager:in bei HOLZRICHTER Berlin entwickelst und optimierst du unseren Webshop sowie zentrale E-Commerce-Prozesse. Du analysierst Potenziale entlang der Customer Journey, optimierst Funnel, User Experience und Conversion und setzt datenbasierte",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T12:00:54Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Senior Full Stack Engineer- Python (m/f/d)",
+      "org": "Flix",
+      "country": "Berlin, Berlin, Germany",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/flix/senior-full-stack-engineer-python-berlin-423041",
+      "source": "Arbeitnow",
+      "notes": "We are seeking a talented and driven Senior Full Stack&nbsp;Engineer (m/f/d) &nbsp;to join our team,&nbsp;in the Demand&nbsp;Division,&nbsp;responsible for developing our contact center applications, with the focus on scalable agent-facing interfaces and autom",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T13:45:26Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Supply Chain Manager",
+      "org": "Ignite",
+      "country": "United Kingdom,",
+      "scope": [
+        "uk"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://remoteOK.com/remote-jobs/remote-supply-chain-manager-ignite-1133497",
+      "source": "RemoteOK",
+      "notes": "Supply Chain ManagerFood Challenger Brandð Fully Remoteð¸ Â£30,000 - Â£35,000â­ Working hours: 9 am-â¦See this and similar jobs on LinkedIn. Please mention the word **ADORE** and tag RMmEwMjphMDNmOjY4YzI6YzQwMDo0ZDc4OmM2YzU6YjdiODo3Yjky when applying to",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T17:46:24Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Sr. Security Researcher II (Remote, DEU)",
+      "org": "CrowdStrike",
+      "country": "Germany",
+      "scope": [
+        "de",
+        "eu",
+        "remote"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "policy",
+        "research",
+        "industry"
+      ],
+      "url": "https://jobicy.com/jobs/145057-sr-security-researcher-ii-remote-deu",
+      "source": "Jobicy",
+      "notes": "As a global leader in cybersecurity, CrowdStrike protects the people, processes and technologies that drive modern organizations. Since 2011, our mission hasn’t changed — we’re here to stop breaches, and we’ve redefined modern security with the world’s most ad",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-05-29T15:01:18Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Product Manager Banking & Financial Services (m/w/d)",
+      "org": "Framewoorks",
+      "country": "Hamburg",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/framewoorks/product-manager-banking-financial-services-hamburg-106469",
+      "source": "Arbeitnow",
+      "notes": "Wir sind Framewoorks – eine spezialisierte Recruiting-Boutique für IT- und Tech-Unternehmen im DACH-Raum. Für einen unserer Kunden, ein wachstumsstarkes Hamburger Tech-Unternehmen im Bereich digitale Identität und Vertrauensdienste, suchen wir aktuell eine erf",
+      "deadline": "",
+      "language": "de",
+      "discoveredAt": "2026-06-17T13:30:41Z",
+      "sourceScore": 18
+    },
+    {
+      "title": "Working Student / IDP: Software Development (m/f/d)",
+      "org": "Blickfeld GmbH",
+      "country": "Munich",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "industry",
+      "types": [
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/blickfeld-gmbh/working-student-idp-software-development-munich-326764",
+      "source": "Arbeitnow",
+      "notes": "Your mission Shape the future of real-world LiDAR applications at a leading high-tech company in Munich. At Blickfeld, we develop our own innovative LiDAR technology based on a frictionless MEMS mirror. Our sensors create 3D data of the environment in high res",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T09:30:47Z",
+      "sourceScore": 17
+    },
+    {
+      "title": "Senior Performance Marketing Manager, Paid Social (all genders)",
+      "org": "Neuraum Ventures GmbH",
+      "country": "Berlin",
+      "scope": [
+        "de",
+        "eu"
+      ],
+      "type": "chemicals",
+      "types": [
+        "chemicals",
+        "research",
+        "industry"
+      ],
+      "url": "https://www.arbeitnow.com/jobs/companies/neuraum-ventures-gmbh/senior-performance-marketing-manager-paid-social-all-genders-berlin-392419",
+      "source": "Arbeitnow",
+      "notes": "We are Neuraum We are evolving beyond pure discovery into a platform that supports the entire home-building journey, from first inspiration to planning and execution. As AI fundamentally changes how people search, compare and decide online, performance marketi",
+      "deadline": "",
+      "language": "en",
+      "discoveredAt": "2026-06-17T12:00:54Z",
+      "sourceScore": 13
     }
   ]
 }

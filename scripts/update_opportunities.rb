@@ -14,16 +14,35 @@ SOURCE_URLS = {
   themuse_science: 'https://www.themuse.com/api/public/jobs?category=Science%20and%20Engineering&page=1'
 }.freeze
 
+JOBICY_TAGS = %w[
+  sustainability climate environmental research scientist pharma pharmaceutical
+  chemistry chemical policy healthcare medical data operations project
+].freeze
+
 KEYWORDS = {
   'life cycle assessment' => 28,
+  'lca' => 26,
+  'ssbd' => 26,
   'safe and sustainable' => 28,
+  'product sustainability' => 24,
+  'carbon footprint' => 22,
+  'environmental footprint' => 22,
+  'circular economy' => 20,
   'sustainability' => 18,
   'environmental' => 16,
   'chemical' => 15,
+  'chemistry' => 15,
   'pharma' => 15,
   'pharmaceutical' => 15,
+  'medical device' => 15,
+  'clinical research' => 14,
   'risk assessment' => 14,
+  'toxicology' => 14,
+  'ecotoxicology' => 14,
   'occupational exposure' => 14,
+  'ehs' => 14,
+  'reach' => 14,
+  'regulatory' => 13,
   'policy' => 13,
   'foresight' => 13,
   'research' => 11,
@@ -32,12 +51,15 @@ KEYWORDS = {
   'climate' => 10,
   'nanomedicine' => 10,
   'process engineer' => 9,
-  'product development' => 9
+  'product development' => 9,
+  'project manager' => 7,
+  'data analyst' => 7
 }.freeze
 
 NOISE = %w[
   sales marketing frontend backend fullstack full-stack devops accountant payroll nurse
-  restaurant retail driver finance banker security designer social-media
+  restaurant retail driver finance banker security designer social-media claims support
+  customer-success supply-chain devsecops
 ].freeze
 
 def fetch_json(url)
@@ -55,8 +77,25 @@ rescue StandardError => e
   nil
 end
 
+def fetch_jobicy(tag)
+  url = "https://jobicy.com/api/v2/remote-jobs?count=100&geo=europe&tag=#{URI.encode_www_form_component(tag)}"
+  fetch_json(url)
+end
+
 def strip_html(value)
   value.to_s.gsub(/<[^>]+>/, ' ').gsub(/\s+/, ' ').strip
+end
+
+def infer_language(title, description, explicit = nil)
+  value = explicit.to_s.downcase.strip
+  return value if %w[en it de fr nl].include?(value)
+
+  text = [title, description].join(' ').downcase
+  return 'de' if text.match?(/\b(m\/w\/d|w\/m\/d|aufgaben|dein|ihre|wir suchen|kenntnisse|berufserfahrung|du bist)\b/)
+  return 'it' if text.match?(/\b(cerchiamo|mansioni|requisiti|laurea|candidato|azienda|sostenibilita|chimica)\b/)
+  return 'fr' if text.match?(/\b(nous recherchons|vous serez|candidat|developpement durable|environnement)\b/)
+  return 'nl' if text.match?(/\b(wij zoeken|functie|duurzaamheid|milieu|onderzoek|ervaring)\b/)
+  'en'
 end
 
 def country_scope(location)
@@ -72,6 +111,7 @@ def country_scope(location)
   scope << 'dk' if text.match?(/denmark|copenhagen/)
   scope << 'se' if text.match?(/sweden|stockholm|gothenburg/)
   scope << 'uk' if text.match?(/united kingdom|london|cambridge|oxford|uk/)
+  scope << 'eu' if (scope & %w[it de nl fr dk se]).any?
   scope = ['remote'] if scope.empty? && text.empty?
   scope.uniq
 end
@@ -100,8 +140,28 @@ def score_offer(title, org, description)
     score += (weight / 2) if title_text.include?(term)
   end
 
-  NOISE.each { |term| score -= 18 if title_text.include?(term) }
+  NOISE.each { |term| score -= 30 if title_text.include?(term) }
+  score += 10 if title_text.match?(/scientist|research|engineer|analyst|consultant|manager/)
+  score += 8 if full_text.match?(/europe|remote|hybrid|switzerland|germany|italy|brussels/)
   score
+end
+
+def base_offer(title:, org:, country:, scope:, type:, types:, url:, source:, notes:, discovered_at:, source_score:, language:)
+  {
+    title: title,
+    org: org,
+    country: country,
+    scope: scope,
+    type: type,
+    types: types,
+    url: url,
+    source: source,
+    notes: notes,
+    deadline: '',
+    language: language,
+    discoveredAt: discovered_at,
+    sourceScore: source_score
+  }
 end
 
 def normalize_arbeitnow(job)
@@ -110,23 +170,24 @@ def normalize_arbeitnow(job)
   location = strip_html(job['location'])
   description = strip_html(job['description'])
   score = score_offer(title, org, description)
-  return nil if score < 18
+  return nil if score < 10
 
   text = [title, org, description].join(' ')
-  {
+  types = infer_types(text)
+  base_offer(
     title: title,
     org: org,
     country: location.empty? ? 'Europe' : location,
     scope: country_scope(location),
-    type: infer_types(text).first,
-    types: infer_types(text),
+    type: types.first,
+    types: types,
     url: job['url'],
     source: 'Arbeitnow',
     notes: description[0, 260],
-    deadline: '',
-    discoveredAt: Time.at(job['created_at'].to_i).utc.iso8601,
-    sourceScore: score
-  }
+    discovered_at: Time.at(job['created_at'].to_i).utc.iso8601,
+    source_score: score,
+    language: infer_language(title, description)
+  )
 end
 
 def normalize_remoteok(job)
@@ -137,23 +198,28 @@ def normalize_remoteok(job)
   location = strip_html(job['location'])
   description = strip_html(job['description'])
   score = score_offer(title, org, description)
-  return nil if score < 30
+  return nil if score < 18
 
   text = [title, org, description, Array(job['tags']).join(' ')].join(' ')
-  {
+  types = infer_types(text)
+  scope = country_scope(location)
+  scope = (scope + ['remote']).uniq if location.empty? || location.downcase.match?(/remote|worldwide|europe|emea|anywhere/)
+  return nil if scope.empty?
+
+  base_offer(
     title: title,
     org: org,
     country: location.empty? ? 'Remote' : location,
-    scope: (country_scope(location) + ['remote']).uniq,
-    type: infer_types(text).first,
-    types: infer_types(text),
+    scope: scope,
+    type: types.first,
+    types: types,
     url: job['url'],
     source: 'RemoteOK',
     notes: description[0, 260],
-    deadline: '',
-    discoveredAt: Time.now.utc.iso8601,
-    sourceScore: score
-  }
+    discovered_at: Time.now.utc.iso8601,
+    source_score: score,
+    language: infer_language(title, description)
+  )
 end
 
 def normalize_themuse(job)
@@ -162,23 +228,55 @@ def normalize_themuse(job)
   location = Array(job['locations']).map { |item| item['name'] }.compact.join(', ')
   description = strip_html(job['contents'])
   score = score_offer(title, org, description)
-  return nil if score < 20
+  return nil if score < 12
 
   text = [title, org, description].join(' ')
-  {
+  types = infer_types(text)
+  base_offer(
     title: title,
     org: org,
     country: location.empty? ? 'Unknown' : location,
     scope: country_scope(location),
-    type: infer_types(text).first,
-    types: infer_types(text),
+    type: types.first,
+    types: types,
     url: job.dig('refs', 'landing_page'),
     source: 'The Muse',
     notes: description[0, 260],
-    deadline: '',
-    discoveredAt: Time.now.utc.iso8601,
-    sourceScore: score
-  }
+    discovered_at: Time.now.utc.iso8601,
+    source_score: score,
+    language: infer_language(title, description)
+  )
+end
+
+def normalize_jobicy(job)
+  title = strip_html(job['jobTitle'])
+  org = strip_html(job['companyName'])
+  location = strip_html(job['jobGeo'])
+  description = strip_html(job['jobDescription'] || job['jobExcerpt'])
+  score = score_offer(title, org, description)
+  return nil if score < 12
+
+  text = [title, org, description, job['jobIndustry']].join(' ')
+  types = infer_types(text)
+  scope = (country_scope(location) + ['remote']).uniq
+  base_offer(
+    title: title,
+    org: org,
+    country: location.empty? ? 'Remote Europe' : location,
+    scope: scope,
+    type: types.first,
+    types: types,
+    url: job['url'],
+    source: 'Jobicy',
+    notes: description[0, 260],
+    discovered_at: begin
+      Time.parse(job['pubDate'].to_s).utc.iso8601
+    rescue StandardError
+      Time.now.utc.iso8601
+    end,
+    source_score: score,
+    language: infer_language(title, description)
+  )
 end
 
 offers = []
@@ -195,11 +293,17 @@ if (data = fetch_json(SOURCE_URLS[:themuse_science]))
   offers.concat(Array(data['results']).map { |job| normalize_themuse(job) }.compact)
 end
 
+JOBICY_TAGS.each do |tag|
+  data = fetch_jobicy(tag)
+  offers.concat(Array(data && data['jobs']).map { |job| normalize_jobicy(job) }.compact)
+end
+
 offers = offers
   .select { |item| item[:url].to_s.start_with?('http') }
+  .select { |item| item[:scope].any? }
   .uniq { |item| [item[:title].downcase, item[:org].downcase] }
   .sort_by { |item| -item[:sourceScore].to_i }
-  .first(40)
+  .first(120)
 
 payload = {
   generatedAt: Time.now.utc.iso8601,
