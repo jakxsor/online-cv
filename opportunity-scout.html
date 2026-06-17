@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Opportunity Scout for LCA, SSbD, environmental risk, foresight and EU policy opportunities.">
+  <title>Jacopo Sorani - Opportunity Scout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #eef1f4;
+      --panel: #ffffff;
+      --ink: #111827;
+      --muted: #5b6575;
+      --line: #d9e0e8;
+      --accent: #22694b;
+      --accent-soft: #e3f2eb;
+      --warn: #8a5a10;
+      --warn-soft: #fff3d8;
+      --danger: #9d2c2c;
+      --danger-soft: #f9dddd;
+      --blue: #1f5d91;
+      --blue-soft: #e3eef8;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 72px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+      overflow: hidden;
+    }
+
+    .panel__head {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel__title {
+      font-weight: 800;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .panel__body { padding: 16px; }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 11px;
+      font: inherit;
+      outline: none;
+    }
+
+    textarea { min-height: 130px; resize: vertical; }
+    select:focus, input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip.is-on {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: #9fcfb8;
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 7px;
+      padding: 9px 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+    }
+
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn--primary:hover { color: #fff; filter: brightness(1.05); }
+    .btn--warn { background: var(--warn-soft); border-color: #e5c273; color: var(--warn); }
+    .btn--danger { background: var(--danger-soft); border-color: #e6a7a7; color: var(--danger); }
+    .btn--blue { background: var(--blue-soft); border-color: #afcbe2; color: var(--blue); }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-list, .opportunity-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .source, .opp {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfd;
+    }
+
+    .source__top, .opp__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 7px;
+    }
+
+    .source__name, .opp__title {
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .source__meta, .opp__meta, .small {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 28px;
+      border-radius: 999px;
+      font-weight: 800;
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .match {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .match span {
+      font-size: 0.74rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 7px;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .split-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .notice {
+      border: 1px solid #d7c38c;
+      background: #fff8e8;
+      color: #5f4611;
+      border-radius: 8px;
+      padding: 11px 12px;
+      font-size: 0.86rem;
+      margin-bottom: 14px;
+    }
+
+    .empty {
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      background: #fbfcfd;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(17, 24, 39, 0.58);
+      z-index: 20;
+    }
+
+    .modal.is-open { display: flex; }
+    .modal__card {
+      width: min(780px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 80px rgba(0,0,0,.25);
+    }
+
+    .modal__head {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .modal__body { padding: 16px; }
+
+    .draft {
+      white-space: pre-wrap;
+      border: 1px solid var(--line);
+      background: #fbfcfd;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout, .grid2 { grid-template-columns: 1fr; }
+      .topbar { flex-direction: column; }
+      .top-actions { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Opportunity Scout</div>
+        <h1>Find relevant roles, calls and collaborations by country.</h1>
+        <p class="lead">A country-aware scouting cockpit built around Jacopo Sorani's CV: LCA, Safe and Sustainable by Design, environmental risk, occupational exposure, foresight, EU policy, pharmaceuticals and nanomedicine.</p>
+      </div>
+      <div class="top-actions">
+        <a class="btn" href="./">Back to CV</a>
+        <button class="btn btn--blue" id="exportBtn">Export JSON</button>
+        <button class="btn btn--danger" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="panel__head">
+          <div class="panel__title">Scout Setup</div>
+          <span class="pill" id="todayLabel"></span>
+        </div>
+        <div class="panel__body">
+          <div class="notice">This static page does not send applications automatically. It prepares targeted searches and application drafts, then asks for explicit authorisation before opening an email draft.</div>
+
+          <div class="grid2">
+            <div>
+              <label for="country">Country / region</label>
+              <select id="country">
+                <option value="eu">European Union / Brussels</option>
+                <option value="ch">Switzerland</option>
+                <option value="it">Italy</option>
+                <option value="de">Germany</option>
+                <option value="nl">Netherlands</option>
+                <option value="fr">France</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
+                <option value="uk">United Kingdom</option>
+                <option value="remote">Remote / hybrid Europe</option>
+              </select>
+            </div>
+            <div>
+              <label for="roleType">Opportunity type</label>
+              <select id="roleType">
+                <option value="all">Jobs, fellowships, calls and collaborations</option>
+                <option value="industry">Industry R&D / sustainability</option>
+                <option value="policy">Policy, foresight and EU institutions</option>
+                <option value="academic">Academic / postdoc / research</option>
+                <option value="funding">Funding calls and grants</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <label>Domains</label>
+            <div class="chips" id="domainChips"></div>
+          </div>
+
+          <div class="toolbar">
+            <button class="btn btn--primary" id="runScoutBtn">Build scout links</button>
+            <button class="btn" id="openAllBtn">Open top searches</button>
+            <button class="btn btn--warn" id="addManualBtn">Add opportunity</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head">
+          <div class="panel__title">CV Matching Logic</div>
+          <span class="pill">Local scoring</span>
+        </div>
+        <div class="panel__body">
+          <div class="source-list">
+            <div class="source">
+              <div class="source__top">
+                <div class="source__name">Strongest positioning</div>
+                <span class="score">A</span>
+              </div>
+              <div class="source__meta">Industry-policy interface: LCA + SSbD + environmental risk + occupational exposure + foresight.</div>
+            </div>
+            <div class="source">
+              <div class="source__top">
+                <div class="source__name">Best target organisations</div>
+                <span class="score">B</span>
+              </div>
+              <div class="source__meta">JRC, ECHA, EEA, EFSA, OECD, consultancies, pharma sustainability teams, chemical safety/R&D groups, university labs.</div>
+            </div>
+            <div class="source">
+              <div class="source__top">
+                <div class="source__name">Auto-application rule</div>
+                <span class="score">Safe</span>
+              </div>
+              <div class="source__meta">The tool can draft messages and email text. It never submits without your explicit confirmation.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:16px">
+      <div class="panel__head">
+        <div class="panel__title">Scout Sources</div>
+        <span class="pill" id="sourceCount">0 sources</span>
+      </div>
+      <div class="panel__body">
+        <div class="source-list" id="sourceList"></div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:16px">
+      <div class="panel__head">
+        <div class="panel__title">Opportunity Inbox</div>
+        <span class="pill" id="oppCount">0 saved</span>
+      </div>
+      <div class="panel__body">
+        <div class="opportunity-list" id="opportunityList"></div>
+      </div>
+    </section>
+
+    <p class="footer">Suggested workflow: choose country and domains, open official searches, save interesting opportunities, score them, generate a tailored draft, authorise manually if you want to send.</p>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal__card">
+      <div class="modal__head">
+        <strong id="modalTitle">Modal</strong>
+        <button class="btn" id="closeModalBtn">Close</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const cvFacts = {
+      name: 'Jacopo Sorani',
+      email: 'jacopo.sorani@gmail.com',
+      position: 'MSCA Doctoral Researcher at ETH Zurich and Empa',
+      summary: 'Sustainability scientist at the interface between industrial R&D, environmental assessment and EU policy.',
+      strengths: [
+        'Life Cycle Assessment and early-stage sustainability screening',
+        'Safe and Sustainable by Design for pharmaceutical and nanomaterial innovation',
+        'environmental risk and occupational exposure assessment',
+        'policy-oriented foresight experience at the European Commission Joint Research Centre',
+        'industry-facing collaborations with Roche and GVS',
+        'software tool development for energy demand and climate-impact estimation'
+      ]
+    };
+
+    const domains = [
+      { id: 'lca', label: 'LCA', terms: ['life cycle assessment', 'LCA', 'environmental footprint'] },
+      { id: 'ssbd', label: 'SSbD', terms: ['safe and sustainable by design', 'SSbD'] },
+      { id: 'risk', label: 'Environmental risk', terms: ['environmental risk assessment', 'chemical risk'] },
+      { id: 'exposure', label: 'Occupational exposure', terms: ['occupational exposure assessment', 'worker exposure'] },
+      { id: 'foresight', label: 'Foresight', terms: ['strategic foresight', 'scenario development'] },
+      { id: 'policy', label: 'EU policy', terms: ['EU policy', 'regulatory science', 'sustainability policy'] },
+      { id: 'pharma', label: 'Pharma sustainability', terms: ['pharmaceutical sustainability', 'pharma LCA'] },
+      { id: 'nano', label: 'Nanomedicine', terms: ['nanomedicine', 'nanomaterials safety'] },
+      { id: 'chemicals', label: 'Chemicals', terms: ['chemical safety', 'advanced materials'] },
+      { id: 'tools', label: 'Python tools', terms: ['Python sustainability tool', 'process energy modelling'] }
+    ];
+
+    const countryNames = {
+      eu: 'European Union / Brussels',
+      ch: 'Switzerland',
+      it: 'Italy',
+      de: 'Germany',
+      nl: 'Netherlands',
+      fr: 'France',
+      dk: 'Denmark',
+      se: 'Sweden',
+      uk: 'United Kingdom',
+      remote: 'Remote / hybrid Europe'
+    };
+
+    const sourceTemplates = [
+      {
+        name: 'EURAXESS Jobs',
+        type: 'academic',
+        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
+        base: 'https://euraxess.ec.europa.eu/jobs/search',
+        note: 'Researcher jobs, postdocs and EU academic positions.'
+      },
+      {
+        name: 'EURES Job Mobility Portal',
+        type: 'industry',
+        scope: ['eu','it','de','nl','fr','dk','se','remote'],
+        base: 'https://eures.europa.eu/index_en',
+        note: 'EU public employment network for cross-border jobs.'
+      },
+      {
+        name: 'EU Funding & Tenders Portal',
+        type: 'funding',
+        scope: ['eu','ch','it','de','nl','fr','dk','se','remote'],
+        base: 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home',
+        note: 'Horizon Europe calls, partnerships and funding opportunities.'
+      },
+      {
+        name: 'JRC Jobs',
+        type: 'policy',
+        scope: ['eu','it','de','nl','remote'],
+        base: 'https://joint-research-centre.ec.europa.eu/working-us/jobs-jrc_en',
+        note: 'European Commission Joint Research Centre roles and traineeships.'
+      },
+      {
+        name: 'EU Careers',
+        type: 'policy',
+        scope: ['eu','it','de','nl','fr','remote'],
+        base: 'https://eu-careers.europa.eu/en',
+        note: 'EU institution competitions, contract agent roles and traineeships.'
+      },
+      {
+        name: 'ECHA Vacancies',
+        type: 'policy',
+        scope: ['eu','remote'],
+        base: 'https://echa.europa.eu/about-us/jobs/open-positions',
+        note: 'Chemical safety, REACH, CLP and regulatory science roles.'
+      },
+      {
+        name: 'EEA Careers',
+        type: 'policy',
+        scope: ['eu','dk','remote'],
+        base: 'https://www.eea.europa.eu/en/about/careers',
+        note: 'European Environment Agency policy and assessment opportunities.'
+      },
+      {
+        name: 'EFSA Careers',
+        type: 'policy',
+        scope: ['eu','it','remote'],
+        base: 'https://www.efsa.europa.eu/en/careers',
+        note: 'Scientific risk assessment and EU agency opportunities.'
+      },
+      {
+        name: 'OECD Careers',
+        type: 'policy',
+        scope: ['fr','eu','remote'],
+        base: 'https://www.oecd.org/en/about/careers.html',
+        note: 'Policy analyst and sustainability roles.'
+      },
+      {
+        name: 'ETH Zurich Jobs',
+        type: 'academic',
+        scope: ['ch'],
+        base: 'https://jobs.ethz.ch/',
+        note: 'Swiss academic and research roles.'
+      },
+      {
+        name: 'Empa Jobs',
+        type: 'academic',
+        scope: ['ch'],
+        base: 'https://www.empa.ch/web/empa/jobs',
+        note: 'Materials, environmental engineering and technology research.'
+      },
+      {
+        name: 'LinkedIn Targeted Search',
+        type: 'industry',
+        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
+        base: 'https://www.linkedin.com/jobs/search/',
+        note: 'Industry, consulting and policy-facing roles. Requires LinkedIn login.'
+      },
+      {
+        name: 'Google Scholar / Web Search',
+        type: 'all',
+        scope: ['eu','ch','it','de','nl','fr','dk','se','uk','remote'],
+        base: 'https://www.google.com/search',
+        note: 'Broad scan for new programmes, calls, workshops and hidden roles.'
+      }
+    ];
+
+    let selectedDomains = new Set(['lca','ssbd','risk','policy','pharma']);
+    let currentSources = [];
+    let opportunities = JSON.parse(localStorage.getItem('opportunityScoutItems') || '[]');
+
+    function qs(id) { return document.getElementById(id); }
+    function encode(v) { return encodeURIComponent(v); }
+
+    function activeTerms() {
+      return domains
+        .filter(d => selectedDomains.has(d.id))
+        .flatMap(d => d.terms)
+        .slice(0, 10);
+    }
+
+    function queryFor(source) {
+      const country = countryNames[qs('country').value];
+      const terms = activeTerms().slice(0, 4).join(' OR ');
+      const baseQuery = `(${terms}) ${country} sustainability researcher policy LCA SSbD`;
+      if (source.name.includes('LinkedIn')) return `${source.base}?keywords=${encode(baseQuery)}&location=${encode(country)}`;
+      if (source.name.includes('Google')) return `${source.base}?q=${encode(baseQuery + ' jobs OR fellowship OR call OR grant')}`;
+      if (source.name.includes('EURAXESS')) return `${source.base}?keywords=${encode(terms)}&sort_by=created`;
+      return source.base;
+    }
+
+    function renderDomainChips() {
+      qs('domainChips').innerHTML = domains.map(d => (
+        `<button class="chip ${selectedDomains.has(d.id) ? 'is-on' : ''}" data-domain="${d.id}">${d.label}</button>`
+      )).join('');
+      document.querySelectorAll('[data-domain]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.domain;
+          if (selectedDomains.has(id)) selectedDomains.delete(id);
+          else selectedDomains.add(id);
+          renderDomainChips();
+          buildScout();
+        });
+      });
+    }
+
+    function buildScout() {
+      const country = qs('country').value;
+      const roleType = qs('roleType').value;
+      currentSources = sourceTemplates
+        .filter(s => s.scope.includes(country))
+        .filter(s => roleType === 'all' || s.type === roleType || s.type === 'all')
+        .map(s => ({ ...s, url: queryFor(s), score: scoreSource(s) }))
+        .sort((a,b) => b.score - a.score);
+      renderSources();
+    }
+
+    function scoreSource(source) {
+      let score = 50;
+      if (source.type === qs('roleType').value) score += 20;
+      if (source.type === 'policy' && selectedDomains.has('policy')) score += 12;
+      if (source.type === 'academic' && (selectedDomains.has('ssbd') || selectedDomains.has('nano'))) score += 8;
+      if (source.name.includes('ECHA') && (selectedDomains.has('risk') || selectedDomains.has('chemicals'))) score += 18;
+      if (source.name.includes('JRC') && selectedDomains.has('foresight')) score += 18;
+      if (source.name.includes('Funding') && selectedDomains.has('ssbd')) score += 10;
+      return Math.min(score, 99);
+    }
+
+    function renderSources() {
+      qs('sourceCount').textContent = `${currentSources.length} sources`;
+      if (!currentSources.length) {
+        qs('sourceList').innerHTML = '<div class="empty">No source matches this filter. Try "all" opportunity types.</div>';
+        return;
+      }
+      qs('sourceList').innerHTML = currentSources.map((s, idx) => `
+        <article class="source">
+          <div class="source__top">
+            <div>
+              <div class="source__name">${s.name}</div>
+              <div class="source__meta">${s.note}</div>
+            </div>
+            <span class="score">${s.score}</span>
+          </div>
+          <div class="match">
+            <span>${s.type}</span>
+            <span>${countryNames[qs('country').value]}</span>
+            <span>${activeTerms().slice(0, 3).join(', ')}</span>
+          </div>
+          <div class="split-actions">
+            <a class="btn btn--primary" href="${s.url}" target="_blank" rel="noopener">Open search</a>
+            <button class="btn" data-save-source="${idx}">Save lead</button>
+          </div>
+        </article>
+      `).join('');
+      document.querySelectorAll('[data-save-source]').forEach(btn => {
+        btn.addEventListener('click', () => saveSourceLead(currentSources[Number(btn.dataset.saveSource)]));
+      });
+    }
+
+    function saveSourceLead(source) {
+      const title = prompt('Opportunity title or note:', `${source.name} scan - ${countryNames[qs('country').value]}`);
+      if (!title) return;
+      const org = prompt('Organisation:', source.name) || source.name;
+      addOpportunity({
+        title,
+        org,
+        country: countryNames[qs('country').value],
+        type: source.type,
+        url: source.url,
+        notes: source.note,
+        created: new Date().toISOString()
+      });
+    }
+
+    function addOpportunity(item) {
+      const scored = { id: crypto.randomUUID(), ...item, match: scoreOpportunity(item) };
+      opportunities.unshift(scored);
+      persist();
+      renderOpportunities();
+    }
+
+    function scoreOpportunity(item) {
+      const text = `${item.title} ${item.org} ${item.notes || ''}`.toLowerCase();
+      const weights = {
+        'ssbd': 18,
+        'safe and sustainable': 18,
+        'life cycle': 16,
+        'lca': 16,
+        'risk': 12,
+        'exposure': 12,
+        'foresight': 13,
+        'policy': 12,
+        'pharma': 12,
+        'nanomedicine': 10,
+        'chemical': 9,
+        'sustainability': 8,
+        'python': 7,
+        'jrc': 15,
+        'echa': 15,
+        'roche': 15
+      };
+      let score = 45;
+      Object.entries(weights).forEach(([term, weight]) => {
+        if (text.includes(term)) score += weight;
+      });
+      if ((item.country || '').includes('Switzerland')) score += 6;
+      if ((item.country || '').includes('European Union')) score += 6;
+      return Math.min(score, 99);
+    }
+
+    function renderOpportunities() {
+      qs('oppCount').textContent = `${opportunities.length} saved`;
+      if (!opportunities.length) {
+        qs('opportunityList').innerHTML = '<div class="empty">No saved opportunities yet. Build scout links, open searches, then save promising leads.</div>';
+        return;
+      }
+      qs('opportunityList').innerHTML = opportunities.map(item => `
+        <article class="opp">
+          <div class="opp__top">
+            <div>
+              <div class="opp__title">${escapeHtml(item.title)}</div>
+              <div class="opp__meta">${escapeHtml(item.org)} - ${escapeHtml(item.country || 'Unknown')} - ${escapeHtml(item.type || 'lead')}</div>
+            </div>
+            <span class="score">${item.match}</span>
+          </div>
+          <div class="small">${escapeHtml(item.notes || '')}</div>
+          <div class="match">
+            ${matchTags(item).map(t => `<span>${t}</span>`).join('')}
+          </div>
+          <div class="split-actions">
+            ${item.url ? `<a class="btn" href="${item.url}" target="_blank" rel="noopener">Open</a>` : ''}
+            <button class="btn btn--blue" data-draft="${item.id}">Draft application</button>
+            <button class="btn btn--danger" data-delete="${item.id}">Delete</button>
+          </div>
+        </article>
+      `).join('');
+      document.querySelectorAll('[data-draft]').forEach(btn => btn.addEventListener('click', () => openDraft(btn.dataset.draft)));
+      document.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', () => deleteOpportunity(btn.dataset.delete)));
+    }
+
+    function matchTags(item) {
+      const text = `${item.title} ${item.org} ${item.notes || ''}`.toLowerCase();
+      return domains.filter(d => d.terms.some(t => text.includes(t.toLowerCase()) || text.includes(d.label.toLowerCase()))).map(d => d.label).slice(0, 6);
+    }
+
+    function openDraft(id) {
+      const item = opportunities.find(o => o.id === id);
+      if (!item) return;
+      const draft = buildDraft(item);
+      openModal('Application draft', `
+        <div class="notice">Review this draft. The "Authorise email" button opens your email client with the message; it does not send automatically.</div>
+        <div class="draft">${escapeHtml(draft)}</div>
+        <div class="toolbar">
+          <button class="btn btn--primary" id="authoriseEmailBtn">Authorise email draft</button>
+          <button class="btn" id="copyDraftBtn">Copy draft</button>
+        </div>
+      `);
+      qs('copyDraftBtn').addEventListener('click', async () => {
+        await navigator.clipboard.writeText(draft);
+        qs('copyDraftBtn').textContent = 'Copied';
+      });
+      qs('authoriseEmailBtn').addEventListener('click', () => {
+        const ok = confirm('Authorise opening an email draft for this opportunity? Nothing will be sent until you press send in your email client.');
+        if (!ok) return;
+        const subject = `Application / expression of interest - ${cvFacts.name}`;
+        window.location.href = `mailto:?subject=${encode(subject)}&body=${encode(draft)}`;
+      });
+    }
+
+    function buildDraft(item) {
+      return `Dear ${item.org} team,
+
+I am writing to express my interest in ${item.title}.
+
+I am ${cvFacts.name}, ${cvFacts.position}, working at the interface between industrial R&D, environmental assessment and EU policy. My work combines ${cvFacts.strengths.slice(0, 4).join(', ')}.
+
+This opportunity is especially relevant to my profile because it connects with ${matchTags(item).join(', ') || 'my work on LCA, SSbD and sustainability assessment'}. I have worked on industry-facing collaborations with Roche and GVS, contributed to EU-oriented foresight work at the Joint Research Centre, and developed practical screening tools for early-stage process and product decisions.
+
+I would welcome the opportunity to discuss how my background in LCA, Safe and Sustainable by Design, environmental risk and occupational exposure assessment could support your work.
+
+Best regards,
+Jacopo Sorani
+${cvFacts.email}
+LinkedIn: https://www.linkedin.com/in/jacoposorani/
+CV: https://jakxsor.github.io/online-cv/
+Opportunity link: ${item.url || 'not provided'}`;
+    }
+
+    function deleteOpportunity(id) {
+      if (!confirm('Delete this saved opportunity?')) return;
+      opportunities = opportunities.filter(o => o.id !== id);
+      persist();
+      renderOpportunities();
+    }
+
+    function addManualOpportunity() {
+      openModal('Add opportunity', `
+        <div class="grid2">
+          <div><label>Title</label><input id="newTitle" placeholder="Role, call or collaboration"></div>
+          <div><label>Organisation</label><input id="newOrg" placeholder="Organisation"></div>
+        </div>
+        <div class="grid2" style="margin-top:12px">
+          <div><label>Country</label><input id="newCountry" value="${countryNames[qs('country').value]}"></div>
+          <div><label>Type</label><input id="newType" value="${qs('roleType').value}"></div>
+        </div>
+        <div style="margin-top:12px"><label>URL</label><input id="newUrl" placeholder="https://..."></div>
+        <div style="margin-top:12px"><label>Notes</label><textarea id="newNotes" placeholder="Paste requirements, deadline, contact, keywords..."></textarea></div>
+        <div class="toolbar"><button class="btn btn--primary" id="saveNewBtn">Save opportunity</button></div>
+      `);
+      qs('saveNewBtn').addEventListener('click', () => {
+        if (!qs('newTitle').value.trim()) return alert('Add a title first.');
+        addOpportunity({
+          title: qs('newTitle').value.trim(),
+          org: qs('newOrg').value.trim() || 'Unknown organisation',
+          country: qs('newCountry').value.trim(),
+          type: qs('newType').value.trim(),
+          url: qs('newUrl').value.trim(),
+          notes: qs('newNotes').value.trim(),
+          created: new Date().toISOString()
+        });
+        closeModal();
+      });
+    }
+
+    function openModal(title, html) {
+      qs('modalTitle').textContent = title;
+      qs('modalBody').innerHTML = html;
+      qs('modal').classList.add('is-open');
+    }
+
+    function closeModal() { qs('modal').classList.remove('is-open'); }
+    function persist() { localStorage.setItem('opportunityScoutItems', JSON.stringify(opportunities)); }
+    function escapeHtml(v) {
+      return String(v || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), opportunities }, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jacopo-opportunity-scout.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function openTopSearches() {
+      currentSources.slice(0, 5).forEach((s, i) => setTimeout(() => window.open(s.url, '_blank', 'noopener'), i * 180));
+    }
+
+    function init() {
+      qs('todayLabel').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      renderDomainChips();
+      buildScout();
+      renderOpportunities();
+      qs('country').addEventListener('change', buildScout);
+      qs('roleType').addEventListener('change', buildScout);
+      qs('runScoutBtn').addEventListener('click', buildScout);
+      qs('openAllBtn').addEventListener('click', openTopSearches);
+      qs('addManualBtn').addEventListener('click', addManualOpportunity);
+      qs('closeModalBtn').addEventListener('click', closeModal);
+      qs('exportBtn').addEventListener('click', exportJson);
+      qs('resetBtn').addEventListener('click', () => {
+        if (!confirm('Clear saved opportunities from this browser?')) return;
+        opportunities = [];
+        persist();
+        renderOpportunities();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
