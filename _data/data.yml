@@ -9,7 +9,7 @@ sidebar:
 
   # Profile information
   name: Jacopo Sorani
-  tagline: PhD Researcher (MSCA) | Industrial Chemist | LCA & SSbD Expert
+  tagline: Sustainability Scientist at the Industry-Policy Interface
   avatar: profile.png
 
   # Sidebar links
@@ -40,200 +40,142 @@ sidebar:
       level: Native
 
     - idiom: English
-      level: Proficient
+      level: C1
 
   interests:
-    title: Interests
+    title: Sectors
     info:
-    - item: Sustainability & Green Chemistry
+    - item: Pharmaceuticals
       link:
 
-    - item: Foresight & Policy Analysis
+    - item: Chemicals & Advanced Materials
       link:
 
-    - item: Nanomedicine & Innovation
+    - item: Nanomedicine & Medical Devices
       link:
 
 career-profile:
-  title: Career Profile
+  title: Profile
   summary: |
-    PhD researcher (Marie Skłodowska-Curie Actions) at Empa / ETH Zürich, focused on Life Cycle
-    Assessment (LCA), Environmental Risk Assessment, Occupational Safety, and Social LCA in
-    pharmaceutical and nanomaterial development. Contributing to the design and implementation of
-    Safe and Sustainable by Design (SSbD) frameworks. Currently visiting scientist at the EU Joint
-    Research Center (JRC) in Brussels, supporting corporate decision-making through foresight
-    methodologies and sustainability assessment. Passionate about integrating nanomaterials into
-    SSbD frameworks and leveraging interdisciplinary collaboration for sustainable innovation.
+    Sustainability scientist working at the interface between industrial R&D, environmental assessment and EU policy. I apply Life Cycle Assessment, Safe and Sustainable by Design (SSbD), environmental risk assessment and occupational exposure assessment to turn early-stage technical data into decision-support insights for companies and policy-oriented stakeholders.
+
+    My work focuses on identifying environmental, safety, resource-use and process hotspots before they become locked into late-stage product or process development. I have experience across industrial collaborations, including Roche and GVS, and policy-oriented foresight work at the European Commission's Joint Research Centre. I also develop practical screening tools that make complex sustainability methods usable in early-stage contexts, when data are still incomplete.
+
+    Sectors: pharmaceuticals, chemicals, advanced materials, nanomedicine and medical devices.
 
 education:
   title: Education
   info:
-  - degree: Doctor of Philosophy (PhD) — Environmental & Environmental Health Engineering
-    university: ETH Zürich
+  - degree: PhD, Environmental Health Engineering
+    university: ETH Zurich
     time: 2023 - Present
     details: |
-      Research focus on Life Cycle Assessment (LCA), Environmental Risk Assessment,
-      Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.
-      Partner in the EU-funded MELOMANES project on sustainable nanomedicine innovation.
 
-  - degree: Master's Degree — Industrial Chemistry, Low Carbon Technologies & Sustainable Chemistry
-    university: Alma Mater Studiorum — Università di Bologna
+  - degree: MSc, Industrial Chemistry - Low-Carbon Technologies & Sustainable Chemistry
+    university: University of Bologna
     time: 2021 - 2023
     details: |
-      Master's education emphasizing low-carbon technologies and sustainable chemistry.
-      Thesis work contributed to evaluating industrial processes through LCA tools.
 
-  - degree: Bachelor's Degree — Natural Sciences
-    university: Università degli Studi di Firenze
+  - degree: BSc, Natural Sciences
+    university: University of Florence
     time: 2017 - 2021
-    details: |
-      Foundational studies in natural sciences providing the basis for advanced
-      research in chemistry and environmental sciences.
-
-  - degree: High School Diploma — Economics
-    university: Cavour-Pacinotti
-    time: 2011 - 2014
     details: |
 
 experiences:
-  title: Experiences
+  title: Experience
   info:
-  - role: Policy Analyst / Foresight (Visiting Scientist)
-    time: 04/2026 - 09/2026
-    company: Joint Research Centre (JRC) — European Commission, Brussels
+  - role: Visiting Scientist - Policy Analyst / Foresight
+    time: Apr 2026 - Sep 2026
+    company: Joint Research Centre (JRC), European Commission - Brussels
     details: |
-      Intern in the EU Policy Lab of the Joint Research Center (JRC), supporting corporate
-      decision-making through future scenario creation and foresight methodologies,
-      alongside sustainability assessment, data analysis, and regulatory support.
+      - Support the EU Policy Lab's foresight work for strategic and corporate decision-making, developing future-oriented scenarios that connect scientific evidence with long-term regulatory and sustainability choices.
+      - Apply sustainability assessment, data analysis and systems thinking to EU innovation and sustainability-policy questions.
 
-  - role: PhD Student (Marie Skłodowska-Curie Actions)
-    time: 09/2023 - Present
-    company: Empa, St. Gallen — Switzerland
+  - role: PhD Researcher - MSCA Fellow
+    time: Sep 2023 - Present
+    company: Empa & ETH Zurich - St. Gallen
     details: |
-      Research focus on Life Cycle Assessment (LCA), Environmental Risk Assessment,
-      Occupational Safety, and Social LCA in pharmaceutical and nanomaterial development.
-      Contributing to Safe and Sustainable by Design (SSbD) frameworks. Partner in the
-      EU-funded MELOMANES project on sustainable nanomedicine innovation.
-        - Led two collaborative projects with Roche: an LCA and energy calculation master's thesis,
-          and an SSbD case study on a Roche pharmaceutical product.
-        - Developed a software tool to support energy calculations for chemical and industrial processes.
+      - Develop Safe and Sustainable by Design methods that integrate environmental, safety and risk assessment into the early stages of pharmaceutical and nanomaterial innovation, before full datasets are available.
+      - Led two industry-facing collaborations with Roche, including an LCA and energy-demand study and an SSbD case study on an early-stage pharmaceutical product.
+      - Translate technical data into practical R&D decision-support insights, building on work published in the Journal of Cleaner Production.
+      - Designed and built a software tool to estimate energy demand and climate impacts of chemical and industrial processes, filling the gap between back-of-the-envelope Excel calculations and data-intensive Aspen-type process simulations.
+      - Enable early-stage screening when detailed process data are scarce, helping identify energy and climate hotspots before process development becomes more advanced.
+      - Contribute to the EU-funded MELOMANES project on sustainable nanomedicine, collaborating with academic and industrial stakeholders.
 
-  - role: Research & Development Intern — LCA Analysis
-    time: 02/2023 - 07/2023
-    company: GVS Filter Technology, Bologna
+  - role: R&D LCA Trainee
+    time: Feb 2023 - Jul 2023
+    company: GVS Filter Technology - Bologna
     details: |
-      Conducted comprehensive Life Cycle Assessment (LCA) and Mass Flow analysis for medical
-      device production processes using SimaPro. Researched innovative production processes,
-      contributing to sustainable practices in medical device manufacturing.
+      - Delivered a Life Cycle Assessment and mass-flow analysis of medical-device production using SimaPro.
+      - Identified process hotspots and potential lower-impact manufacturing options to support R&D decision-making.
 
-  - role: Participant — Climate Leadership Journey
-    time: 04/2022 - 12/2022
-    company: Climate-KIC, Lisbon
+  - role: Climate Leadership Journey
+    time: Apr 2022 - Dec 2022
+    company: Climate-KIC - Lisbon
     details: |
-      Developed system thinking skills within a multicultural and interdisciplinary group.
-      Proposed ideas through innovation and leadership to facilitate the net-zero goal of Lisbon.
+      - Selected for an international climate-innovation programme.
+      - Applied systems thinking to propose solutions supporting Lisbon's net-zero transition.
 
-  - role: EBU Label Program — Bioeconomy Qualification
-    time: 04/2022 - 06/2022
-    company: European Bioeconomy University (EBU), Bologna
+  - role: Tutor, Industrial Chemistry
+    time: 2021 - 2022
+    company: University of Bologna
     details: |
-      Common qualification supplement offered by the six EBU partner universities, covering
-      cross-sectoral mindset, inter- and trans-disciplinarity, critical thinking, creativity,
-      problem-solving, and sustainability transformation knowledge.
-
-certifications:
-  title: Certifications
-  list:
-  - name: EBU Label — Bioeconomy Qualification
-    start: 2022
-    end: 2022
-    organization: European Bioeconomy University
-    credentialid:
-    credentialurl: www.bioeconomy-university.eu
-    credentialname: EBU
-    details: |
-      Common qualification supplement covering bioeconomy curricula including cross-sectoral
-      mindset, inter- and trans-disciplinarity, critical thinking, and sustainability
-      transformation knowledge.
+      - Supported students in the Industrial Chemistry programme.
 
 projects:
-  title: Projects
+  title: Selected Work
   intro: >
-    Selected research projects and collaborative initiatives developed during my PhD and
-    professional experience.
+    Applied research, industrial collaborations and tool development across LCA, SSbD, environmental risk and early-stage sustainability assessment.
   assignments:
-  - title: MELOMANES — EU-funded Nanomedicine Project
+  - title: Roche SSbD and LCA Collaborations
     link: "#"
-    tagline: "EU-funded project on sustainable nanomedicine innovation, integrating SSbD principles into nanomaterial and pharmaceutical development."
+    tagline: "Industry-facing collaborations with Roche, including an LCA and energy-demand study and an SSbD case study on an early-stage pharmaceutical product."
 
-  - title: Roche SSbD Case Study
+  - title: Energy and Climate Screening Tool
     link: "#"
-    tagline: "Safe and Sustainable by Design case study on a Roche pharmaceutical product, evaluating environmental and safety regulatory compliance from early development stages."
+    tagline: "Software tool for estimating energy demand and climate impacts of chemical and industrial processes when detailed process data are not yet available."
 
-  - title: Energy Calculation Software Tool
+  - title: MELOMANES - Sustainable Nanomedicine
     link: "#"
-    tagline: "Developed a software tool to support energy demand estimation for chemical and industrial processes."
+    tagline: "EU-funded project on sustainable nanomedicine, developed with academic and industrial stakeholders."
 
-  - title: LCA for Medical Device Production (GVS)
+  - title: GVS Medical Device LCA
     link: "#"
-    tagline: "Comprehensive Life Cycle Assessment and Mass Flow analysis for medical device production processes using SimaPro."
-
-oss:
-  title: OSS Contributions
-  intro: >
-    Open source tools and resources related to sustainability assessment and SSbD methodology.
-  contributions:
-  - title: Group Assignment Algorithm
-    link: "https://github.com/jakxsor/online-cv"
-    tagline: "Algorithm for heterogeneous group assignments with multi-criteria scoring, diversity optimization, and Excel reporting."
+    tagline: "Life Cycle Assessment and mass-flow analysis of medical-device production using SimaPro."
 
 publications:
   title: Publications
   intro: |
-    Peer-reviewed scientific publications in the field of Life Cycle Assessment,
-    Safe and Sustainable by Design, and nanomedicine.
+    Peer-reviewed scientific publications in Life Cycle Assessment, Safe and Sustainable by Design, and nanomedicine.
   papers:
   - title: "Implementing Safe and Sustainable by Design in Pharmaceutical Innovation"
     link: "https://doi.org/10.1016/j.jclepro.2025.147280"
-    authors: Jacopo Sorani, Bernd Nowack, Roland Hischier
-    conference: "Journal of Cleaner Production, January 2026 — DOI: 10.1016/j.jclepro.2025.147280"
+    authors: Sorani J., Nowack B., Hischier R.
+    conference: "Journal of Cleaner Production, 2026 - DOI: 10.1016/j.jclepro.2025.147280"
 
-  - title: "Nanomedicine Meets Immunotherapy: Advancing Adoptive Cell Therapy with Nanoparticles in the Treatment of Cancer with Sustainability Perspectives"
+  - title: "Nanomedicine Meets Immunotherapy: Adoptive Cell Therapy with Nanoparticles - Sustainability Perspectives"
     link: "https://doi.org/10.1002/advs.202522864"
     authors: Multiple authors
-    conference: "Advanced Science, January 2026 — DOI: 10.1002/advs.202522864"
-
-recommendations:
-  title: Recommendations
-  list:
-  - person: Colleague / Supervisor
-    email:
-    phone:
-    role: ETH Zürich / Empa
-    recommendation: |
-      Available upon request.
+    conference: "Advanced Science, 2026 - DOI: 10.1002/advs.202522864"
 
 skills:
-  title: Skills &amp; Proficiency
+  title: Key Skills
 
   toolset:
-  - name: Life Cycle Assessment (LCA) & SimaPro
+  - name: "Methods: Life Cycle Assessment, Safe and Sustainable by Design, Environmental Risk Assessment, Social LCA"
     level: 95%
 
-  - name: Safe and Sustainable by Design (SSbD)
-    level: 95%
-
-  - name: Environmental Risk Assessment
+  - name: "Exposure & Safety: Occupational Exposure Assessment, Occupational Safety"
     level: 90%
 
-  - name: Python & Data Analysis
-    level: 80%
+  - name: "Policy & Strategy: Strategic Foresight, Scenario Development, Regulatory and Sustainability Analysis"
+    level: 90%
 
-  - name: Foresight & Policy Analysis
-    level: 75%
-
-  - name: Scientific Writing & Publication
+  - name: "Tools: SimaPro, openLCA, ecoinvent, Stoffenmanager, Python, Excel Modelling, Git"
     level: 85%
 
+  - name: "Sectors: Pharmaceuticals, Chemicals, Advanced Materials, Nanomedicine, Medical Devices"
+    level: 95%
+
 footer: >
-  Jacopo Sorani — PhD Researcher (MSCA) at ETH Zürich &amp; Empa
+  Jacopo Sorani - Sustainability Scientist at the Industry-Policy Interface
