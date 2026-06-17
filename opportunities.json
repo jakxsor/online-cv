@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-06-17T15:20:00Z",
+  "sourceNote": "Seed feed generated from public job feeds checked on 2026-06-17. GitHub Actions can refresh this file daily from public feeds.",
+  "opportunities": [
+    {
+      "title": "Betriebsingenieur (m/w/d) fuer die Pharmaindustrie",
+      "org": "agap2 - moOngy GmbH",
+      "country": "Duesseldorf, Germany",
+      "scope": ["de", "eu"],
+      "type": "pharma",
+      "types": ["pharma", "consulting", "industry"],
+      "url": "https://www.arbeitnow.com/jobs/companies/agap2-moongy-gmbh/betriebsingenieur-fur-die-pharmaindustrie-dusseldorf-77127",
+      "source": "Arbeitnow",
+      "notes": "Operational consulting role in science and engineering for the pharmaceutical industry.",
+      "deadline": "",
+      "discoveredAt": "2026-06-17T15:20:00Z",
+      "sourceScore": 68
+    },
+    {
+      "title": "Ingenieur (m/w/d) fuer Facility Management in der Pharmaindustrie",
+      "org": "agap2 - moOngy GmbH",
+      "country": "Cuxhaven, Germany",
+      "scope": ["de", "eu"],
+      "type": "pharma",
+      "types": ["pharma", "industry"],
+      "url": "https://www.arbeitnow.com/jobs/companies/agap2-moongy-gmbh/ingenieur-fur-facility-management-in-der-pharmaindustrie-cuxhaven-148473",
+      "source": "Arbeitnow",
+      "notes": "Engineering role in a pharma-industry environment; potentially relevant for process, EHS and operational sustainability positioning.",
+      "deadline": "",
+      "discoveredAt": "2026-06-17T15:20:00Z",
+      "sourceScore": 62
+    },
+    {
+      "title": "Scientist, Operations",
+      "org": "The Coca-Cola Company",
+      "country": "Brussels, Belgium",
+      "scope": ["eu"],
+      "type": "research",
+      "types": ["research", "industry"],
+      "url": "https://www.themuse.com/jobs/thecocacolacompany/scientist-operations-efc033",
+      "source": "The Muse",
+      "notes": "Scientist role in Brussels with industrial operations context; useful as a lower-priority R&D/process screening lead.",
+      "deadline": "",
+      "discoveredAt": "2026-06-17T15:20:00Z",
+      "sourceScore": 54
+    },
+    {
+      "title": "Pharmacology Research Specialist",
+      "org": "STEM Sync AI",
+      "country": "Remote",
+      "scope": ["remote"],
+      "type": "pharma",
+      "types": ["pharma", "research"],
+      "url": "https://remoteOK.com/remote-jobs/remote-pharmacology-research-specialist-stem-sync-ai-1133451",
+      "source": "RemoteOK",
+      "notes": "Remote pharmacology research role. Medium fit: scientific/pharma relevance, but less direct on LCA/SSbD.",
+      "deadline": "",
+      "discoveredAt": "2026-06-17T15:20:00Z",
+      "sourceScore": 50
+    }
+  ]
+}

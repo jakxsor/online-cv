@@ -354,8 +354,8 @@
     <div class="topbar">
       <div>
         <div class="eyebrow">Opportunity Scout</div>
-        <h1>High-signal opportunity scout for jobs, calls and hidden leads.</h1>
-        <p class="lead">A country-aware scouting cockpit built around Jacopo Sorani's CV. It searches official career pages, job boards, EU portals, research institutes, pharma, chemicals, consultancies and impact platforms using targeted Boolean and site-specific searches.</p>
+        <h1>Direct opportunity inbox for jobs, calls and hidden leads.</h1>
+        <p class="lead">A country-aware scouting cockpit built around Jacopo Sorani's CV. It shows direct opportunity cards first, then keeps high-quality source searches as backup for sites that do not expose reliable public feeds.</p>
       </div>
       <div class="top-actions">
         <a class="btn" href="./">Back to CV</a>
@@ -371,7 +371,7 @@
           <span class="pill" id="todayLabel"></span>
         </div>
         <div class="panel__body">
-          <div class="notice">This is a static, safe scout: it opens high-quality searches and saves leads locally. It cannot silently scrape or submit applications, but it can prepare targeted drafts and asks for explicit authorisation before opening any email draft.</div>
+          <div class="notice">Direct offers are loaded from a public JSON feed and filtered locally by country, type and CV domains. The page still cannot silently scrape protected sites or submit applications, but it drafts tailored messages and asks for explicit authorisation before opening any email draft.</div>
 
           <div class="grid2">
             <div>
@@ -412,7 +412,7 @@
           </div>
 
           <div class="toolbar">
-            <button class="btn btn--primary" id="runScoutBtn">Build scout links</button>
+            <button class="btn btn--primary" id="runScoutBtn">Refresh direct offers</button>
             <button class="btn" id="openAllBtn">Open best 12</button>
             <button class="btn" id="copyQueryBtn">Copy Boolean query</button>
             <button class="btn btn--warn" id="addManualBtn">Add opportunity</button>
@@ -455,7 +455,19 @@
 
     <section class="panel" style="margin-top:16px">
       <div class="panel__head">
-        <div class="panel__title">Scout Sources</div>
+        <div class="panel__title">Direct Offers</div>
+        <span class="pill" id="directCount">Loading</span>
+      </div>
+      <div class="panel__body">
+        <div class="source-list" id="directList">
+          <div class="empty">Loading direct opportunities...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:16px">
+      <div class="panel__head">
+        <div class="panel__title">Backup Search Sources</div>
         <span class="pill" id="sourceCount">0 sources</span>
       </div>
       <div class="panel__body">
@@ -473,7 +485,7 @@
       </div>
     </section>
 
-    <p class="footer">Suggested workflow: choose country and domains, open the best 12 searches, save promising roles, score them, generate a tailored draft, authorise manually if you want to send.</p>
+    <p class="footer">Suggested workflow: choose country and domains, review direct offers first, save promising roles, generate a tailored draft, then authorise manually if you want to send.</p>
   </main>
 
   <div class="modal" id="modal">
@@ -619,6 +631,9 @@
 
     let selectedDomains = new Set(['lca','ssbd','risk','policy','pharma']);
     let currentSources = [];
+    let directFeedMeta = null;
+    let directOffers = [];
+    let visibleDirectOffers = [];
     let opportunities = JSON.parse(localStorage.getItem('opportunityScoutItems') || '[]');
 
     function qs(id) { return document.getElementById(id); }
@@ -678,6 +693,107 @@
         .map(s => ({ ...s, url: queryFor(s), score: scoreSource(s) }))
         .sort((a,b) => b.score - a.score);
       renderSources();
+      renderDirectOffers();
+    }
+
+    async function loadDirectOffers() {
+      qs('directCount').textContent = 'Loading';
+      try {
+        const response = await fetch(`opportunities.json?v=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        directFeedMeta = payload;
+        directOffers = Array.isArray(payload.opportunities) ? payload.opportunities : [];
+      } catch (error) {
+        directFeedMeta = { sourceNote: `Could not load opportunities.json: ${error.message}` };
+        directOffers = [];
+      }
+      renderDirectOffers();
+    }
+
+    function offerTypes(offer) {
+      return offer.types || [offer.type || 'industry'];
+    }
+
+    function offerMatchesFilters(offer) {
+      const country = qs('country').value;
+      const roleType = qs('roleType').value;
+      const scope = offer.scope || [];
+      const types = offerTypes(offer);
+      const countryMatch = scope.includes(country) || scope.includes('eu') && country === 'eu' || country === 'remote' && scope.includes('remote');
+      const typeMatch = roleType === 'all' || types.includes(roleType);
+      const domainText = `${offer.title} ${offer.org} ${offer.notes || ''} ${types.join(' ')}`.toLowerCase();
+      const domainMatch = activeTerms().some(term => domainText.includes(term.toLowerCase())) || types.some(type => selectedDomains.has(type));
+      return countryMatch && typeMatch && domainMatch;
+    }
+
+    function scoreDirectOffer(offer) {
+      const base = scoreOpportunity(offer);
+      const sourceScore = Number(offer.sourceScore || 0);
+      const typeBonus = offerTypes(offer).includes(qs('roleType').value) ? 8 : 0;
+      return Math.min(99, Math.round((base * 0.72) + (sourceScore * 0.28) + typeBonus));
+    }
+
+    function renderDirectOffers() {
+      if (!qs('directList')) return;
+      visibleDirectOffers = directOffers
+        .filter(offerMatchesFilters)
+        .map(offer => ({ ...offer, match: scoreDirectOffer(offer) }))
+        .sort((a, b) => b.match - a.match);
+
+      const generated = directFeedMeta && directFeedMeta.generatedAt
+        ? `Updated ${new Date(directFeedMeta.generatedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+        : `${directOffers.length} loaded`;
+      qs('directCount').textContent = `${visibleDirectOffers.length} direct - ${generated}`;
+
+      if (!visibleDirectOffers.length) {
+        const message = directOffers.length
+          ? 'No direct offers match this exact filter. Try "All high-signal sources" or use the backup searches below.'
+          : 'No direct feed loaded yet. The backup searches below still work and the GitHub Action can refresh the feed daily.';
+        qs('directList').innerHTML = `<div class="empty">${message}</div>`;
+        return;
+      }
+
+      qs('directList').innerHTML = visibleDirectOffers.map((item, idx) => `
+        <article class="opp">
+          <div class="opp__top">
+            <div>
+              <div class="opp__title">${escapeHtml(item.title)}</div>
+              <div class="opp__meta">${escapeHtml(item.org)} - ${escapeHtml(item.country || 'Unknown')} - ${escapeHtml(item.source || 'direct feed')}</div>
+            </div>
+            <span class="score">${item.match}</span>
+          </div>
+          <div class="small">${escapeHtml(item.notes || '')}</div>
+          <div class="match">
+            ${offerTypes(item).slice(0, 5).map(t => `<span>${escapeHtml(t)}</span>`).join('')}
+            ${item.deadline ? `<span>deadline ${escapeHtml(item.deadline)}</span>` : ''}
+          </div>
+          <div class="split-actions">
+            <a class="btn btn--primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open offer</a>
+            <button class="btn" data-save-direct="${idx}">Save</button>
+            <button class="btn btn--blue" data-draft-direct="${idx}">Draft</button>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-save-direct]').forEach(btn => {
+        btn.addEventListener('click', () => addOpportunity(visibleDirectOffers[Number(btn.dataset.saveDirect)]));
+      });
+      document.querySelectorAll('[data-draft-direct]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = { ...visibleDirectOffers[Number(btn.dataset.draftDirect)], id: 'direct-preview' };
+          const draft = buildDraft(item);
+          openModal('Application draft', `
+            <div class="notice">Review this draft. It is generated from the direct offer card; sending still requires your manual authorisation.</div>
+            <div class="draft">${escapeHtml(draft)}</div>
+            <div class="toolbar"><button class="btn" id="copyDraftBtn">Copy draft</button></div>
+          `);
+          qs('copyDraftBtn').addEventListener('click', async () => {
+            await navigator.clipboard.writeText(draft);
+            qs('copyDraftBtn').textContent = 'Copied';
+          });
+        });
+      });
     }
 
     function scoreSource(source) {
@@ -930,9 +1046,10 @@ Opportunity link: ${item.url || 'not provided'}`;
       renderDomainChips();
       buildScout();
       renderOpportunities();
+      loadDirectOffers();
       qs('country').addEventListener('change', buildScout);
       qs('roleType').addEventListener('change', buildScout);
-      qs('runScoutBtn').addEventListener('click', buildScout);
+      qs('runScoutBtn').addEventListener('click', loadDirectOffers);
       qs('openAllBtn').addEventListener('click', openTopSearches);
       qs('copyQueryBtn').addEventListener('click', copyBooleanQuery);
       qs('addManualBtn').addEventListener('click', addManualOpportunity);
