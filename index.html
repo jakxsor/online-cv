@@ -370,6 +370,8 @@ body.edit-mode .cv__photo-placeholder:hover { opacity: 1; }
 }
 .pub__doi:hover { opacity: 1; text-decoration: underline; }
 
+#github-contact.is-hidden { display: none !important; }
+
 /* ── EDIT MODE ───────────────────────────────────── */
 .section__add-btn {
   display: none;
@@ -876,7 +878,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
           <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           linkedin.com/in/jacoposorani
         </a>
-        <a href="https://github.com/jakxsor" target="_blank" rel="noopener" class="contact-item">
+        <a href="https://github.com/jakxsor" target="_blank" rel="noopener" class="contact-item" id="github-contact">
           <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           github.com/jakxsor
         </a>
@@ -1130,6 +1132,7 @@ var photoPos    = 'right';
 var photoBorder = '#2a5a2a';
 var asideMode   = 'light';  // light | colored | dark
 var dockMode    = false;
+var showGithubLink = true;
 
 var FONTS = [
   { n:'Inter',         s:"'Inter',system-ui,sans-serif",                              x:'Sans' },
@@ -1462,8 +1465,20 @@ function syncPanelControls(){
   document.querySelectorAll('.shape-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.r===photoR); });
   document.querySelectorAll('.p-color-dot').forEach(function(d){ d.classList.toggle('selected', d.dataset.bc===photoBorder); });
   document.querySelectorAll('.aside-mode-btn').forEach(function(b){ b.classList.toggle('selected', b.dataset.aside===asideMode); });
+  var ghBtn=document.getElementById('toggle-github');
+  if(ghBtn) ghBtn.innerHTML=(showGithubLink?'&#128065; Hide GitHub Link':'&#128065; Show GitHub Link');
   var dockBtn=document.getElementById('dock-toggle');
   if(dockBtn) dockBtn.textContent=dockMode?'&#8613; Side':'&#8615; Bottom';
+}
+function setGithubVisibility(on, silent){
+  showGithubLink=!!on;
+  var link=document.getElementById('github-contact');
+  if(link) link.classList.toggle('is-hidden', !showGithubLink);
+  syncPanelControls();
+  if(!silent) toast(showGithubLink?'GitHub link shown':'GitHub link hidden');
+}
+function toggleGithubLink(){
+  setGithubVisibility(!showGithubLink);
 }
 function updateAside(){
   var cv=document.getElementById('cv-root');
@@ -1587,6 +1602,7 @@ function save(){
       size:fontSize, photoSize:photoSize, photoR:photoR,
       photoPos:photoPos, photoBorder:photoBorder,
       asideMode:asideMode, dockMode:dockMode,
+      showGithubLink:showGithubLink,
       photoSrc:(img&&img.classList.contains('has-photo'))?img.src:''
     }));
     toast('Saved \u2713');
@@ -1612,6 +1628,7 @@ function loadSaved(){
     if(st.photoBorder){ photoBorder=st.photoBorder; }
     if(st.asideMode) { asideMode=st.asideMode; updateAside(); }
     if(st.dockMode)  { setDockMode(true); }
+    if(typeof st.showGithubLink==='boolean') setGithubVisibility(st.showGithubLink, true);
     if(st.photoSrc){
       var img=document.getElementById('cv-photo');
       var ph=document.getElementById('photo-placeholder');
@@ -1654,6 +1671,7 @@ function resetAll(){
   });
   fontSize=16; accent='#2a5a2a'; font='Inter'; photoSize=88; photoR='50%';
   photoPos='right'; photoBorder='#2a5a2a'; asideMode='light';
+  setGithubVisibility(true, true);
   updatePhoto(); updateAside();
   setDockMode(false);
   toast('Reset to default');
@@ -1711,6 +1729,7 @@ function buildPanel(){
     +'<button class="p-btn" id="add-skill"><span class="pi">&#9889;</span> Add Skill</button>'
     +'<button class="p-btn" id="add-lang"><span class="pi">&#127757;</span> Add Language</button>'
     +'<div class="p-label">Section Visibility</div>'
+    +'<button class="p-btn" id="toggle-github"><span class="pi">&#128065;</span> Hide GitHub Link</button>'
     +'<button class="p-btn" id="toggle-cert"><span class="pi">&#128065;</span> Show / Hide Certifications</button>'
     +'<button class="p-btn" id="toggle-award"><span class="pi">&#128065;</span> Show / Hide Awards</button>'
     +'<div class="p-label">Custom</div>'
@@ -1833,6 +1852,7 @@ function buildPanel(){
   gs('add-pub').onclick   = function(){ var s=gs('sec-publications'); if(s) addToSection(s); };
   gs('add-skill').onclick = function(){ var s=gs('sec-skills'); if(s) addToSection(s); };
   gs('add-lang').onclick  = function(){ var s=gs('sec-languages'); if(s) addToSection(s); };
+  gs('toggle-github').onclick = toggleGithubLink;
   gs('toggle-cert').onclick  = function(){ toggleSection('sec-certifications'); };
   gs('toggle-award').onclick = function(){ toggleSection('sec-awards'); };
   gs('add-smain').onclick  = function(){ addSection('.cv__main'); };
