@@ -68,7 +68,7 @@ education:
   info:
   - degree: PhD, Environmental Health Engineering
     university: ETH Zurich
-    time: 2023 - Present
+    time: 2023 - Present (expected Dec 2026 / Jan 2027)
     details: |
 
   - degree: MSc, Industrial Chemistry - Low-Carbon Technologies & Sustainable Chemistry
@@ -84,15 +84,15 @@ education:
 experiences:
   title: Experience
   info:
-  - role: Visiting Scientist - Policy Analyst / Foresight
-    time: Apr 2026 - Sep 2026
+  - role: Visiting Scientist - Policy Analyst / Foresight (Trainee)
+    time: Apr 2026 - Nov 2026
     company: Joint Research Centre (JRC), European Commission - Brussels
     details: |
       - Support the EU Policy Lab's foresight work for strategic and corporate decision-making, developing future-oriented scenarios that connect scientific evidence with long-term regulatory and sustainability choices.
       - Apply sustainability assessment, data analysis and systems thinking to EU innovation and sustainability-policy questions.
 
   - role: PhD Researcher - MSCA Fellow
-    time: Sep 2023 - Present
+    time: Sep 2023 - Present (completion expected Dec 2026 / Jan 2027)
     company: Empa & ETH Zurich - St. Gallen
     details: |
       - Develop Safe and Sustainable by Design methods that integrate environmental, safety and risk assessment into the early stages of pharmaceutical and nanomaterial innovation, before full datasets are available.
@@ -146,7 +146,7 @@ projects:
 publications:
   title: Publications
   intro: |
-    Peer-reviewed scientific publications in Life Cycle Assessment, Safe and Sustainable by Design, and nanomedicine.
+    Peer-reviewed scientific publications in Life Cycle Assessment, Safe and Sustainable by Design, and nanomedicine, plus manuscripts currently in preparation.
   papers:
   - title: "Implementing Safe and Sustainable by Design in Pharmaceutical Innovation"
     link: "https://doi.org/10.1016/j.jclepro.2025.147280"
@@ -158,6 +158,21 @@ publications:
     authors: Multiple authors
     conference: "Advanced Science, 2026 - DOI: 10.1002/advs.202522864"
 
+  - title: "Generalised Scale-Up Framework in Prospective Life Cycle Assessment"
+    link:
+    authors: Sorani J., Majó M., Nowack B., Hischier R.
+    conference: "In preparation"
+
+  - title: "EnerFlox: A Data-Driven Tool for Energy Flow Calculations in Life Cycle Inventory Modeling"
+    link:
+    authors: Sorani J., Majó M., Nowack B., Hischier R. - Technology and Society Laboratory, Empa, St. Gallen
+    conference: "In preparation"
+
+  - title: "Data Readiness for Safer and More Sustainable Pharmaceuticals: Lessons from an Early-Stage Pharmaceutical Case Study"
+    link:
+    authors: Sorani J., Barilli F., Nowack B., Hischier R., Romeo D. - developed in collaboration with Roche
+    conference: "In preparation"
+
 skills:
   title: Key Skills
 
@@ -168,7 +183,7 @@ skills:
   - name: "Exposure & Safety: Occupational Exposure Assessment, Occupational Safety"
     level: 90%
 
-  - name: "Policy & Strategy: Strategic Foresight, Scenario Development, Regulatory and Sustainability Analysis"
+  - name: "Policy & Strategy: Strategic Foresight, Scenario Development, EU Sustainability Frameworks, Regulatory and Sustainability Analysis"
     level: 90%
 
   - name: "Tools: SimaPro, openLCA, ecoinvent, Stoffenmanager, Python, Excel Modelling, Git"
