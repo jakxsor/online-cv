@@ -833,47 +833,38 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
   html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
   .page { padding: 0 !important; margin: 0 !important; }
-  .cv   { box-shadow: none !important; border-radius: 0 !important; overflow: visible !important; }
+  .cv   { box-shadow: none !important; border-radius: 0 !important; overflow: visible !important; background: transparent !important; }
   .pg-guide { display: none !important; }
 
-  /* Grid/flex containers do not fragment reliably across pages in Chrome:
-     switch to a table layout for print so break rules below are honoured. */
-  .cv__body  { display: table !important; table-layout: fixed; width: 100%; border-spacing: 0; }
-  .cv__main  { display: table-cell !important; vertical-align: top; width: auto; }
-  .cv__aside { display: table-cell !important; vertical-align: top; width: 225px; }
+  /* Each grid column fragments independently. Only the block that would be cut
+     moves to the next page; headings and entry titles travel with what follows. */
+  .cv__body, .cv__main, .cv__aside, .section, .entry__desc, .skill-list { break-inside: auto; }
+  .entry, .pub, .entry__desc li, .entry__desc p, .skill-list li, .skill-bar-item, .lang-chips, .profile-text {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  /* :not(:last-child) matters: a break-after:avoid on a last child propagates to its
+     parent and would chain whole sections together (e.g. compact education entries). */
+  .section__title, .entry__head, .entry__org:not(:last-child) {
+    break-after: avoid; page-break-after: avoid; break-inside: avoid;
+  }
+  p, li { orphans: 2; widows: 2; }
 
-  /* Never split a job, a degree, a publication, a bullet or a skill across pages */
-  .entry, .pub, .entry__desc li, .skill-list li, .lang-chips {
-    break-inside: avoid !important; page-break-inside: avoid !important;
-  }
-  /* Keep headings and entry titles attached to what follows */
-  .section__title, .entry__head, .entry__org, .pub__title {
-    break-after: avoid !important; page-break-after: avoid !important;
-  }
-  .section__title + * { break-before: avoid !important; page-break-before: avoid !important; }
-  .section, .cv__header { break-inside: auto; }
-  p, li { orphans: 3; widows: 3; }
-
-  /* Sidebar background: a fixed strip is repeated by the browser on every
-     printed page, so the coloured column always runs to the page bottom. */
-  .print-aside-bg {
-    display: block !important; position: fixed; top: 0; right: 0; bottom: 0;
-    width: 225px; z-index: 0; background: var(--clr-aside);
-    border-left: 1px solid var(--clr-border);
-  }
+  /* Sidebar background: fixed strip repeated by the browser on every page */
+  .print-aside-bg { display: block !important; position: fixed; top: 0; right: 0; bottom: 0; width: 225px; z-index: 0;
+                    background: var(--clr-aside); border-left: 1px solid var(--clr-border); }
+  .print-aside-bg.mode-colored { background: var(--clr-accent); border-left: none; }
+  .print-aside-bg.mode-dark    { background: #16202e; border-left: none; }
+  .cv__header { position: relative; z-index: 1; background: var(--clr-card); }
+  .cv__body   { position: relative; z-index: 1; }
+  .cv__aside  { background: transparent !important; }
   .cv, .cv__body, .cv__main, .cv__aside { border: 0 !important; outline: 0 !important; box-shadow: none !important; }
-  .cv--aside-colored .print-aside-bg, .cv--aside-dark .print-aside-bg { border-left: none; }
-  .cv--aside-colored .print-aside-bg { background: var(--clr-accent); }
-  .cv--aside-dark    .print-aside-bg { background: #16202e; }
-  .cv           { background: transparent !important; }
-  .cv__header   { position: relative; z-index: 1; background: var(--clr-card); }
-  .cv__body     { position: relative; z-index: 1; }
-  .cv__aside    { background: transparent !important; }
+  .cv__body   { grid-template-columns: 1fr 225px !important; } /* never collapse to one column on paper */
 
   .fab-group, #editor-panel, .section__add-btn,
   .item-delete, .item-move, .tag-del, .tag-add,
   .lang-add-form, .cv__photo-placeholder { display: none !important; }
 }
+
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 760px) {
@@ -891,8 +882,8 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 <body>
 
 <div class="page">
+<div class="print-aside-bg" id="print-aside-bg" aria-hidden="true"></div>
 <div class="cv" id="cv-root">
-<div class="print-aside-bg" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header class="cv__header">
@@ -1541,6 +1532,7 @@ function updateAside(){
   if(!cv) return;
   cv.classList.toggle('cv--aside-colored', asideMode==='colored');
   cv.classList.toggle('cv--aside-dark',    asideMode==='dark');
+  if(typeof pbSyncStrip==='function') pbSyncStrip();
   syncPanelControls();
 }
 function setDockMode(on){
@@ -2044,6 +2036,13 @@ function wireSectionBtns(){
     }
   });
 }
+
+/* ── PRINT: sidebar background strip follows the aside mode ─── */
+function pbSyncStrip(){
+  var strip = document.getElementById('print-aside-bg');
+  if(strip) strip.className = 'print-aside-bg mode-' + asideMode;
+}
+window.addEventListener('beforeprint', pbSyncStrip);
 
 /* ── PAGE GUIDES ─── */
 var A4_PX = Math.round(297 * 96 / 25.4); // 297mm at 96dpi ≈ 1122px
