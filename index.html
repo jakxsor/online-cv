@@ -56,6 +56,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* ── PAGE GUIDES ─────────────────────────────────── */
+.print-aside-bg { display: none; }
 .pg-guide {
   position: absolute;
   left: -16px; right: -16px;
@@ -837,7 +838,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
   /* Grid/flex containers do not fragment reliably across pages in Chrome:
      switch to a table layout for print so break rules below are honoured. */
-  .cv__body  { display: table !important; table-layout: fixed; width: 100%; border-collapse: collapse; }
+  .cv__body  { display: table !important; table-layout: fixed; width: 100%; border-spacing: 0; }
   .cv__main  { display: table-cell !important; vertical-align: top; width: auto; }
   .cv__aside { display: table-cell !important; vertical-align: top; width: 225px; }
 
@@ -852,6 +853,22 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
   .section__title + * { break-before: avoid !important; page-break-before: avoid !important; }
   .section, .cv__header { break-inside: auto; }
   p, li { orphans: 3; widows: 3; }
+
+  /* Sidebar background: a fixed strip is repeated by the browser on every
+     printed page, so the coloured column always runs to the page bottom. */
+  .print-aside-bg {
+    display: block !important; position: fixed; top: 0; right: 0; bottom: 0;
+    width: 225px; z-index: 0; background: var(--clr-aside);
+    border-left: 1px solid var(--clr-border);
+  }
+  .cv, .cv__body, .cv__main, .cv__aside { border: 0 !important; outline: 0 !important; box-shadow: none !important; }
+  .cv--aside-colored .print-aside-bg, .cv--aside-dark .print-aside-bg { border-left: none; }
+  .cv--aside-colored .print-aside-bg { background: var(--clr-accent); }
+  .cv--aside-dark    .print-aside-bg { background: #16202e; }
+  .cv           { background: transparent !important; }
+  .cv__header   { position: relative; z-index: 1; background: var(--clr-card); }
+  .cv__body     { position: relative; z-index: 1; }
+  .cv__aside    { background: transparent !important; }
 
   .fab-group, #editor-panel, .section__add-btn,
   .item-delete, .item-move, .tag-del, .tag-add,
@@ -875,6 +892,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
 <div class="page">
 <div class="cv" id="cv-root">
+<div class="print-aside-bg" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header class="cv__header">
