@@ -835,8 +835,23 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
   .cv   { box-shadow: none !important; border-radius: 0 !important; overflow: visible !important; }
   .pg-guide { display: none !important; }
 
-  .entry   { page-break-inside: avoid; }
-  .pub     { page-break-inside: avoid; }
+  /* Grid/flex containers do not fragment reliably across pages in Chrome:
+     switch to a table layout for print so break rules below are honoured. */
+  .cv__body  { display: table !important; table-layout: fixed; width: 100%; border-collapse: collapse; }
+  .cv__main  { display: table-cell !important; vertical-align: top; width: auto; }
+  .cv__aside { display: table-cell !important; vertical-align: top; width: 225px; }
+
+  /* Never split a job, a degree, a publication, a bullet or a skill across pages */
+  .entry, .pub, .entry__desc li, .skill-list li, .lang-chips {
+    break-inside: avoid !important; page-break-inside: avoid !important;
+  }
+  /* Keep headings and entry titles attached to what follows */
+  .section__title, .entry__head, .entry__org, .pub__title {
+    break-after: avoid !important; page-break-after: avoid !important;
+  }
+  .section__title + * { break-before: avoid !important; page-break-before: avoid !important; }
+  .section, .cv__header { break-inside: auto; }
+  p, li { orphans: 3; widows: 3; }
 
   .fab-group, #editor-panel, .section__add-btn,
   .item-delete, .item-move, .tag-del, .tag-add,
