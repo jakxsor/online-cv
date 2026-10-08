@@ -54,12 +54,17 @@ sidebar:
     - item: Nanomedicine & Medical Devices
       link:
 
+    - item: Biomass & Bioeconomy
+      link:
+
 career-profile:
   title: Profile
   summary: |
     Sustainability scientist working at the interface between industrial R&D, environmental assessment and EU policy. I apply Life Cycle Assessment, Safe and Sustainable by Design (SSbD), environmental risk assessment and occupational exposure assessment to turn early-stage technical data into decision-support insights for companies and policy-oriented stakeholders.
 
     My work focuses on identifying environmental, safety, resource-use and process hotspots before they become locked into late-stage product or process development. I have experience across industrial collaborations, including Roche and GVS, and policy-oriented foresight work at the European Commission's Joint Research Centre. I also develop practical screening tools that make complex sustainability methods usable in early-stage contexts, when data are still incomplete.
+
+    I am also interested in biomass, bio-based value chains and the bioeconomy, where agricultural, industrial and environmental policy meet.
 
     Sectors: pharmaceuticals, chemicals, advanced materials, nanomedicine and medical devices.
 
@@ -75,11 +80,13 @@ education:
     university: University of Bologna
     time: 2021 - 2023
     details: |
+      Chemistry combined with plant, soil and biomass science: agronomy and herbaceous biomass, soil chemistry and the carbon cycle, biochemistry and ecology, industrial and environmental biotechnology, biopolymers, circular economy, LCA and urban mining. Builds on botany from the BSc.
 
   - degree: BSc, Natural Sciences
     university: University of Florence
     time: 2017 - 2021
     details: |
+      Botany (general and systematic), general biology, genetics, geology, climatology, chemistry and mathematics.
 
 experiences:
   title: Experience
@@ -183,7 +190,7 @@ skills:
   - name: "Exposure & Safety: Occupational Exposure Assessment, Occupational Safety"
     level: 90%
 
-  - name: "Policy & Strategy: Strategic Foresight, Scenario Development, EU Sustainability Frameworks, Regulatory and Sustainability Analysis"
+  - name: "Policy & Strategy: Strategic Foresight, Scenario Development, EU Sustainability Frameworks, Bioeconomy and Circular Economy, Regulatory and Sustainability Analysis"
     level: 90%
 
   - name: "Tools: SimaPro, openLCA, ecoinvent, Stoffenmanager, Python, Excel Modelling, Git"
