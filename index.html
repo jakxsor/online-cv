@@ -858,7 +858,11 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
   .cv__body   { position: relative; z-index: 1; }
   .cv__aside  { background: transparent !important; }
   .cv, .cv__body, .cv__main, .cv__aside { border: 0 !important; outline: 0 !important; box-shadow: none !important; }
-  .cv__body   { grid-template-columns: 1fr 225px !important; } /* never collapse to one column on paper */
+  /* Paper layout must not depend on the printable width: browsers that add their own
+     margins (or a custom scale) would otherwise shrink the page below the phone breakpoint. */
+  .cv         { width: 100% !important; max-width: none !important; margin: 0 !important; }
+  .cv__body   { display: grid !important; grid-template-columns: minmax(0, 1fr) 225px !important; }
+  .cv__header { flex-wrap: nowrap !important; }
 
   .fab-group, #editor-panel, .section__add-btn,
   .item-delete, .item-move, .tag-del, .tag-add,
@@ -867,7 +871,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
 
 /* ── RESPONSIVE ──────────────────────────────────── */
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .cv__body { grid-template-columns: 1fr; }
   .cv__main { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 22px 18px 28px; }
   .cv__aside { padding: 22px 18px 28px; }
