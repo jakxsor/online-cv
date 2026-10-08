@@ -56,7 +56,6 @@ a:hover { text-decoration: underline; }
 }
 
 /* ── PAGE GUIDES ─────────────────────────────────── */
-.print-aside-bg { display: none; }
 .pg-guide {
   position: absolute;
   left: -16px; right: -16px;
@@ -826,59 +825,44 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 .p-color-dot:hover { transform: scale(1.2); }
 .p-color-dot.selected { border-color: #fff; transform: scale(1.15); }
 
+/* ── PRINT SHEETS ─────────────────────────────────
+   The printed CV is assembled from real A4 sheets (see buildPrintSheets in the script).
+   Every sheet has a fixed size, so no browser has to split a grid across pages:
+   an entry that does not fit simply starts on the next sheet. */
+#print-sheets { position: fixed; left: -20000px; top: 0; width: 210mm; visibility: hidden; pointer-events: none; }
+.sheet {
+  width: 210mm; max-width: none; height: 296.4mm; margin: 0;
+  box-shadow: none; border-radius: 0; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.sheet .cv__header { flex: none; }
+.sheet .cv__body { flex: 1 1 auto; min-height: 0; grid-template-columns: minmax(0, 1fr) 225px; grid-template-rows: minmax(0, 1fr); }
+.sheet .cv__main, .sheet .cv__aside { min-height: 0; overflow: hidden; }
+.sheet [data-sid="sec-publications"]:not(:first-child) { margin-top: -8px; }
+.sheet .cv__photo-placeholder, .sheet .item-delete, .sheet .item-move, .sheet .tag-del, .sheet .tag-add,
+.sheet .section__add-btn, .sheet .lang-add-form, .sheet .pg-guide { display: none !important; }
+
 @media print {
   @page { size: A4 portrait; margin: 0; }
-
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-  html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
-  .page { padding: 0 !important; margin: 0 !important; }
-  .cv   { box-shadow: none !important; border-radius: 0 !important; overflow: visible !important; background: transparent !important; }
-  .pg-guide { display: none !important; }
-
-  /* Each grid column fragments independently. Only the block that would be cut
-     moves to the next page; headings and entry titles travel with what follows. */
-  .cv__body, .cv__main, .cv__aside, .section, .entry__desc, .skill-list { break-inside: auto; }
-  .entry, .pub, .entry__desc li, .entry__desc p, .skill-list li, .skill-bar-item, .lang-chips, .profile-text {
-    break-inside: avoid; page-break-inside: avoid;
-  }
-  /* :not(:last-child) matters: a break-after:avoid on a last child propagates to its
-     parent and would chain whole sections together (e.g. compact education entries). */
-  .section__title, .entry__head, .entry__org:not(:last-child) {
-    break-after: avoid; page-break-after: avoid; break-inside: avoid;
-  }
-  p, li { orphans: 2; widows: 2; }
-
-  /* Sidebar background: fixed strip repeated by the browser on every page */
-  .print-aside-bg { display: block !important; position: fixed; top: 0; right: 0; bottom: 0; width: 225px; z-index: 0;
-                    background: var(--clr-aside); border-left: 1px solid var(--clr-border); }
-  .print-aside-bg.mode-colored { background: var(--clr-accent); border-left: none; }
-  .print-aside-bg.mode-dark    { background: #16202e; border-left: none; }
-  .cv__header { position: relative; z-index: 1; background: var(--clr-card); }
-  .cv__body   { position: relative; z-index: 1; }
-  .cv__aside  { background: transparent !important; }
-  .cv, .cv__body, .cv__main, .cv__aside { border: 0 !important; outline: 0 !important; box-shadow: none !important; }
-  /* Paper layout must not depend on the printable width: browsers that add their own
-     margins (or a custom scale) would otherwise shrink the page below the phone breakpoint. */
-  .cv         { width: 100% !important; max-width: none !important; margin: 0 !important; }
-  .cv__body   { display: grid !important; grid-template-columns: minmax(0, 1fr) 225px !important; }
-  .cv__header { flex-wrap: nowrap !important; }
-
-  .fab-group, #editor-panel, .section__add-btn,
-  .item-delete, .item-move, .tag-del, .tag-add,
-  .lang-add-form, .cv__photo-placeholder { display: none !important; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  .page, .fab-group, #editor-panel, .pg-guide { display: none !important; }
+  #print-sheets { position: static; left: auto; width: auto; visibility: visible; pointer-events: auto; }
+  .sheet { break-after: page; page-break-after: always; }
+  .sheet:last-child { break-after: auto; page-break-after: auto; }
 }
 
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media screen and (max-width: 760px) {
-  .cv__body { grid-template-columns: 1fr; }
-  .cv__main { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 22px 18px 28px; }
-  .cv__aside { padding: 22px 18px 28px; }
-  .cv__header { padding: 24px 18px 20px; flex-wrap: wrap; }
-  .cv__name { font-size: 1.75rem; }
+  .page .cv__body { grid-template-columns: 1fr; }
+  .page .cv__main { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 22px 18px 28px; }
+  .page .cv__aside { padding: 22px 18px 28px; }
+  .page .cv__header { padding: 24px 18px 20px; flex-wrap: wrap; }
+  .page .cv__name { font-size: 1.75rem; }
   #editor-panel { width: 100%; right: -100%; }
   body.edit-mode .fab-group { right: 16px; bottom: 110px; }
+}
 }
 
   </style>
@@ -886,7 +870,6 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 <body>
 
 <div class="page">
-<div class="print-aside-bg" id="print-aside-bg" aria-hidden="true"></div>
 <div class="cv" id="cv-root">
 
   <!-- HEADER -->
@@ -1541,7 +1524,6 @@ function updateAside(){
   if(!cv) return;
   cv.classList.toggle('cv--aside-colored', asideMode==='colored');
   cv.classList.toggle('cv--aside-dark',    asideMode==='dark');
-  if(typeof pbSyncStrip==='function') pbSyncStrip();
   syncPanelControls();
 }
 function setDockMode(on){
@@ -2046,12 +2028,114 @@ function wireSectionBtns(){
   });
 }
 
-/* ── PRINT: sidebar background strip follows the aside mode ─── */
-function pbSyncStrip(){
-  var strip = document.getElementById('print-aside-bg');
-  if(strip) strip.className = 'print-aside-bg mode-' + asideMode;
+/* ── PRINT SHEETS ───
+   Builds one fixed-size A4 element per printed page in an off-screen host.
+   #cv-root stays the editable source; the sheets are throw-away copies. Each column is
+   filled separately, block by block; a block that would cross the page bottom (and a
+   section title with the block that follows it) moves whole to the next sheet. */
+var PS = { timer: null, dirty: true };
+var PS_JUNK = '.item-delete,.item-move,.tag-del,.tag-add,.section__add-btn,.pg-guide,.lang-add-form,.cv__photo-placeholder';
+
+function psHost(){
+  var h = document.getElementById('print-sheets');
+  if(!h){ h = document.createElement('div'); h.id = 'print-sheets'; h.setAttribute('aria-hidden', 'true'); document.body.appendChild(h); }
+  return h;
 }
-window.addEventListener('beforeprint', pbSyncStrip);
+function psClone(node){
+  var c = node.cloneNode(true);
+  c.removeAttribute('id'); c.removeAttribute('contenteditable');
+  c.querySelectorAll('[id]').forEach(function(e){ e.removeAttribute('id'); });
+  c.querySelectorAll('[contenteditable]').forEach(function(e){ e.removeAttribute('contenteditable'); });
+  c.querySelectorAll(PS_JUNK).forEach(function(e){ e.remove(); });
+  return c;
+}
+function psShown(el){ return getComputedStyle(el).display !== 'none'; }
+
+function buildPrintSheets(){
+  clearTimeout(PS.timer);
+  var cv = document.getElementById('cv-root');
+  if(!cv) return;
+  var headSrc = cv.querySelector('.cv__header'), mainSrc = cv.querySelector('.cv__main'), asideSrc = cv.querySelector('.cv__aside');
+  if(!headSrc || !mainSrc || !asideSrc) return;
+  var host = psHost();
+  host.innerHTML = '';
+  var cls = cv.className.replace(/\bedit-mode\b/g, '').trim();
+  var sheets = [];
+
+  function addSheet(){
+    var el = document.createElement('div');
+    el.className = cls + ' sheet';
+    if(!sheets.length) el.appendChild(psClone(headSrc));
+    var body = document.createElement('div'); body.className = 'cv__body';
+    var m = document.createElement('main');  m.className = 'cv__main';
+    var a = document.createElement('aside'); a.className = 'cv__aside';
+    body.appendChild(m); body.appendChild(a); el.appendChild(body); host.appendChild(el);
+    sheets.push({ body: body, main: m, aside: a });
+  }
+  function sheetAt(i){ while(sheets.length <= i) addSheet(); return sheets[i]; }
+  function overflows(sh, col){
+    var last = col.lastElementChild;
+    if(!last) return false;
+    var limit = sh.body.getBoundingClientRect().bottom - (parseFloat(getComputedStyle(col).paddingBottom) || 0);
+    return last.getBoundingClientRect().bottom > limit + 0.5;
+  }
+  function fill(src, key){
+    var page = 0;
+    Array.prototype.slice.call(src.children).forEach(function(sec){
+      if(!sec.classList.contains('section') || !psShown(sec)) return;
+      var units = Array.prototype.slice.call(sec.children).filter(function(u){ return !u.matches(PS_JUNK) && psShown(u); });
+      var groups = [];
+      for(var i = 0; i < units.length; i++){
+        if(units[i].classList.contains('section__title') && i + 1 < units.length){ groups.push([units[i], units[i + 1]]); i++; }
+        else groups.push([units[i]]);
+      }
+      var shell = null;
+      groups.forEach(function(g){
+        for(;;){
+          var sh = sheetAt(page), col = sh[key];
+          var wasEmpty = col.childElementCount === 0, madeShell = false;
+          if(!shell || shell.parentNode !== col){
+            shell = sec.cloneNode(false);
+            if(sec.id) shell.setAttribute('data-sid', sec.id);
+            shell.removeAttribute('id');
+            col.appendChild(shell); madeShell = true;
+          }
+          var added = g.map(function(u){ var c = psClone(u); shell.appendChild(c); return c; });
+          if(wasEmpty || !overflows(sh, col)) return;
+          added.forEach(function(c){ c.remove(); });
+          if(madeShell || !shell.childElementCount) shell.remove();
+          shell = null; page++;
+        }
+      });
+    });
+  }
+  fill(mainSrc, 'main');
+  fill(asideSrc, 'aside');
+  PS.dirty = false;
+}
+function schedulePrintSheets(){ PS.dirty = true; clearTimeout(PS.timer); PS.timer = setTimeout(buildPrintSheets, 350); }
+function printCV(){
+  buildPrintSheets();
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('#print-sheets img[src]'));
+  Promise.all(imgs.map(function(i){ return i.decode ? i.decode().catch(function(){}) : null; }))
+    .then(function(){ window.print(); });
+}
+function setupPrintSheets(){
+  var cv = document.getElementById('cv-root');
+  if(!cv) return;
+  new MutationObserver(function(recs){
+    var real = recs.some(function(r){
+      var n = Array.prototype.slice.call(r.addedNodes).concat(Array.prototype.slice.call(r.removedNodes));
+      return !(n.length && n.every(function(x){ return x.nodeType === 1 && x.classList.contains('pg-guide'); }));
+    });
+    if(real) schedulePrintSheets();
+  }).observe(cv, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class', 'src'] });
+  new MutationObserver(schedulePrintSheets).observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(schedulePrintSheets);
+  window.addEventListener('load', schedulePrintSheets);
+  window.addEventListener('beforeprint', function(){ if(PS.dirty) buildPrintSheets(); });
+  schedulePrintSheets();
+}
 
 /* ── PAGE GUIDES ─── */
 var A4_PX = Math.round(297 * 96 / 25.4); // 297mm at 96dpi ≈ 1122px
@@ -2072,8 +2156,12 @@ function updatePageGuides(){
 
 function setupPageGuides(){
   updatePageGuides();
-  var obs = new MutationObserver(function(){
-    requestAnimationFrame(updatePageGuides);
+  var obs = new MutationObserver(function(recs){
+    var own = recs.every(function(r){
+      var n = Array.prototype.slice.call(r.addedNodes).concat(Array.prototype.slice.call(r.removedNodes));
+      return n.length && n.every(function(x){ return x.nodeType === 1 && x.classList.contains('pg-guide'); });
+    });
+    if(!own) requestAnimationFrame(updatePageGuides);
   });
   obs.observe(document.getElementById('cv-root'), {
     childList: true, subtree: true, characterData: true
@@ -2089,10 +2177,11 @@ document.addEventListener('DOMContentLoaded',function(){
   updateAside();
   syncPanelControls();
   setupPageGuides();
+  setupPrintSheets();
   document.getElementById('btn-edit').addEventListener('click', toggleEdit);
   document.getElementById('btn-print').addEventListener('click', function(){
     if(editMode) toggleEdit();
-    window.print();
+    printCV();
   });
 });
 
