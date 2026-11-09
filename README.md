@@ -30,6 +30,15 @@ I have made this into a Jekyll Theme. Checkout the live demo [here](https://onli
 * Your new site should be ready at `https://<username>.github.io/online-cv/`;
 * Printable version of the site can be found at `https://<username>.github.io/online-cv/print`. Use a third party link https://pdflayer.com/, https://www.web2pdfconvert.com/ etc to get the printable PDF.
 
+## CV versions
+
+The main CV page offers two print layouts using the same current content:
+
+* **Print / PDF** keeps the designed, two-column presentation.
+* **ATS PDF — Single Column** prints an A4, text-first layout with a single reading column, plain typography, and no profile photo or decorative colors. Use the browser's print dialog to save it as a PDF.
+
+The ATS layout changes presentation only; it does not translate or rewrite CV content. Review the generated PDF before sending it, since applicant-tracking systems can parse documents differently.
+
 Change all the details from one place: `_data/data.yml`.
 
 ### To preview/edit locally with docker
@@ -87,4 +96,3 @@ Check out for more themes: [**Jekyll Themes**](http://jekyll-themes.com).
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=sharu725/online-cv&type=Date)](https://star-history.com/#sharu725/online-cv&Date)
-
