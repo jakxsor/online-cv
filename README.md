@@ -35,7 +35,7 @@ I have made this into a Jekyll Theme. Checkout the live demo [here](https://onli
 The main CV page offers two print layouts using the same current content:
 
 * **Print / PDF** keeps the designed, two-column presentation.
-* **ATS PDF — Single Column** prints an A4, text-first layout with a single reading column, plain typography, and no profile photo or decorative colors. Use the browser's print dialog to save it as a PDF.
+* **ATS PDF — Single Column** prints a compact, two-page maximum A4 layout with a single reading column, plain typography, and no profile photo or decorative colors. Experience, education, and publication entries stay together on one page. Use the browser's print dialog to save it as a PDF.
 
 The ATS layout changes presentation only; it does not translate or rewrite CV content. Review the generated PDF before sending it, since applicant-tracking systems can parse documents differently.
 

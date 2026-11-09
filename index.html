@@ -855,14 +855,14 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 }
 
 @media print {
-  @page { size: A4 portrait; margin: 14mm 15mm; }
+  @page { size: A4 portrait; margin: 10mm 12mm; }
 
   body.ats-print,
   body.ats-print .page {
     background: #fff !important;
     color: #111 !important;
     font-family: Arial, Helvetica, sans-serif !important;
-    line-height: 1.35 !important;
+    line-height: 1.22 !important;
   }
 
   body.ats-print .page {
@@ -885,7 +885,7 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
     box-shadow: none !important;
     color: #111 !important;
     font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 9.5pt !important;
+    font-size: 9pt !important;
   }
 
   body.ats-print #cv-root * {
@@ -896,31 +896,33 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
   body.ats-print .cv__header {
     display: block !important;
-    padding: 0 0 8pt !important;
+    padding: 0 0 5pt !important;
     border: 0 !important;
     border-bottom: 1px solid #555 !important;
     border-radius: 0 !important;
     background: #fff !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   body.ats-print .cv__header-left { width: 100% !important; }
   body.ats-print .cv__name {
-    margin: 0 0 3pt !important;
-    font-size: 21pt !important;
+    margin: 0 0 2pt !important;
+    font-size: 18pt !important;
     font-weight: 700 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
   }
 
   body.ats-print .cv__tagline {
-    margin: 0 0 5pt !important;
-    font-size: 10pt !important;
+    margin: 0 0 3pt !important;
+    font-size: 9pt !important;
   }
 
   body.ats-print .cv__contacts {
     display: flex !important;
-    gap: 2pt 10pt !important;
-    font-size: 8.5pt !important;
+    gap: 1pt 8pt !important;
+    font-size: 8pt !important;
   }
 
   body.ats-print .cv__contacts .icon,
@@ -961,52 +963,97 @@ body.edit-mode.dock-open .page { padding-bottom: 368px; }
 
   body.ats-print #cv-root .section {
     width: 100% !important;
-    margin: 0 0 9pt !important;
+    margin: 0 0 5pt !important;
     padding: 0 !important;
     background: #fff !important;
   }
 
   body.ats-print #sec-publications { margin-top: 0 !important; }
   body.ats-print #cv-root .section__title {
-    margin: 0 0 5pt !important;
-    padding: 0 0 3pt !important;
+    margin: 0 0 3pt !important;
+    padding: 0 0 2pt !important;
     border-bottom: 1px solid #888 !important;
-    font-size: 10pt !important;
+    font-size: 9pt !important;
     font-weight: 700 !important;
-    letter-spacing: .06em !important;
+    letter-spacing: .04em !important;
+    break-after: avoid-page;
     page-break-after: avoid;
   }
 
   body.ats-print #cv-root .section__title::after { display: none !important; }
   body.ats-print #cv-root .entry,
   body.ats-print #cv-root .pub {
-    margin-bottom: 6pt !important;
+    margin-bottom: 3pt !important;
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
+  body.ats-print #cv-root .entry { padding-bottom: 3pt !important; }
+  body.ats-print #cv-root .entry + .entry { padding-top: 3pt !important; }
+  body.ats-print #cv-root .entry--compact { padding-bottom: 2pt !important; }
+  body.ats-print #cv-root .entry--compact + .entry--compact { padding-top: 2pt !important; }
+
   body.ats-print #cv-root .entry__head {
     display: flex !important;
     justify-content: space-between !important;
-    gap: 8pt !important;
+    gap: 5pt !important;
   }
 
   body.ats-print #cv-root .entry__title,
-  body.ats-print #cv-root .pub__title { font-weight: 700 !important; }
-  body.ats-print #cv-root .entry__date { white-space: nowrap; }
+  body.ats-print #cv-root .pub__title {
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+  }
+
+  body.ats-print #cv-root .entry__date {
+    font-size: 8pt !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    text-align: right;
+  }
+
+  body.ats-print #cv-root .entry__tag {
+    font-size: 7pt !important;
+    padding: 0 3pt !important;
+  }
+
   body.ats-print #cv-root .entry__org,
   body.ats-print #cv-root .entry__desc,
   body.ats-print #cv-root .profile-text,
-  body.ats-print #cv-root .skill-list,
-  body.ats-print #cv-root .lang-chips,
   body.ats-print #cv-root .pub__meta,
   body.ats-print #cv-root .pub__authors,
   body.ats-print #cv-root .pub__doi {
     font-size: 9pt !important;
-    line-height: 1.35 !important;
+    line-height: 1.22 !important;
   }
 
-  body.ats-print #cv-root .entry__desc ul { margin: 2pt 0 0 14pt !important; }
+  body.ats-print #cv-root .entry__org { margin: 1pt 0 2pt !important; }
+  body.ats-print #cv-root .entry__desc ul { margin: 1pt 0 0 12pt !important; }
+  body.ats-print #cv-root .entry__desc li { margin-bottom: 1pt !important; }
+
+  body.ats-print #cv-root .profile-text,
+  body.ats-print #cv-root .skill-list,
+  body.ats-print #cv-root .lang-chips {
+    font-size: 9pt !important;
+    line-height: 1.22 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body.ats-print #cv-root .skill-list { gap: 1pt 3pt !important; }
+  body.ats-print #cv-root .skill-list li {
+    font-size: 8pt !important;
+    line-height: 1.2 !important;
+    padding: 0 3pt !important;
+  }
+
+  body.ats-print #cv-root .pub { padding-left: 5pt !important; }
+  body.ats-print #cv-root .pub__title { line-height: 1.2 !important; }
+  body.ats-print #cv-root .pub__meta,
+  body.ats-print #cv-root .pub__authors,
+  body.ats-print #cv-root .pub__doi { margin-top: 1pt !important; }
+
   body.ats-print #cv-root .section__add-btn,
   body.ats-print .fab-group,
   body.ats-print #editor-panel,
